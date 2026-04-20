@@ -407,17 +407,6 @@ a { color: inherit; }
 /* ═══════════════════════════════════════════════
    HERO
 ═══════════════════════════════════════════════ */
-/* Su dalgalanma canvas */
-#water-canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.55;
-}
-
 #hero {
   min-height: 100vh;
   min-height: 100svh; /* Safari mobil için */
