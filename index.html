@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Sultan II. Bayezid Külliyesi Sağlık Müzesi — Osmanlı tıbbının zirvesi, Edirne">
+<meta name="theme-color" content="#1a1008">
+<title>Sultan II. Bayezid Külliyesi Sağlık Müzesi</title>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=IM+Fell+English:ital@0;1&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- Styles -->
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ═══════ SPLASH ═══════ -->
+<div id="splash" role="status" aria-label="Yükleniyor">
+  <div class="splash-ornament" aria-hidden="true">
+    <div class="splash-img-wrap">
+      <img src="images/splash-logo.webp" alt="Sultan II. Bayezid Külliyesi" class="splash-img">
+    </div>
+  </div>
+  <div class="splash-title">Sultan II. Bayezid Külliyesi</div>
+  <div class="splash-subtitle">Sağlık Müzesi · Edirne</div>
+  <div class="splash-bar" role="progressbar" aria-valuenow="0" aria-valuemax="100">
+    <div class="splash-bar-fill"></div>
+  </div>
+</div>
+
+<!-- ═══════ NAVİGASYON ═══════ -->
+<header id="navbar" role="banner">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo" aria-label="Ana Sayfa">
+      <div class="nav-logo-icon" aria-hidden="true">
+        <img src="images/logo.png" alt="Sultan II. Bayezid Külliyesi Logo" class="nav-logo-img">
+      </div>
+      <div class="nav-logo-text">
+        <span class="nav-logo-top">T.C. TRAKYA ÜNİVERSİTESİ</span>
+        <span class="nav-logo-main">Sultan II. Bayezid<br>Külliyesi Sağlık Müzesi</span>
+      </div>
+    </a>
+
+    <nav class="nav-links" aria-label="Ana menü">
+      <ul>
+        <li><a href="#explore">Bölümler</a></li>
+        <li><a href="tarihce/tarihce.html">Tarihçe</a></li>
+        <li><a href="bayezid/bayezid.html">Sultan II. Bayezid</a></li>
+        <li><a href="hastane/hastane.html">Darüşşifa</a></li>
+        <li><a href="music/music.html">Müzikle Tedavi</a></li>
+        <li><a href="galeri/galeri.html">Galeri</a></li>
+        <li><a href="siir/siir.html">Sarmaşık</a></li>
+        <li><a href="#contact">İletişim</a></li>
+      </ul>
+    </nav>
+
+    <button class="nav-hamburger" id="hamburger" aria-label="Menüyü aç/kapat" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <!-- Mobil Menü -->
+  <nav id="mobileMenu" aria-label="Mobil menü" aria-hidden="true">
+    <a href="index.html">Ana Sayfa</a>
+    <a href="tarihce/tarihce.html">Tarihçe</a>
+    <a href="bayezid/bayezid.html">Sultan II. Bayezid</a>
+    <a href="evliya/evliya.html">Evliya Çelebi</a>
+    <a href="medrese/medrese.html">Tıp Medresesi</a>
+    <a href="hastane/hastane.html">Darüşşifa</a>
+    <a href="imaret/imaret.html">İmarethane</a>
+    <a href="music/music.html">Müzikle Tedavi</a>
+    <a href="geziplani/geziplani.html">Gezi Planı</a>
+    <a href="galeri/galeri.html">Görsel Galeri</a>
+    <a href="siir/siir.html">Sarmaşık</a>
+    <a href="oduller/oduller.html">Ödüller</a>
+    <a href="personel/personel.html">Personelimiz</a>
+    <a href="haberler/haberler.html">Haberler</a>
+    <a href="duyurular/duyurular.html">Duyurular</a>
+    <a href="basin/basin.html">Basında Biz</a>
+    <a href="https://www.trakya.edu.tr/" target="_blank" rel="noopener">Trakya Üniversitesi</a>
+  </nav>
+</header>
+
+<!-- ═══════ HERO ═══════ -->
+<main>
+<section id="hero" aria-label="Hoş geldiniz">
+  <div class="hero-content">
+    <div class="hero-badge" aria-hidden="true">
+      <div class="hero-badge-ring"></div>
+      <div class="hero-badge-inner">
+        <img src="images/hero-badge.webp" alt="Külliye görseli" class="hero-badge-img">
+      </div>
+    </div>
+    <p class="hero-eyebrow">T.C. Trakya Üniversitesi · Edirne</p>
+    <h1 class="hero-title">Sultan <span>II. Bayezid</span><br>Külliyesi</h1>
+    <p class="hero-subtitle">Sağlık Müzesi</p>
+    <p class="hero-date">H. 886 — M. 1484 — EDİRNE</p>
+    <div class="hero-divider" aria-hidden="true">
+      <div class="hero-divider-line"></div>
+      <span class="hero-divider-gem">✦</span>
+      <div class="hero-divider-line"></div>
+    </div>
+    <p class="hero-desc">
+      Osmanlı tıbbının zirvesi, müzikle tedavinin beşiği. 
+      Beş asrı aşkın tarihiyle insanlığa hizmet etmiş bu nadide külliyeyi keşfetmeye davet ediyoruz.
+    </p>
+    <div class="hero-ctas">
+      <a href="#explore" class="btn-primary">MÜZEYİ KEŞFET</a>
+      <a href="geziplani/geziplani.html" class="btn-secondary">GEZİ PLANI</a>
+    </div>
+  </div>
+  <button class="hero-scroll" id="scrollDown" aria-label="Aşağı kaydır">
+    <span>AŞAĞI KAYDIRIN</span>
+    <i class="fa fa-chevron-down" aria-hidden="true"></i>
+  </button>
+</section>
+
+<!-- ═══════ VİDEO ═══════ -->
+<section id="video-section" aria-label="Tanıtım videosu">
+  <div class="section-header reveal">
+    <span class="section-eyebrow">Tanıtım</span>
+    <h2 class="section-title">Külliyeyi <span>Tanıyın</span></h2>
+    <div class="section-ornament" aria-hidden="true">
+      <div class="section-ornament-line"></div>
+      <span class="section-ornament-gem">✦</span>
+      <div class="section-ornament-line"></div>
+    </div>
+  </div>
+  <div class="video-wrapper reveal">
+    <div class="video-label" aria-hidden="true">KÜLLİYE TANITIM VİDEOSU</div>
+    <div class="video-frame">
+      <iframe 
+        src="https://www.youtube.com/embed/YUw2S2MrHow?start=1" 
+        allowfullscreen 
+        title="Külliye Tanıtım Videosu"
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ MÜZEYİ KEŞFET ═══════ -->
+<section id="explore" aria-label="Müze bölümleri">
+  <div class="section-header reveal">
+    <span class="section-eyebrow">Müze Bölümleri</span>
+    <h2 class="section-title">Külliyeyi <span>Keşfedin</span></h2>
+    <div class="section-ornament" aria-hidden="true">
+      <div class="section-ornament-line"></div>
+      <span class="section-ornament-gem">✦</span>
+      <div class="section-ornament-line"></div>
+    </div>
+  </div>
+  <div class="explore-grid">
+
+    <!-- Darüşşifa — öne çıkan -->
+    <a href="hastane/hastane.html" class="museum-card featured reveal reveal-d1">
+      <div class="mc-icon-area">
+        <div class="mc-img-wrap">
+          <img src="images/cards/daruşşifa.webp" alt="Darüşşifa" class="mc-img" loading="lazy">
+        </div>
+        <span class="mc-tag">ÖNE ÇIKAN</span>
+      </div>
+      <div class="mc-body">
+        <h3 class="mc-title">Darüşşifa (Hastane)</h3>
+        <p class="mc-desc">Osmanlı döneminin en gelişmiş sağlık tesislerinden biri olan Darüşşifa, müzikle tedavi yönteminin uygulandığı bu eşsiz yapı, hasta odaları ve merkezi avlusuyla ziyaretçilerini 15. yüzyıla taşımaktadır.</p>
+        <span class="mc-arrow">BÖLÜMÜ ZİYARET ET <i class="fa fa-arrow-right" aria-hidden="true"></i></span>
+      </div>
+    </a>
+
+    <a href="medrese/medrese.html" class="museum-card reveal reveal-d2">
+      <div class="mc-icon-area">
+        <div class="mc-img-wrap">
+          <img src="images/cards/medrese.webp" alt="Tıp Medresesi" class="mc-img" loading="lazy">
+        </div>
+      </div>
+      <div class="mc-body">
+        <h3 class="mc-title">Tıp Medresesi</h3>
+        <p class="mc-desc">Osmanlı'nın yetiştirdiği tabip ve hekimlerin eğitim aldığı kadim ilim yuvası.</p>
+        <span class="mc-arrow">KEŞFET <i class="fa fa-arrow-right" aria-hidden="true"></i></span>
+      </div>
+    </a>
+
+    <a href="imaret/imaret.html" class="museum-card reveal reveal-d3">
+      <div class="mc-icon-area">
+        <div class="mc-img-wrap">
+          <img src="images/cards/imaret.webp" alt="İmarethane" class="mc-img" loading="lazy">
+        </div>
+      </div>
+      <div class="mc-body">
+        <h3 class="mc-title">İmarethane</h3>
+        <p class="mc-desc">Yoksullara, hastalara ve yolculara ücretsiz yemek verilen Osmanlı sosyal dayanışmasının simgesi.</p>
+        <span class="mc-arrow">KEŞFET <i class="fa fa-arrow-right" aria-hidden="true"></i></span>
+      </div>
+    </a>
+
+    <a href="music/music.html" class="museum-card reveal reveal-d1">
+      <div class="mc-icon-area">
+        <div class="mc-img-wrap">
+          <img src="images/cards/muzik.webp" alt="Müzikle Tedavi" class="mc-img" loading="lazy">
+        </div>
+      </div>
+      <div class="mc-body">
+        <h3 class="mc-title">Müzikle Tedavi</h3>
+        <p class="mc-desc">Uşşak ve Hicaz makamlarıyla ruhu iyileştiren kadim bir terapi sanatı. Dünyada nadir örneklerden biri.</p>
+        <span class="mc-arrow">KEŞFET <i class="fa fa-arrow-right" aria-hidden="true"></i></span>
+      </div>
+    </a>
+
+    <a href="bayezid/bayezid.html" class="museum-card reveal reveal-d2">
+      <div class="mc-icon-area">
+        <div class="mc-img-wrap">
+          <img src="images/cards/bayezid.webp" alt="Sultan II. Bayezid" class="mc-img" loading="lazy">
+        </div>
+      </div>
+      <div class="mc-body">
+        <h3 class="mc-title">Sultan II. Bayezid</h3>
+        <p class="mc-desc">Bu külliyeyi yaptıran sultan; devlet adamı, şair ve dinin koruyucusu.</p>
+        <span class="mc-arrow">KEŞFET <i class="fa fa-arrow-right" aria-hidden="true"></i></span>
+      </div>
+    </a>
+
+    <a href="evliya/evliya.html" class="museum-card reveal reveal-d3">
+      <div class="mc-icon-area">
+        <div class="mc-img-wrap">
+          <img src="images/cards/evliya.webp" alt="Evliya Çelebi" class="mc-img" loading="lazy">
+        </div>
+      </div>
+      <div class="mc-body">
+        <h3 class="mc-title">Evliya Çelebi</h3>
+        <p class="mc-desc">Seyahatnâme'sinde Edirne ve Külliyeyi belgeleyen büyük gezginin gözünden.</p>
+        <span class="mc-arrow">KEŞFET <i class="fa fa-arrow-right" aria-hidden="true"></i></span>
+      </div>
+    </a>
+
+    <a href="tarihce/tarihce.html" class="museum-card reveal reveal-d1">
+      <div class="mc-icon-area">
+        <div class="mc-img-wrap">
+          <img src="images/cards/tarihce.webp" alt="Tarihçe" class="mc-img" loading="lazy">
+        </div>
+      </div>
+      <div class="mc-body">
+        <h3 class="mc-title">Tarihçe</h3>
+        <p class="mc-desc">1484'ten günümüze uzanan beş asırlık tarihin izlerini takip edin.</p>
+        <span class="mc-arrow">KEŞFET <i class="fa fa-arrow-right" aria-hidden="true"></i></span>
+      </div>
+    </a>
+
+    <a href="galeri/galeri.html" class="museum-card reveal reveal-d2">
+      <div class="mc-icon-area">
+        <div class="mc-img-wrap">
+          <img src="images/cards/galeri.webp" alt="Görsel Galeri" class="mc-img" loading="lazy">
+        </div>
+      </div>
+      <div class="mc-body">
+        <h3 class="mc-title">Görsel Galeri</h3>
+        <p class="mc-desc">Külliyenin mimari güzelliklerini yüksek çözünürlüklü fotoğraflarla keşfedin.</p>
+        <span class="mc-arrow">GALERİYE GİT <i class="fa fa-arrow-right" aria-hidden="true"></i></span>
+      </div>
+    </a>
+
+    <a href="oduller/oduller.html" class="museum-card reveal reveal-d3">
+      <div class="mc-icon-area">
+        <div class="mc-img-wrap">
+          <img src="images/cards/oduller.webp" alt="Ödüllerimiz" class="mc-img" loading="lazy">
+        </div>
+      </div>
+      <div class="mc-body">
+        <h3 class="mc-title">Ödüllerimiz</h3>
+        <p class="mc-desc">Ulusal ve uluslararası arenada kazandığımız ödüller ve başarı belgelerimiz.</p>
+        <span class="mc-arrow">GÖRÜNTÜLE <i class="fa fa-arrow-right" aria-hidden="true"></i></span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ═══════ ZAMAN ÇİZGİSİ ═══════ -->
+<section id="timeline" aria-label="Tarihsel süreç">
+  <div class="section-header reveal">
+    <span class="section-eyebrow">Tarihsel Süreç</span>
+    <h2 class="section-title">Beş Asrın <span>İzinde</span></h2>
+    <div class="section-ornament" aria-hidden="true">
+      <div class="section-ornament-line"></div>
+      <span class="section-ornament-gem">✦</span>
+      <div class="section-ornament-line"></div>
+    </div>
+  </div>
+  <div class="timeline-wrap">
+    <div class="tl-item reveal">
+      <div class="tl-content">
+        <div class="tl-year">1484</div>
+        <p class="tl-text">Sultan II. Bayezid'in emriyle Edirne'de inşaat başlar. Mimar Hayreddin önderliğinde külliyenin temeli atılır.</p>
+      </div>
+      <div class="tl-spacer"><div class="tl-dot" aria-hidden="true"></div></div>
+      <div class="tl-empty"></div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-empty"></div>
+      <div class="tl-spacer"><div class="tl-dot" aria-hidden="true"></div></div>
+      <div class="tl-content">
+        <div class="tl-year">1488</div>
+        <p class="tl-text">Darüşşifa, Tıp Medresesi ve İmarethane tamamlanarak hizmete açılır. Osmanlı'nın en kapsamlı sağlık külliyesi hayata geçer.</p>
+      </div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-content">
+        <div class="tl-year">16. yy</div>
+        <p class="tl-text">Evliya Çelebi Seyahatnâme'sinde külliyeyi ayrıntılı biçimde kaleme alır; müzikle tedaviyi dünyaya tanıtır.</p>
+      </div>
+      <div class="tl-spacer"><div class="tl-dot" aria-hidden="true"></div></div>
+      <div class="tl-empty"></div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-empty"></div>
+      <div class="tl-spacer"><div class="tl-dot" aria-hidden="true"></div></div>
+      <div class="tl-content">
+        <div class="tl-year">1877</div>
+        <p class="tl-text">93 Harbi sırasında askeri amaçlarla kullanılan yapı, uzun yıllar çeşitli kurumlara ev sahipliği yapar.</p>
+      </div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-content">
+        <div class="tl-year">1997</div>
+        <p class="tl-text">Trakya Üniversitesi bünyesinde kapsamlı restorasyon çalışmaları başlar. Külliye özgün kimliğine kavuşturuluyor.</p>
+      </div>
+      <div class="tl-spacer"><div class="tl-dot" aria-hidden="true"></div></div>
+      <div class="tl-empty"></div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-empty"></div>
+      <div class="tl-spacer"><div class="tl-dot" aria-hidden="true"></div></div>
+      <div class="tl-content">
+        <div class="tl-year">Günümüz</div>
+        <p class="tl-text">Uluslararası ödüllere layık görülen müze; yerli ve yabancı binlerce ziyaretçiye her yıl kapılarını açmaktadır.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ ZİYARET BİLGİLERİ ═══════ -->
+<section id="visit" aria-label="Ziyaret bilgileri">
+  <div class="section-header reveal">
+    <span class="section-eyebrow">Ziyaret</span>
+    <h2 class="section-title">Müzeyi <span>Ziyaret Edin</span></h2>
+    <div class="section-ornament" aria-hidden="true">
+      <div class="section-ornament-line"></div>
+      <span class="section-ornament-gem">✦</span>
+      <div class="section-ornament-line"></div>
+    </div>
+  </div>
+  <div class="visit-grid">
+
+    <div class="visit-card reveal reveal-d1">
+      <span class="vc-icon" aria-hidden="true">🕐</span>
+      <h3 class="vc-title">ÇALIŞMA SAATLERİ</h3>
+      <div class="vc-row">
+        <span class="vc-label">Pazartesi</span>
+        <span class="vc-value vc-closed">KAPALI</span>
+      </div>
+      <div class="vc-row">
+        <span class="vc-label">Salı – Pazar</span>
+        <span class="vc-value">09:30 – 18:00</span>
+      </div>
+      <div class="vc-row">
+        <span class="vc-label">Resmi Tatiller</span>
+        <span class="vc-value">Lütfen arayın</span>
+      </div>
+    </div>
+
+    <div class="visit-card reveal reveal-d2">
+      <span class="vc-icon" aria-hidden="true">🎟️</span>
+      <h3 class="vc-title">GİRİŞ ÜCRETLERİ</h3>
+      <div class="vc-row">
+        <span class="vc-label">Yerli Ziyaretçi</span>
+        <span class="vc-value">60 TL</span>
+      </div>
+      <div class="vc-row">
+        <span class="vc-label">Yabancı Ziyaretçi</span>
+        <span class="vc-value">120 TL</span>
+      </div>
+      <div class="vc-row">
+        <span class="vc-label">Müze Kart</span>
+        <span class="vc-value vc-closed">Geçersiz</span>
+      </div>
+      <div class="vc-row vc-row--block">
+        <span class="vc-label vc-label--bold">Ücretsiz Giriş:</span>
+        <span class="vc-free-list">
+          17 yaş altı · 65 yaş üstü · Akademisyenler · Basın kartı · Gaziler · 
+          Engelliler ve refakatçi · Trakya Üniversitesi öğrenci &amp; personeli · 
+          ICOM / ICOMOS / UNESCO kart sahipleri
+        </span>
+      </div>
+    </div>
+
+    <div class="visit-card visit-card--stats reveal reveal-d3">
+      <span class="vc-icon" aria-hidden="true">📊</span>
+      <h3 class="vc-title">MÜZE İSTATİSTİKLERİ</h3>
+      <div class="stat-box">
+        <span class="stat-number" id="counter-years" aria-label="537 yıllık tarihi miras">537</span>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <span class="stat-label">Yıllık Tarihi Miras</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-number" id="counter-rooms" aria-label="4 ana külliye bölümü">4</span>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <span class="stat-label">Ana Külliye Bölümü</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════ HABERLER ═══════ -->
+<section id="news" aria-label="Haberler ve duyurular">
+  <div class="section-header reveal">
+    <span class="section-eyebrow">Güncel</span>
+    <h2 class="section-title">Haberler &amp; <span>Duyurular</span></h2>
+    <div class="section-ornament" aria-hidden="true">
+      <div class="section-ornament-line"></div>
+      <span class="section-ornament-gem">✦</span>
+      <div class="section-ornament-line"></div>
+    </div>
+  </div>
+
+  <div class="news-tabs reveal" role="tablist" aria-label="Haber kategorileri">
+    <button class="news-tab active" role="tab" aria-selected="true" aria-controls="tab-duyurular" data-tab="duyurular">DUYURULAR</button>
+    <button class="news-tab" role="tab" aria-selected="false" aria-controls="tab-haberler" data-tab="haberler">HABERLER</button>
+    <button class="news-tab" role="tab" aria-selected="false" aria-controls="tab-basinda" data-tab="basinda">BASINDA BİZ</button>
+  </div>
+
+  <div id="tab-duyurular" class="news-panel active reveal" role="tabpanel">
+    <ul class="news-list" id="list-duyurular" aria-live="polite">
+      <li class="news-item news-item--loading"><span class="news-date">Yükleniyor…</span></li>
+    </ul>
+    <div class="news-more">
+      <a href="duyurular/duyurular.html" class="btn-secondary">TÜM DUYURULAR →</a>
+    </div>
+  </div>
+  <div id="tab-haberler" class="news-panel reveal" role="tabpanel" hidden>
+    <ul class="news-list" id="list-haberler" aria-live="polite">
+      <li class="news-item news-item--loading"><span class="news-date">Yükleniyor…</span></li>
+    </ul>
+    <div class="news-more">
+      <a href="haberler/haberler.html" class="btn-secondary">TÜM HABERLER →</a>
+    </div>
+  </div>
+  <div id="tab-basinda" class="news-panel reveal" role="tabpanel" hidden>
+    <ul class="news-list" id="list-basinda" aria-live="polite">
+      <li class="news-item news-item--loading"><span class="news-date">Yükleniyor…</span></li>
+    </ul>
+    <div class="news-more">
+      <a href="basin/basin.html" class="btn-secondary">TÜMÜ →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ ŞİİR KARTI ═══════ -->
+<section id="poetry" aria-label="Ağaçla Sarmaşık şiiri">
+  <div class="section-header reveal">
+    <span class="section-eyebrow">Edebiyat</span>
+    <h2 class="section-title">Ağaçla <span>Sarmaşık</span></h2>
+    <div class="section-ornament" aria-hidden="true">
+      <div class="section-ornament-line"></div>
+      <span class="section-ornament-gem">✦</span>
+      <div class="section-ornament-line"></div>
+    </div>
+  </div>
+  <a href="siir/siir.html" class="poetry-card reveal">
+    <span class="poetry-icon" aria-hidden="true">🌿</span>
+    <p class="poetry-eyebrow">Ahmet Kutsi Tecer · Darüşşifa Bahçesi</p>
+    <h3 class="poetry-title">Ağaçla Sarmaşık</h3>
+    <p class="poetry-subtitle">Sessiz yatıyor hâlâ o eski bahçe</p>
+    <blockquote class="poetry-quote">
+      Ne kadar yıl geçti bilmem, kim bilir<br>
+      Sarmaşık sardı ağacı, ağaç sardı sarmaşığı…<br>
+      İkisi de eskimeden, ben eskidim işte.
+    </blockquote>
+    <span class="poetry-cta">ŞİİRİ VE VİDEOYU İZLE →</span>
+  </a>
+</section>
+
+<!-- ═══════ İLETİŞİM ═══════ -->
+<section id="contact" aria-label="İletişim ve konum">
+  <div class="section-header reveal">
+    <span class="section-eyebrow">Ulaşım</span>
+    <h2 class="section-title">İletişim &amp; <span>Konum</span></h2>
+    <div class="section-ornament" aria-hidden="true">
+      <div class="section-ornament-line"></div>
+      <span class="section-ornament-gem">✦</span>
+      <div class="section-ornament-line"></div>
+    </div>
+  </div>
+  <div class="contact-grid">
+
+    <div class="contact-card reveal reveal-d1">
+      <h3 class="cc-title"><span aria-hidden="true">📍</span> ADRES VE ULAŞIM</h3>
+      <div class="cc-row">
+        <span class="cc-row-icon" aria-hidden="true">🏠</span>
+        <span>Sultan II. Bayezid Külliyesi Sağlık Müzesi, Yeniimaret, Edirne</span>
+      </div>
+      <div class="cc-row">
+        <span class="cc-row-icon" aria-hidden="true">📞</span>
+        <a href="tel:02842240922">0 284 224 09 22</a>
+      </div>
+      <div class="cc-row">
+        <span class="cc-row-icon" aria-hidden="true">✉️</span>
+        <a href="mailto:saglikmuze@trakya.edu.tr">saglikmuze@trakya.edu.tr</a>
+      </div>
+      <div class="cc-row">
+        <span class="cc-row-icon" aria-hidden="true">🚌</span>
+        <span>ETUS 3A hattı midibüsleri ile ulaşabilirsiniz</span>
+      </div>
+      <div class="cc-row">
+        <span class="cc-row-icon" aria-hidden="true">🗺️</span>
+        <a href="https://maps.app.goo.gl/bzReF3jYhArMYWi86" target="_blank" rel="noopener">Google Maps'te Görüntüle &amp; Yol Tarifi Al</a>
+      </div>
+    </div>
+
+    <div class="contact-card reveal reveal-d2">
+      <h3 class="cc-title"><span aria-hidden="true">🌐</span> SOSYAL MEDYA</h3>
+      <div class="cc-row cc-row--block">
+        <p class="cc-social-desc">Müzemizin sosyal medya hesaplarını takip ederek etkinlikler, duyurular ve tarihi içeriklerden haberdar olun.</p>
+        <div class="social-row">
+          <a href="https://www.instagram.com/edirnesaglikmuzesi/" target="_blank" rel="noopener" class="social-btn">
+            <i class="fab fa-instagram" style="color:#E1306C;" aria-hidden="true"></i> Instagram
+          </a>
+          <a href="https://www.facebook.com/people/Edirne-Saglik-Muzesi/100079601388695/" target="_blank" rel="noopener" class="social-btn">
+            <i class="fab fa-facebook" style="color:#1877F2;" aria-hidden="true"></i> Facebook
+          </a>
+          <a href="https://x.com/saglikmuzesi" target="_blank" rel="noopener" class="social-btn">
+            𝕏 @saglikmuzesi
+          </a>
+        </div>
+      </div>
+      <div class="cc-row cc-row--block" style="margin-top:16px;">
+        <span class="cc-quick-title">HIZLI BAĞLANTILAR</span>
+        <div class="social-row">
+          <a href="geziplani/geziplani.html" class="social-btn">Gezi Planı</a>
+          <a href="personel/personel.html" class="social-btn">Personelimiz</a>
+          <a href="oduller/oduller.html" class="social-btn">Ödüller</a>
+          <a href="https://www.trakya.edu.tr" target="_blank" rel="noopener" class="social-btn">Trakya Üniv.</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+</main>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-brand-title">Sultan II. Bayezid Külliyesi Sağlık Müzesi</div>
+      <div class="footer-brand-sub">T.C. TRAKYA ÜNİVERSİTESİ · EDİRNE</div>
+      <p class="footer-brand-desc">
+        1484 yılında Sultan II. Bayezid tarafından yaptırılan bu eşsiz külliye, Osmanlı sağlık anlayışının 
+        en nadide örneğini sunar. Müzikle tedaviden tıp eğitimine, imarethane hizmetlerinden mimari 
+        güzelliğe uzanan kapsamlı bir kültür mirası.
+      </p>
+    </div>
+    <nav class="footer-nav" aria-label="Site haritası - Sayfalar">
+      <div class="footer-col-title">SAYFALAR</div>
+      <ul class="footer-links">
+        <li><a href="tarihce/tarihce.html">Tarihçe</a></li>
+        <li><a href="bayezid/bayezid.html">Sultan II. Bayezid</a></li>
+        <li><a href="evliya/evliya.html">Evliya Çelebi</a></li>
+        <li><a href="hastane/hastane.html">Darüşşifa</a></li>
+        <li><a href="medrese/medrese.html">Tıp Medresesi</a></li>
+        <li><a href="imaret/imaret.html">İmarethane</a></li>
+        <li><a href="music/music.html">Müzikle Tedavi</a></li>
+      </ul>
+    </nav>
+    <nav class="footer-nav" aria-label="Site haritası - Diğer">
+      <div class="footer-col-title">DİĞER</div>
+      <ul class="footer-links">
+        <li><a href="geziplani/geziplani.html">Gezi Planı</a></li>
+        <li><a href="galeri/galeri.html">Görsel Galeri</a></li>
+        <li><a href="siir/siir.html">Sarmaşık</a></li>
+        <li><a href="oduller/oduller.html">Ödüller</a></li>
+        <li><a href="personel/personel.html">Personelimiz</a></li>
+        <li><a href="haberler/haberler.html">Haberler</a></li>
+        <li><a href="duyurular/duyurular.html">Duyurular</a></li>
+        <li><a href="basin/basin.html">Basında Biz</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <span aria-hidden="true">✦</span>
+    © 2026 T.C. TRAKYA ÜNİVERSİTESİ · SULTAN II. BAYEZİD KÜLLİYESİ SAĞLIK MÜZESİ · TÜM HAKLARI SAKLIDIR
+    <span aria-hidden="true">✦</span>
+  </div>
+</footer>
+
+<!-- Back to top -->
+<button id="btt" aria-label="Sayfanın başına dön" title="Yukarı çık">
+  <i class="fa fa-chevron-up" aria-hidden="true"></i>
+</button>
+
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
