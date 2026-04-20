@@ -152,6 +152,7 @@ a { color: inherit; }
   overflow: hidden;
   position: relative;
   z-index: 1;
+  animation: spinSlow 20s linear infinite reverse;
 }
 
 .splash-img {
@@ -159,7 +160,6 @@ a { color: inherit; }
   height: 100%;
   object-fit: cover;
   border-radius: 50%;
-  animation: pulse 2.5s ease-in-out infinite;
 }
 
 .splash-title {
@@ -407,6 +407,17 @@ a { color: inherit; }
 /* ═══════════════════════════════════════════════
    HERO
 ═══════════════════════════════════════════════ */
+/* Su dalgalanma canvas */
+#water-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.55;
+}
+
 #hero {
   min-height: 100vh;
   min-height: 100svh; /* Safari mobil için */
