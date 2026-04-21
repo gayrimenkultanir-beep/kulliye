@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Görsel Galeri — Sultan II. Bayezid Külliyesi Sağlık Müzesi · Tarihi fotoğraflar, restorasyon, Darüşşifa, gravür ve minyatürler">
+<meta name="theme-color" content="#1a1008">
+<title>Görsel Galeri · Sultan II. Bayezid Külliyesi Sağlık Müzesi</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=IM+Fell+English:ital@0;1&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+/* ═══════════════════════════════════════════
+   CUSTOM PROPERTIES
+═══════════════════════════════════════════ */
+:root {
+  --gold:        #c9a84c;
+  --gold-light:  #e8d08a;
+  --gold-dark:   #8b6914;
+  --ink:         #1a1008;
+  --ink-soft:    #2e1f0a;
+  --parchment:   #f5e9c8;
+  --crimson:     #7a1c1c;
+
+  --space-xs:8px; --space-sm:16px; --space-md:24px;
+  --space-lg:40px; --space-xl:60px; --space-2xl:80px;
+
+  --container-max:1260px;
+  --nav-height:72px;
+  --r-sm:6px; --r-md:10px; --r-lg:14px;
+
+  --t-fast:0.2s ease; --t-med:0.35s ease;
+  --t-slow:0.52s cubic-bezier(.4,0,.2,1);
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;font-size:16px;-webkit-text-size-adjust:100%;}
+
+body{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  background:var(--parchment);color:var(--ink);
+  overflow-x:hidden;line-height:1.6;
+}
+
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E"),
+    radial-gradient(ellipse at 20% 20%,#f7edce 0%,transparent 60%),
+    radial-gradient(ellipse at 80% 80%,#e8d5a3 0%,transparent 55%),
+    linear-gradient(160deg,#f5e9c8 0%,#ecddb4 40%,#f0e3be 100%);
+  pointer-events:none;
+}
+
+img{max-width:100%;height:auto;display:block;}
+ul{list-style:none;} a{color:inherit;} button{cursor:pointer;}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:2px;}
+
+/* ═══════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════ */
+#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;}
+
+.nav-inner{
+  max-width:var(--container-max);margin:0 auto;
+  background:var(--ink);border:1px solid var(--gold-dark);
+  border-top:none;border-bottom-left-radius:var(--r-lg);border-bottom-right-radius:var(--r-lg);
+  padding:0 clamp(16px,4vw,30px);
+  display:flex;align-items:center;justify-content:space-between;gap:var(--space-md);
+  min-height:var(--nav-height);
+  box-shadow:0 8px 40px rgba(0,0,0,.5),inset 0 1px 0 rgba(201,168,76,.2);
+  position:relative;
+}
+
+.nav-inner::before{
+  content:'✦ ───── ✦ ───── ✦';
+  position:absolute;top:6px;left:50%;transform:translateX(-50%);
+  font-size:8px;color:rgba(201,168,76,.4);letter-spacing:4px;pointer-events:none;white-space:nowrap;
+}
+
+.nav-logo{display:flex;align-items:center;gap:14px;text-decoration:none;flex-shrink:0;}
+.nav-logo-icon{width:44px;height:44px;border:1px solid var(--gold-dark);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;background:rgba(201,168,76,.05);}
+.nav-logo-img{width:100%;height:100%;object-fit:contain;padding:6px;}
+.nav-logo-text{display:flex;flex-direction:column;}
+.nav-logo-top{font-family:'Cinzel',serif;font-size:9px;color:rgba(201,168,76,.7);letter-spacing:2px;line-height:1.4;}
+.nav-logo-main{font-family:'Cinzel',serif;font-size:13px;font-weight:700;color:var(--gold);letter-spacing:1px;line-height:1.2;}
+
+.nav-links ul{display:flex;align-items:center;gap:2px;flex-wrap:nowrap;}
+.nav-links a{
+  font-family:'Cinzel',serif;font-size:10px;font-weight:600;
+  color:rgba(201,168,76,.75);text-decoration:none;
+  padding:8px 10px;border-radius:var(--r-sm);letter-spacing:.5px;white-space:nowrap;display:block;
+  transition:color var(--t-fast),background var(--t-fast);
+}
+.nav-links a:hover,.nav-links a.active{color:var(--gold);background:rgba(201,168,76,.1);}
+
+.nav-hamburger{display:none;flex-direction:column;gap:5px;background:none;border:1px solid var(--gold-dark);border-radius:var(--r-sm);padding:10px 12px;flex-shrink:0;touch-action:manipulation;}
+.nav-hamburger span{display:block;width:22px;height:1.5px;background:var(--gold);transition:transform var(--t-med),opacity var(--t-fast);transform-origin:center;}
+.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+
+#mobileMenu{
+  position:absolute;top:100%;left:0;right:0;
+  background:var(--ink);border:1px solid var(--gold-dark);border-top:none;
+  border-bottom-left-radius:var(--r-md);border-bottom-right-radius:var(--r-md);
+  display:flex;flex-wrap:wrap;gap:var(--space-xs);padding:var(--space-sm);
+  max-height:0;overflow:hidden;opacity:0;pointer-events:none;
+  transition:max-height .4s ease,opacity .3s ease;
+}
+#mobileMenu.open{max-height:520px;opacity:1;pointer-events:auto;}
+#mobileMenu a{font-family:'Cinzel',serif;font-size:10px;font-weight:600;color:rgba(201,168,76,.75);text-decoration:none;padding:8px 12px;border-radius:var(--r-sm);border:1px solid rgba(201,168,76,.15);transition:background var(--t-fast),color var(--t-fast);}
+#mobileMenu a:hover{background:rgba(201,168,76,.12);color:var(--gold);}
+
+/* ═══════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════ */
+.page-hero{
+  position:relative;padding-top:var(--nav-height);min-height:50vh;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;background:var(--ink);
+}
+
+.page-hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 50% 0%,rgba(201,168,76,.13) 0%,transparent 60%),
+    radial-gradient(ellipse at 0% 100%,rgba(122,28,28,.12) 0%,transparent 50%),
+    radial-gradient(ellipse at 100% 100%,rgba(30,74,92,.12) 0%,transparent 50%);
+}
+
+.page-hero::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M40 0 L80 40 L40 80 L0 40 Z' fill='none' stroke='rgba(201,168,76,0.04)' stroke-width='1'/%3E%3Ccircle cx='40' cy='40' r='20' fill='none' stroke='rgba(201,168,76,0.03)' stroke-width='1'/%3E%3C/svg%3E");
+}
+
+.page-hero-inner{position:relative;z-index:1;text-align:center;padding:clamp(48px,8vw,80px) var(--space-sm);max-width:700px;}
+.hero-eyebrow{font-family:'Cinzel',serif;font-size:clamp(9px,2vw,11px);letter-spacing:4px;color:rgba(201,168,76,.6);display:block;margin-bottom:20px;}
+
+.hero-ornament{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:24px;}
+.hero-orn-line{height:1px;width:60px;background:linear-gradient(90deg,transparent,var(--gold-dark));}
+.hero-orn-line:last-child{background:linear-gradient(270deg,transparent,var(--gold-dark));}
+.hero-orn-gem{color:var(--gold);font-size:16px;animation:gemPulse 3s ease-in-out infinite;}
+@keyframes gemPulse{0%,100%{opacity:.7;transform:scale(1);}50%{opacity:1;transform:scale(1.1);}}
+
+.hero-title{font-family:'Cinzel',serif;font-size:clamp(32px,8vw,68px);font-weight:700;color:var(--gold);letter-spacing:6px;line-height:1;margin-bottom:14px;text-shadow:0 0 60px rgba(201,168,76,.3);}
+.hero-subtitle{font-family:'IM Fell English',serif;font-style:italic;font-size:clamp(14px,3vw,20px);color:rgba(201,168,76,.65);letter-spacing:1px;margin-bottom:18px;}
+.hero-desc{font-size:clamp(13px,2.5vw,16px);color:rgba(245,233,200,.55);line-height:1.8;max-width:480px;margin:0 auto;}
+
+/* ═══════════════════════════════════════════
+   STICKY BÖLÜM NAV
+═══════════════════════════════════════════ */
+#bolum-nav{
+  position:sticky;top:var(--nav-height);z-index:90;
+  background:rgba(26,16,8,.97);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(139,105,20,.55);
+  overflow-x:auto;scrollbar-width:none;
+  box-shadow:0 4px 20px rgba(0,0,0,.4);
+}
+#bolum-nav::-webkit-scrollbar{display:none;}
+
+.bolum-nav-inner{display:flex;align-items:stretch;padding:0 clamp(8px,2vw,20px);min-width:max-content;}
+
+.bnl{
+  font-family:'Cinzel',serif;font-size:9px;font-weight:700;
+  letter-spacing:1.5px;color:rgba(201,168,76,.5);
+  text-decoration:none;padding:13px 13px 11px;
+  border-bottom:2px solid transparent;
+  white-space:nowrap;display:flex;align-items:center;gap:6px;
+  transition:color var(--t-fast),border-color var(--t-fast),background var(--t-fast);
+}
+
+.bnl-num{
+  display:flex;align-items:center;justify-content:center;
+  width:16px;height:16px;border-radius:50%;
+  background:rgba(201,168,76,.1);font-size:8px;
+  border:1px solid rgba(201,168,76,.2);flex-shrink:0;
+}
+
+.bnl:hover{color:rgba(201,168,76,.85);background:rgba(201,168,76,.05);}
+.bnl.active{color:var(--gold);border-bottom-color:var(--gold);}
+.bnl.active .bnl-num{background:var(--gold);color:var(--ink);border-color:var(--gold);}
+
+/* ═══════════════════════════════════════════
+   BÖLÜM
+═══════════════════════════════════════════ */
+.galeri-section{position:relative;z-index:1;padding:clamp(52px,7vw,88px) 0 0;}
+.galeri-section:nth-child(even){background:rgba(26,16,8,.025);}
+
+/* Başlık */
+.gs-header{text-align:center;padding:0 var(--space-sm) clamp(24px,4vw,44px);max-width:var(--container-max);margin:0 auto;}
+.gs-eyebrow{font-family:'Cinzel',serif;font-size:10px;letter-spacing:4px;color:var(--gold-dark);text-transform:uppercase;display:block;margin-bottom:10px;}
+.gs-title{font-family:'Cinzel',serif;font-size:clamp(20px,4vw,34px);font-weight:700;color:var(--ink);letter-spacing:2px;line-height:1.2;margin-bottom:14px;}
+.gs-title span{color:var(--crimson);}
+.gs-ornament{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:20px;}
+.gs-orn-line{height:1px;width:50px;background:var(--gold-dark);}
+.gs-orn-gem{color:var(--gold);font-size:12px;}
+
+/* Vurgulu söz */
+.gs-quote{
+  font-family:'IM Fell English',serif;font-style:italic;
+  font-size:clamp(14px,2.3vw,17px);color:var(--ink-soft);line-height:1.85;
+  max-width:600px;margin:0 auto;
+  padding:14px 22px;
+  border-left:2px solid var(--gold-dark);
+  background:rgba(201,168,76,.05);
+  border-radius:0 var(--r-sm) var(--r-sm) 0;text-align:left;
+}
+.gs-quote cite{display:block;margin-top:10px;font-style:normal;font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--gold-dark);}
+
+/* ─── Slider ─── */
+.gs-slider-wrap{position:relative;max-width:var(--container-max);margin:0 auto;padding-bottom:clamp(32px,5vw,52px);}
+
+.gs-stage{
+  position:relative;overflow:hidden;background:var(--ink);
+  border-top:1px solid rgba(139,105,20,.2);
+  border-bottom:1px solid rgba(139,105,20,.2);
+}
+
+.gs-track{display:flex;transition:transform var(--t-slow);will-change:transform;}
+
+.gs-slide{flex:0 0 100%;width:100%;position:relative;user-select:none;}
+
+.gs-slide-img{
+  width:100%;aspect-ratio:16/9;object-fit:cover;display:block;
+  filter:sepia(8%) contrast(1.04) brightness(.97);
+  transition:filter .5s ease;cursor:zoom-in;-webkit-user-drag:none;
+}
+.gs-slide:hover .gs-slide-img{filter:sepia(0%) contrast(1.08) brightness(1);}
+
+/* Zoom ikon */
+.gs-zoom-icon{
+  position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;
+  background:rgba(26,16,8,.65);border:1px solid rgba(201,168,76,.35);
+  color:var(--gold);font-size:12px;display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity var(--t-fast);pointer-events:none;
+}
+.gs-slide:hover .gs-zoom-icon{opacity:1;}
+
+/* Caption */
+.gs-slide-caption{
+  position:absolute;bottom:0;left:0;right:0;
+  background:linear-gradient(to top,rgba(26,16,8,.82) 0%,transparent 100%);
+  padding:28px 20px 12px;
+  font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,168,76,.85);
+  transform:translateY(4px);opacity:0;
+  transition:opacity var(--t-med),transform var(--t-med);
+}
+.gs-slide:hover .gs-slide-caption{opacity:1;transform:translateY(0);}
+
+/* Placeholder */
+.gs-ph{width:100%;aspect-ratio:16/9;background:rgba(26,16,8,.88);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;}
+.gs-ph-icon{font-size:28px;opacity:.18;color:var(--gold);}
+.gs-ph-txt{font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;color:rgba(201,168,76,.18);text-align:center;padding:0 20px;line-height:1.8;}
+
+/* Oklar */
+.gs-arrow{
+  position:absolute;top:50%;z-index:10;
+  width:clamp(38px,4.5vw,50px);height:clamp(38px,4.5vw,50px);
+  border-radius:50%;border:1px solid rgba(139,105,20,.5);
+  background:rgba(26,16,8,.78);backdrop-filter:blur(6px);
+  color:var(--gold);font-size:clamp(13px,1.5vw,16px);
+  display:flex;align-items:center;justify-content:center;
+  transform:translateY(-50%);
+  transition:background var(--t-fast),border-color var(--t-fast),transform var(--t-fast);
+  touch-action:manipulation;
+}
+.gs-arrow:hover{background:var(--gold-dark);color:var(--parchment);border-color:var(--gold);transform:translateY(-50%) scale(1.1);}
+.gs-arrow:disabled{opacity:.18;pointer-events:none;}
+.gs-arrow-prev{left:clamp(6px,1.2vw,14px);}
+.gs-arrow-next{right:clamp(6px,1.2vw,14px);}
+
+/* Sayaç rozeti */
+.gs-counter-badge{
+  position:absolute;bottom:10px;right:14px;
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;
+  color:rgba(201,168,76,.45);user-select:none;
+  background:rgba(26,16,8,.5);padding:3px 9px;border-radius:20px;
+}
+
+/* Kontroller (thumbs + dots) */
+.gs-controls{padding:10px clamp(8px,2vw,16px) 0;display:flex;flex-direction:column;gap:8px;}
+
+/* Thumbnails */
+.gs-thumbs{display:flex;gap:5px;overflow-x:auto;scrollbar-width:none;scroll-behavior:smooth;padding-bottom:2px;}
+.gs-thumbs::-webkit-scrollbar{display:none;}
+
+.gs-thumb{
+  flex:0 0 clamp(48px,6.5vw,74px);height:clamp(32px,4.5vw,50px);
+  object-fit:cover;display:block;border:2px solid transparent;border-radius:3px;
+  opacity:.5;cursor:pointer;filter:sepia(25%);flex-shrink:0;
+  transition:opacity var(--t-fast),border-color var(--t-fast),transform var(--t-fast),filter var(--t-fast);
+  -webkit-user-drag:none;
+}
+.gs-thumb:hover{opacity:.78;transform:translateY(-2px);}
+.gs-thumb.active{border-color:var(--gold);opacity:1;filter:sepia(0%);transform:translateY(-2px);}
+
+.gs-thumb-ph{
+  flex:0 0 clamp(48px,6.5vw,74px);height:clamp(32px,4.5vw,50px);
+  border:1px dashed rgba(201,168,76,.18);border-radius:3px;opacity:.35;cursor:pointer;
+  background:rgba(26,16,8,.3);display:flex;align-items:center;justify-content:center;
+  font-family:'Cinzel',serif;font-size:8px;color:rgba(201,168,76,.25);flex-shrink:0;
+  transition:opacity var(--t-fast),border-color var(--t-fast);
+}
+.gs-thumb-ph.active{border-color:var(--gold);opacity:.75;}
+
+/* Dots */
+.gs-dots{display:flex;justify-content:center;align-items:center;gap:5px;flex-wrap:wrap;padding:4px 0 0;}
+.gs-dot{width:6px;height:6px;border-radius:50%;padding:0;border:1px solid rgba(201,168,76,.3);background:transparent;flex-shrink:0;transition:background var(--t-fast),border-color var(--t-fast),transform var(--t-fast);}
+.gs-dot.active{background:var(--gold);border-color:var(--gold);transform:scale(1.35);}
+
+/* Ayraç */
+.gs-divider{width:100%;height:1px;margin-top:clamp(40px,6vw,72px);background:linear-gradient(90deg,transparent,rgba(201,168,76,.18),transparent);}
+
+/* ═══════════════════════════════════════════
+   LIGHTBOX
+═══════════════════════════════════════════ */
+#lightbox{
+  position:fixed;inset:0;z-index:9900;
+  background:rgba(6,3,1,.97);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .28s ease;
+}
+#lightbox.open{opacity:1;pointer-events:auto;}
+
+/* Üst çubuk */
+.lb-bar{
+  position:absolute;top:0;left:0;right:0;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px clamp(16px,4vw,32px);
+  background:linear-gradient(to bottom,rgba(6,3,1,.88),transparent);z-index:2;
+}
+
+.lb-bar-left{display:flex;flex-direction:column;gap:3px;}
+.lb-bar-section{font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;color:rgba(201,168,76,.5);}
+.lb-bar-caption{font-family:'IM Fell English',serif;font-style:italic;font-size:14px;color:rgba(201,168,76,.8);}
+.lb-bar-right{display:flex;align-items:center;gap:12px;}
+.lb-counter{font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,168,76,.4);}
+
+.lb-close-btn{width:38px;height:38px;border-radius:50%;border:1px solid rgba(201,168,76,.3);background:none;color:var(--gold);font-size:14px;display:flex;align-items:center;justify-content:center;transition:background var(--t-fast),border-color var(--t-fast);}
+.lb-close-btn:hover{background:rgba(201,168,76,.15);border-color:var(--gold);}
+
+/* Görsel */
+.lb-img-wrap{flex:1;display:flex;align-items:center;justify-content:center;width:100%;padding:70px clamp(48px,6vw,90px) 80px;position:relative;}
+
+#lbImg{
+  max-width:100%;max-height:calc(100vh - 160px);object-fit:contain;display:block;
+  border:1px solid rgba(201,168,76,.12);box-shadow:0 24px 80px rgba(0,0,0,.9);
+  transition:opacity .18s ease;
+}
+#lbImg.fading{opacity:0;}
+
+/* Oklar */
+.lb-arrow{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:clamp(44px,5vw,58px);height:clamp(44px,5vw,58px);
+  border-radius:50%;border:1px solid rgba(201,168,76,.25);
+  background:rgba(26,16,8,.7);backdrop-filter:blur(8px);
+  color:var(--gold);font-size:clamp(15px,2vw,20px);
+  display:flex;align-items:center;justify-content:center;
+  transition:background var(--t-fast),transform var(--t-fast);
+  touch-action:manipulation;z-index:2;
+}
+.lb-arrow:hover{background:rgba(201,168,76,.18);transform:translateY(-50%) scale(1.08);}
+.lb-arrow:disabled{opacity:.15;pointer-events:none;}
+.lb-prev{left:clamp(8px,2vw,22px);}
+.lb-next{right:clamp(8px,2vw,22px);}
+
+/* Alt thumbnail şeridi */
+.lb-thumbs-wrap{
+  position:absolute;bottom:0;left:0;right:0;
+  background:linear-gradient(to top,rgba(6,3,1,.9),transparent);
+  padding:28px clamp(16px,4vw,40px) 14px;
+  display:flex;justify-content:center;z-index:2;
+}
+
+.lb-thumbs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;scroll-behavior:smooth;max-width:100%;}
+.lb-thumbs::-webkit-scrollbar{display:none;}
+
+.lb-thumb{
+  flex:0 0 clamp(44px,5.5vw,64px);height:clamp(30px,3.8vw,44px);
+  object-fit:cover;display:block;border:2px solid transparent;border-radius:3px;
+  opacity:.4;cursor:pointer;filter:sepia(20%);
+  transition:opacity .2s,border-color .2s,transform .2s,filter .2s;
+  -webkit-user-drag:none;flex-shrink:0;
+}
+.lb-thumb:hover{opacity:.7;}
+.lb-thumb.active{border-color:var(--gold);opacity:1;filter:sepia(0%);transform:translateY(-2px);}
+
+.lb-thumb-ph{flex:0 0 clamp(44px,5.5vw,64px);height:clamp(30px,3.8vw,44px);border:1px dashed rgba(201,168,76,.15);border-radius:3px;opacity:.3;cursor:pointer;background:rgba(26,16,8,.4);flex-shrink:0;transition:border-color .2s,opacity .2s;}
+.lb-thumb-ph.active{border-color:var(--gold);opacity:.7;}
+
+/* ═══════════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════════ */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* ═══════════════════════════════════════════
+   BACK TO TOP
+═══════════════════════════════════════════ */
+#btt{
+  position:fixed;bottom:28px;right:20px;z-index:500;
+  width:48px;height:48px;border-radius:50%;
+  background:var(--ink);border:1px solid var(--gold-dark);color:var(--gold);font-size:16px;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;
+  transition:opacity var(--t-med),background var(--t-fast),transform var(--t-fast);
+  box-shadow:0 4px 16px rgba(0,0,0,.3);touch-action:manipulation;
+}
+#btt.show{opacity:1;pointer-events:auto;}
+#btt:hover{background:var(--gold-dark);color:var(--ink);transform:translateY(-2px);}
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+footer{background:var(--ink);border-top:1px solid var(--gold-dark);padding:clamp(32px,6vw,48px) var(--space-sm) var(--space-lg);position:relative;z-index:1;}
+.footer-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:clamp(24px,5vw,40px);margin-bottom:clamp(24px,4vw,36px);}
+.footer-brand-title{font-family:'Cinzel',serif;font-size:clamp(14px,2.5vw,16px);font-weight:700;color:var(--gold);margin-bottom:4px;line-height:1.3;}
+.footer-brand-sub{font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,168,76,.6);margin-bottom:var(--space-sm);}
+.footer-brand-desc{font-size:14px;color:rgba(201,168,76,.55);line-height:1.7;}
+.footer-col-title{font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;color:var(--gold);margin-bottom:var(--space-sm);padding-bottom:10px;border-bottom:1px solid rgba(201,168,76,.2);}
+.footer-links{display:flex;flex-direction:column;gap:10px;}
+.footer-links a{font-size:13px;color:rgba(201,168,76,.6);text-decoration:none;transition:color var(--t-fast);}
+.footer-links a:hover{color:var(--gold);}
+.footer-bottom{border-top:1px solid rgba(201,168,76,.15);padding-top:var(--space-md);text-align:center;font-family:'Cinzel',serif;font-size:clamp(8px,1.5vw,10px);letter-spacing:2px;color:rgba(201,168,76,.4);line-height:1.6;}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media(max-width:1100px){.nav-links{display:none;}.nav-hamburger{display:flex;}}
+@media(max-width:768px){
+  .nav-logo-top{display:none;}
+  .footer-inner{grid-template-columns:1fr;}
+  .gs-arrow{display:none;}
+}
+@media(max-width:480px){
+  #btt{bottom:16px;right:14px;width:42px;height:42px;}
+  .lb-thumbs-wrap{display:none;}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}html{scroll-behavior:auto;}}
+@media print{#navbar,#btt,#lightbox,#bolum-nav{display:none;}body{background:white;color:black;}.reveal{opacity:1;transform:none;}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header id="navbar" role="banner">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo" aria-label="Ana Sayfa">
+      <div class="nav-logo-icon" aria-hidden="true">
+        <img src="../images/logo.png" alt="Logo" class="nav-logo-img">
+      </div>
+      <div class="nav-logo-text">
+        <span class="nav-logo-top">T.C. TRAKYA ÜNİVERSİTESİ</span>
+        <span class="nav-logo-main">Sultan II. Bayezid<br>Külliyesi Sağlık Müzesi</span>
+      </div>
+    </a>
+    <nav class="nav-links" aria-label="Ana menü">
+      <ul>
+        <li><a href="../index.html#explore">Bölümler</a></li>
+        <li><a href="../tarihce/tarihce.html">Tarihçe</a></li>
+        <li><a href="../bayezid/bayezid.html">Sultan II. Bayezid</a></li>
+        <li><a href="../hastane/hastane.html">Darüşşifa</a></li>
+        <li><a href="../music/music.html">Müzikle Tedavi</a></li>
+        <li><a href="../galeri/galeri.html" class="active">Galeri</a></li>
+        <li><a href="../siir/siir.html">Sarmaşık</a></li>
+        <li><a href="../index.html#contact">İletişim</a></li>
+      </ul>
+    </nav>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menüyü aç/kapat" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav id="mobileMenu" aria-label="Mobil menü" aria-hidden="true">
+    <a href="../index.html">Ana Sayfa</a>
+    <a href="../tarihce/tarihce.html">Tarihçe</a>
+    <a href="../bayezid/bayezid.html">Sultan II. Bayezid</a>
+    <a href="../evliya/evliya.html">Evliya Çelebi</a>
+    <a href="../medrese/medrese.html">Tıp Medresesi</a>
+    <a href="../hastane/hastane.html">Darüşşifa</a>
+    <a href="../imaret/imaret.html">İmarethane</a>
+    <a href="../music/music.html">Müzikle Tedavi</a>
+    <a href="../geziplani/geziplani.html">Gezi Planı</a>
+    <a href="../galeri/galeri.html">Görsel Galeri</a>
+    <a href="../siir/siir.html">Sarmaşık</a>
+    <a href="../oduller/oduller.html">Ödüller</a>
+    <a href="../personel/personel.html">Personelimiz</a>
+    <a href="../index.html#contact">İletişim</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="page-hero" aria-label="Görsel Galeri">
+  <div class="page-hero-inner">
+    <span class="hero-eyebrow">Sultan II. Bayezid Külliyesi · Edirne</span>
+    <div class="hero-ornament" aria-hidden="true">
+      <div class="hero-orn-line"></div>
+      <span class="hero-orn-gem">✦</span>
+      <div class="hero-orn-line"></div>
+    </div>
+    <h1 class="hero-title">GÖRSEL GALERİ</h1>
+    <p class="hero-subtitle">Geçmişin Şifası, Geleceğin Hafızası</p>
+    <p class="hero-desc">Beş asırlık tarihin görsel tanıkları. Tarihi fotoğraflardan minyatürlere, restorasyon belgelerinden güncel çekimlere uzanan kapsamlı bir görsel arşiv.</p>
+  </div>
+</section>
+
+<!-- BÖLÜM NAVİGASYONU -->
+<nav id="bolum-nav" aria-label="Galeri bölümleri">
+  <div class="bolum-nav-inner">
+    <a class="bnl active" href="#b1"><span class="bnl-num">1</span>TARİHİ FOTOĞRAFLAR</a>
+    <a class="bnl" href="#b2"><span class="bnl-num">2</span>RESTORASYON ÖNCESİ</a>
+    <a class="bnl" href="#b3"><span class="bnl-num">3</span>GENEL GÖRÜNTÜLER</a>
+    <a class="bnl" href="#b4"><span class="bnl-num">4</span>DARÜŞŞİFA</a>
+    <a class="bnl" href="#b5"><span class="bnl-num">5</span>MEDRESE</a>
+    <a class="bnl" href="#b6"><span class="bnl-num">6</span>İMARET</a>
+    <a class="bnl" href="#b7"><span class="bnl-num">7</span>DİĞER BÖLÜMLER</a>
+    <a class="bnl" href="#b8"><span class="bnl-num">8</span>GRAVÜR VE MİNYATÜRLER</a>
+    <a class="bnl" href="#b9"><span class="bnl-num">9</span>ÖDÜLLER</a>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════
+     9 BÖLÜM — DATA-DRIVEN HTML
+     Her bölüm aynı yapıda, JS doldurur
+══════════════════════════════════ -->
+
+<!-- BÖLÜM 1 -->
+<section class="galeri-section" id="b1" aria-labelledby="b1-title">
+  <div class="gs-header reveal">
+    <span class="gs-eyebrow">Bölüm 1</span>
+    <h2 class="gs-title" id="b1-title">Tarihi <span>Fotoğraflar</span></h2>
+    <div class="gs-ornament"><div class="gs-orn-line"></div><span class="gs-orn-gem">✦</span><div class="gs-orn-line"></div></div>
+    <blockquote class="gs-quote">
+      Görseller, 1484'ten bugüne uzanan merhamet yolculuğunun görsel şahitleridir.
+      <cite>— Sultan II. Bayezid Külliyesi Arşivi</cite>
+    </blockquote>
+  </div>
+  <div class="gs-slider-wrap" data-sid="0">
+    <div class="gs-stage">
+      <div class="gs-track"></div>
+      <button class="gs-arrow gs-arrow-prev" aria-label="Önceki"><i class="fa fa-chevron-left"></i></button>
+      <button class="gs-arrow gs-arrow-next" aria-label="Sonraki"><i class="fa fa-chevron-right"></i></button>
+      <span class="gs-counter-badge">1 / 20</span>
+    </div>
+    <div class="gs-controls">
+      <div class="gs-thumbs"></div>
+      <div class="gs-dots"></div>
+    </div>
+  </div>
+  <div class="gs-divider"></div>
+</section>
+
+<!-- BÖLÜM 2 -->
+<section class="galeri-section" id="b2" aria-labelledby="b2-title">
+  <div class="gs-header reveal">
+    <span class="gs-eyebrow">Bölüm 2</span>
+    <h2 class="gs-title" id="b2-title">Restorasyon <span>Öncesi</span></h2>
+    <div class="gs-ornament"><div class="gs-orn-line"></div><span class="gs-orn-gem">✦</span><div class="gs-orn-line"></div></div>
+    <blockquote class="gs-quote">
+      Harabeye dönmüş duvarlar bile bu yapının asil geçmişini ve yeniden doğuşunu anlatır.
+      <cite>— Restorasyon Arşivi, Trakya Üniversitesi</cite>
+    </blockquote>
+  </div>
+  <div class="gs-slider-wrap" data-sid="1">
+    <div class="gs-stage">
+      <div class="gs-track"></div>
+      <button class="gs-arrow gs-arrow-prev" aria-label="Önceki"><i class="fa fa-chevron-left"></i></button>
+      <button class="gs-arrow gs-arrow-next" aria-label="Sonraki"><i class="fa fa-chevron-right"></i></button>
+      <span class="gs-counter-badge">1 / 20</span>
+    </div>
+    <div class="gs-controls">
+      <div class="gs-thumbs"></div>
+      <div class="gs-dots"></div>
+    </div>
+  </div>
+  <div class="gs-divider"></div>
+</section>
+
+<!-- BÖLÜM 3 -->
+<section class="galeri-section" id="b3" aria-labelledby="b3-title">
+  <div class="gs-header reveal">
+    <span class="gs-eyebrow">Bölüm 3</span>
+    <h2 class="gs-title" id="b3-title">Genel <span>Görüntüler</span></h2>
+    <div class="gs-ornament"><div class="gs-orn-line"></div><span class="gs-orn-gem">✦</span><div class="gs-orn-line"></div></div>
+    <blockquote class="gs-quote">
+      Külliyenin tümünü kucaklayan bu kareler, beş asırlık mirasın bugünkü yüzünü gözler önüne serer.
+      <cite>— Müze Arşivi</cite>
+    </blockquote>
+  </div>
+  <div class="gs-slider-wrap" data-sid="2">
+    <div class="gs-stage">
+      <div class="gs-track"></div>
+      <button class="gs-arrow gs-arrow-prev" aria-label="Önceki"><i class="fa fa-chevron-left"></i></button>
+      <button class="gs-arrow gs-arrow-next" aria-label="Sonraki"><i class="fa fa-chevron-right"></i></button>
+      <span class="gs-counter-badge">1 / 20</span>
+    </div>
+    <div class="gs-controls">
+      <div class="gs-thumbs"></div>
+      <div class="gs-dots"></div>
+    </div>
+  </div>
+  <div class="gs-divider"></div>
+</section>
+
+<!-- BÖLÜM 4 -->
+<section class="galeri-section" id="b4" aria-labelledby="b4-title">
+  <div class="gs-header reveal">
+    <span class="gs-eyebrow">Bölüm 4</span>
+    <h2 class="gs-title" id="b4-title"><span>Darüşşifa</span></h2>
+    <div class="gs-ornament"><div class="gs-orn-line"></div><span class="gs-orn-gem">✦</span><div class="gs-orn-line"></div></div>
+    <blockquote class="gs-quote">
+      Müzikle, suyla ve kokuyla şifa veren bu nadide yapı, çağının tıp anlayışını yüzyıllar ötesine taşımıştır.
+      <cite>— Darüşşifa Belgeleri</cite>
+    </blockquote>
+  </div>
+  <div class="gs-slider-wrap" data-sid="3">
+    <div class="gs-stage">
+      <div class="gs-track"></div>
+      <button class="gs-arrow gs-arrow-prev" aria-label="Önceki"><i class="fa fa-chevron-left"></i></button>
+      <button class="gs-arrow gs-arrow-next" aria-label="Sonraki"><i class="fa fa-chevron-right"></i></button>
+      <span class="gs-counter-badge">1 / 20</span>
+    </div>
+    <div class="gs-controls">
+      <div class="gs-thumbs"></div>
+      <div class="gs-dots"></div>
+    </div>
+  </div>
+  <div class="gs-divider"></div>
+</section>
+
+<!-- BÖLÜM 5 -->
+<section class="galeri-section" id="b5" aria-labelledby="b5-title">
+  <div class="gs-header reveal">
+    <span class="gs-eyebrow">Bölüm 5</span>
+    <h2 class="gs-title" id="b5-title"><span>Medrese</span></h2>
+    <div class="gs-ornament"><div class="gs-orn-line"></div><span class="gs-orn-gem">✦</span><div class="gs-orn-line"></div></div>
+    <blockquote class="gs-quote">
+      Bu avlular, tıbbın yalnızca bir ilim değil; bir erdem ve sorumluluk olduğunu öğretti.
+      <cite>— Tıp Medresesi Yazıtı</cite>
+    </blockquote>
+  </div>
+  <div class="gs-slider-wrap" data-sid="4">
+    <div class="gs-stage">
+      <div class="gs-track"></div>
+      <button class="gs-arrow gs-arrow-prev" aria-label="Önceki"><i class="fa fa-chevron-left"></i></button>
+      <button class="gs-arrow gs-arrow-next" aria-label="Sonraki"><i class="fa fa-chevron-right"></i></button>
+      <span class="gs-counter-badge">1 / 20</span>
+    </div>
+    <div class="gs-controls">
+      <div class="gs-thumbs"></div>
+      <div class="gs-dots"></div>
+    </div>
+  </div>
+  <div class="gs-divider"></div>
+</section>
+
+<!-- BÖLÜM 6 -->
+<section class="galeri-section" id="b6" aria-labelledby="b6-title">
+  <div class="gs-header reveal">
+    <span class="gs-eyebrow">Bölüm 6</span>
+    <h2 class="gs-title" id="b6-title"><span>İmaret</span></h2>
+    <div class="gs-ornament"><div class="gs-orn-line"></div><span class="gs-orn-gem">✦</span><div class="gs-orn-line"></div></div>
+    <blockquote class="gs-quote">
+      Kapısı herkese açık bu ocaktan yükselen duman, asırlık bir merhamet geleneğinin en sessiz tanığıdır.
+      <cite>— İmarethane Vakfiye Kaydı</cite>
+    </blockquote>
+  </div>
+  <div class="gs-slider-wrap" data-sid="5">
+    <div class="gs-stage">
+      <div class="gs-track"></div>
+      <button class="gs-arrow gs-arrow-prev" aria-label="Önceki"><i class="fa fa-chevron-left"></i></button>
+      <button class="gs-arrow gs-arrow-next" aria-label="Sonraki"><i class="fa fa-chevron-right"></i></button>
+      <span class="gs-counter-badge">1 / 20</span>
+    </div>
+    <div class="gs-controls">
+      <div class="gs-thumbs"></div>
+      <div class="gs-dots"></div>
+    </div>
+  </div>
+  <div class="gs-divider"></div>
+</section>
+
+<!-- BÖLÜM 7 -->
+<section class="galeri-section" id="b7" aria-labelledby="b7-title">
+  <div class="gs-header reveal">
+    <span class="gs-eyebrow">Bölüm 7</span>
+    <h2 class="gs-title" id="b7-title">Diğer <span>Bölümler</span></h2>
+    <div class="gs-ornament"><div class="gs-orn-line"></div><span class="gs-orn-gem">✦</span><div class="gs-orn-line"></div></div>
+    <blockquote class="gs-quote">
+      Külliyenin her taşı, insan onuruna verilen değerin somutlaşmış hâlidir.
+      <cite>— Edirne Vakıflar Arşivi</cite>
+    </blockquote>
+  </div>
+  <div class="gs-slider-wrap" data-sid="6">
+    <div class="gs-stage">
+      <div class="gs-track"></div>
+      <button class="gs-arrow gs-arrow-prev" aria-label="Önceki"><i class="fa fa-chevron-left"></i></button>
+      <button class="gs-arrow gs-arrow-next" aria-label="Sonraki"><i class="fa fa-chevron-right"></i></button>
+      <span class="gs-counter-badge">1 / 20</span>
+    </div>
+    <div class="gs-controls">
+      <div class="gs-thumbs"></div>
+      <div class="gs-dots"></div>
+    </div>
+  </div>
+  <div class="gs-divider"></div>
+</section>
+
+<!-- BÖLÜM 8 -->
+<section class="galeri-section" id="b8" aria-labelledby="b8-title">
+  <div class="gs-header reveal">
+    <span class="gs-eyebrow">Bölüm 8</span>
+    <h2 class="gs-title" id="b8-title">Gravür ve <span>Minyatürler</span></h2>
+    <div class="gs-ornament"><div class="gs-orn-line"></div><span class="gs-orn-gem">✦</span><div class="gs-orn-line"></div></div>
+    <blockquote class="gs-quote">
+      Fırçanın diliyle anlatılan bu tarih, görmek için değil; hissetmek için resmedilmiştir.
+      <cite>— Osmanlı Minyatür Koleksiyonu</cite>
+    </blockquote>
+  </div>
+  <div class="gs-slider-wrap" data-sid="7">
+    <div class="gs-stage">
+      <div class="gs-track"></div>
+      <button class="gs-arrow gs-arrow-prev" aria-label="Önceki"><i class="fa fa-chevron-left"></i></button>
+      <button class="gs-arrow gs-arrow-next" aria-label="Sonraki"><i class="fa fa-chevron-right"></i></button>
+      <span class="gs-counter-badge">1 / 20</span>
+    </div>
+    <div class="gs-controls">
+      <div class="gs-thumbs"></div>
+      <div class="gs-dots"></div>
+    </div>
+  </div>
+  <div class="gs-divider"></div>
+</section>
+
+<!-- BÖLÜM 9 -->
+<section class="galeri-section" id="b9" aria-labelledby="b9-title">
+  <div class="gs-header reveal">
+    <span class="gs-eyebrow">Bölüm 9</span>
+    <h2 class="gs-title" id="b9-title"><span>Ödüller</span></h2>
+    <div class="gs-ornament"><div class="gs-orn-line"></div><span class="gs-orn-gem">✦</span><div class="gs-orn-line"></div></div>
+    <blockquote class="gs-quote">
+      Kazanılan her ödül, bu mirası geleceğe taşıma sorumluluğunun bir kez daha hatırlatılmasıdır.
+      <cite>— Müze Yönetimi</cite>
+    </blockquote>
+  </div>
+  <div class="gs-slider-wrap" data-sid="8">
+    <div class="gs-stage">
+      <div class="gs-track"></div>
+      <button class="gs-arrow gs-arrow-prev" aria-label="Önceki"><i class="fa fa-chevron-left"></i></button>
+      <button class="gs-arrow gs-arrow-next" aria-label="Sonraki"><i class="fa fa-chevron-right"></i></button>
+      <span class="gs-counter-badge">1 / 20</span>
+    </div>
+    <div class="gs-controls">
+      <div class="gs-thumbs"></div>
+      <div class="gs-dots"></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-brand-title">Sultan II. Bayezid Külliyesi Sağlık Müzesi</div>
+      <div class="footer-brand-sub">T.C. TRAKYA ÜNİVERSİTESİ · EDİRNE</div>
+      <p class="footer-brand-desc">1484 yılında Sultan II. Bayezid tarafından yaptırılan bu eşsiz külliye, Osmanlı sağlık anlayışının en nadide örneğini sunar.</p>
+    </div>
+    <nav class="footer-nav" aria-label="Sayfalar">
+      <div class="footer-col-title">SAYFALAR</div>
+      <ul class="footer-links">
+        <li><a href="../tarihce/tarihce.html">Tarihçe</a></li>
+        <li><a href="../bayezid/bayezid.html">Sultan II. Bayezid</a></li>
+        <li><a href="../hastane/hastane.html">Darüşşifa</a></li>
+        <li><a href="../medrese/medrese.html">Tıp Medresesi</a></li>
+        <li><a href="../imaret/imaret.html">İmarethane</a></li>
+        <li><a href="../music/music.html">Müzikle Tedavi</a></li>
+        <li><a href="../galeri/galeri.html">Galeri</a></li>
+      </ul>
+    </nav>
+    <nav class="footer-nav" aria-label="Diğer">
+      <div class="footer-col-title">DİĞER</div>
+      <ul class="footer-links">
+        <li><a href="../geziplani/geziplani.html">Gezi Planı</a></li>
+        <li><a href="../siir/siir.html">Sarmaşık</a></li>
+        <li><a href="../oduller/oduller.html">Ödüller</a></li>
+        <li><a href="../personel/personel.html">Personelimiz</a></li>
+        <li><a href="../haberler/haberler.html">Haberler</a></li>
+        <li><a href="../duyurular/duyurular.html">Duyurular</a></li>
+        <li><a href="../index.html#contact">İletişim</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <span aria-hidden="true">✦</span>
+    © 2026 T.C. TRAKYA ÜNİVERSİTESİ · SULTAN II. BAYEZİD KÜLLİYESİ SAĞLIK MÜZESİ · TÜM HAKLARI SAKLIDIR
+    <span aria-hidden="true">✦</span>
+  </div>
+</footer>
+
+<button id="btt" aria-label="Sayfanın başına dön"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Tam ekran görsel" aria-hidden="true">
+  <div class="lb-bar">
+    <div class="lb-bar-left">
+      <span class="lb-bar-section" id="lbSection"></span>
+      <span class="lb-bar-caption" id="lbCaption"></span>
+    </div>
+    <div class="lb-bar-right">
+      <span class="lb-counter" id="lbCounter"></span>
+      <button class="lb-close-btn" id="lbClose" aria-label="Kapat"><i class="fa fa-times"></i></button>
+    </div>
+  </div>
+  <div class="lb-img-wrap">
+    <button class="lb-arrow lb-prev" id="lbPrev" aria-label="Önceki"><i class="fa fa-chevron-left"></i></button>
+    <img id="lbImg" src="" alt="">
+    <button class="lb-arrow lb-next" id="lbNext" aria-label="Sonraki"><i class="fa fa-chevron-right"></i></button>
+  </div>
+  <div class="lb-thumbs-wrap">
+    <div class="lb-thumbs" id="lbThumbs"></div>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+/* ════════════════════════════════════════════
+   BÖLÜM TANIMLARI
+   ─ folder: galeri/images/{klasör}/  altındaki görseller
+   ─ count:  kaç görsel var (değişebilir)
+   ─ ext:    dosya uzantısı
+   ─ captions: isteğe bağlı açıklama dizisi;
+               boş bırakılırsa "Bölüm Adı · Görsel N" kullanılır
+════════════════════════════════════════════ */
+const SECTIONS = [
+  { name:'Tarihi Fotoğraflar',    folder:'images/tarihifoto',  count:20, ext:'jpg', captions:[] },
+  { name:'Restorasyon Öncesi',    folder:'images/restorasyon', count:20, ext:'jpg', captions:[] },
+  { name:'Genel Görüntüler',      folder:'images/genel',       count:20, ext:'jpg', captions:[] },
+  { name:'Darüşşifa',             folder:'images/darussifa',   count:20, ext:'jpg', captions:[] },
+  { name:'Medrese',               folder:'images/medrese',     count:20, ext:'jpg', captions:[] },
+  { name:'İmaret',                folder:'images/imaret',      count:20, ext:'jpg', captions:[] },
+  { name:'Diğer Bölümler',        folder:'images/diger',       count:20, ext:'jpg', captions:[] },
+  { name:'Gravür ve Minyatürler', folder:'images/gravur',      count:20, ext:'jpg', captions:[] },
+  { name:'Ödüller',               folder:'images/oduller',     count:20, ext:'jpg', captions:[] }
+];
+
+/* ════════════════════════════════════════════
+   YARDIMCILAR
+════════════════════════════════════════════ */
+const $  = (s,p=document)  => p.querySelector(s);
+const $$ = (s,p=document)  => [...p.querySelectorAll(s)];
+
+/* ════════════════════════════════════════════
+   SLIDER SINIFI
+════════════════════════════════════════════ */
+class Slider {
+  constructor(wrap, def, sIndex) {
+    this.wrap    = wrap;
+    this.def     = def;
+    this.sIndex  = sIndex;   // global bölüm indeksi (lightbox için)
+    this.current = 0;
+    this.total   = def.count;
+
+    this.track   = $('.gs-track',       wrap);
+    this.btnPrev = $('.gs-arrow-prev',  wrap);
+    this.btnNext = $('.gs-arrow-next',  wrap);
+    this.counter = $('.gs-counter-badge', wrap);
+    this.thumbsEl= $('.gs-thumbs',      wrap);
+    this.dotsEl  = $('.gs-dots',        wrap);
+
+    this._build();
+    this._bindEvents();
+    this._update(0, false);
+  }
+
+  /* Tüm slide + thumbnail + dot DOM */
+  _build() {
+    const { folder, count, ext, captions, name } = this.def;
+
+    for (let i = 0; i < count; i++) {
+      const n       = i + 1;
+      const src     = `${folder}/${n}.${ext}`;
+      const caption = captions[i] || `${name} · Görsel ${n}`;
+
+      /* ── Slide ── */
+      const slide = document.createElement('div');
+      slide.className     = 'gs-slide';
+      slide.dataset.index = i;
+      slide.dataset.cap   = caption;
+
+      const img = document.createElement('img');
+      img.className  = 'gs-slide-img';
+      img.alt        = caption;
+      img.loading    = i < 3 ? 'eager' : 'lazy';  // ilk 3 eager
+      img.draggable  = false;
+      img.src        = src;
+
+      const zoom = document.createElement('span');
+      zoom.className   = 'gs-zoom-icon';
+      zoom.setAttribute('aria-hidden', 'true');
+      zoom.innerHTML   = '<i class="fa fa-search-plus"></i>';
+
+      const cap = document.createElement('div');
+      cap.className   = 'gs-slide-caption';
+      cap.textContent = caption;
+
+      const ph = document.createElement('div');
+      ph.className = 'gs-ph';
+      ph.setAttribute('aria-hidden', 'true');
+      ph.innerHTML = `<span class="gs-ph-icon">🏛️</span><span class="gs-ph-txt">${name}<br>Görsel ${n}</span>`;
+      ph.style.display = 'none';
+
+      img.onerror = () => {
+        img.style.display  = 'none';
+        zoom.style.display = 'none';
+        ph.style.display   = 'flex';
+        slide.style.cursor = 'default';
+        zoom.onclick       = null;
+      };
+
+      // Tıkla → lightbox
+      slide.addEventListener('click', () => {
+        if (img.style.display === 'none') return;
+        LB.open(this.def, this.current, this.sIndex);
+      });
+
+      slide.append(img, zoom, cap, ph);
+      this.track.appendChild(slide);
+
+      /* ── Thumbnail ── */
+      const thumb = document.createElement('img');
+      thumb.className     = 'gs-thumb';
+      thumb.src           = src;
+      thumb.alt           = '';
+      thumb.loading       = 'lazy';
+      thumb.draggable     = false;
+      thumb.dataset.index = i;
+
+      thumb.onerror = () => {
+        const tph = document.createElement('div');
+        tph.className     = 'gs-thumb-ph';
+        tph.dataset.index = i;
+        tph.textContent   = n;
+        tph.addEventListener('click', () => this._goTo(i));
+        this.thumbsEl.replaceChild(tph, thumb);
+      };
+
+      thumb.addEventListener('click', () => this._goTo(i));
+      this.thumbsEl.appendChild(thumb);
+
+      /* ── Dot ── */
+      const dot = document.createElement('button');
+      dot.className       = 'gs-dot';
+      dot.setAttribute('aria-label', `Görsel ${n}`);
+      dot.dataset.index   = i;
+      dot.addEventListener('click', () => this._goTo(i));
+      this.dotsEl.appendChild(dot);
+    }
+  }
+
+  _bindEvents() {
+    this.btnPrev.addEventListener('click', () => this._goTo(this.current - 1));
+    this.btnNext.addEventListener('click', () => this._goTo(this.current + 1));
+
+    /* Klavye — slider focus alanındaysa */
+    this.wrap.setAttribute('tabindex', '-1');
+    this.wrap.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); this._goTo(this.current - 1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); this._goTo(this.current + 1); }
+    });
+
+    /* Swipe */
+    let tx = null;
+    this.track.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, {passive:true});
+    this.track.addEventListener('touchend',   e => {
+      if (tx === null) return;
+      const dx = e.changedTouches[0].clientX - tx;
+      tx = null;
+      if (Math.abs(dx) < 40) return;
+      this._goTo(dx < 0 ? this.current + 1 : this.current - 1);
+    }, {passive:true});
+  }
+
+  _goTo(idx) {
+    if (idx < 0 || idx >= this.total) return;
+    this._update(idx, true);
+  }
+
+  _update(idx, animate) {
+    this.current = idx;
+
+    if (!animate) {
+      this.track.style.transition = 'none';
+      requestAnimationFrame(() => {
+        this.track.style.transform = `translateX(-${idx * 100}%)`;
+        requestAnimationFrame(() => { this.track.style.transition = ''; });
+      });
+    } else {
+      this.track.style.transform = `translateX(-${idx * 100}%)`;
+    }
+
+    this.counter.textContent  = `${idx + 1} / ${this.total}`;
+    this.btnPrev.disabled      = idx === 0;
+    this.btnNext.disabled      = idx === this.total - 1;
+
+    /* Thumbnails */
+    $$('.gs-thumb, .gs-thumb-ph', this.thumbsEl).forEach(t => {
+      const active = +t.dataset.index === idx;
+      t.classList.toggle('active', active);
+      if (active) t.scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
+    });
+
+    /* Dots */
+    $$('.gs-dot', this.dotsEl).forEach(d => {
+      d.classList.toggle('active', +d.dataset.index === idx);
+    });
+  }
+}
+
+/* ════════════════════════════════════════════
+   LIGHTBOX
+════════════════════════════════════════════ */
+const LB = (() => {
+  const el      = $('#lightbox');
+  const lbImg   = $('#lbImg');
+  const lbPrev  = $('#lbPrev');
+  const lbNext  = $('#lbNext');
+  const lbClose = $('#lbClose');
+  const lbSec   = $('#lbSection');
+  const lbCap   = $('#lbCaption');
+  const lbCount = $('#lbCounter');
+  const lbThEl  = $('#lbThumbs');
+
+  let cur = 0, def = null;
+
+  function open(sectionDef, idx, sIdx) {
+    def = sectionDef;
+    cur = idx;
+    _buildThumbs();
+    _show();
+    el.classList.add('open');
+    el.removeAttribute('aria-hidden');
+    document.body.style.overflow = 'hidden';
+    lbClose.focus();
+  }
+
+  function close() {
+    el.classList.remove('open');
+    el.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    setTimeout(() => { lbImg.src = ''; }, 300);
+  }
+
+  function _buildThumbs() {
+    lbThEl.innerHTML = '';
+    for (let i = 0; i < def.count; i++) {
+      const src = `${def.folder}/${i + 1}.${def.ext}`;
+      const t   = document.createElement('img');
+      t.className     = 'lb-thumb';
+      t.src           = src;
+      t.alt           = '';
+      t.loading       = 'lazy';
+      t.draggable     = false;
+      t.dataset.index = i;
+
+      t.onerror = () => {
+        const tph = document.createElement('div');
+        tph.className     = 'lb-thumb-ph';
+        tph.dataset.index = i;
+        tph.addEventListener('click', () => _go(i));
+        lbThEl.replaceChild(tph, t);
+      };
+
+      t.addEventListener('click', () => _go(i));
+      lbThEl.appendChild(t);
+    }
+  }
+
+  function _show() {
+    const src = `${def.folder}/${cur + 1}.${def.ext}`;
+    const cap = def.captions[cur] || `${def.name} · Görsel ${cur + 1}`;
+
+    lbImg.classList.add('fading');
+    setTimeout(() => {
+      lbImg.src         = src;
+      lbImg.alt         = cap;
+      lbSec.textContent = def.name.toUpperCase();
+      lbCap.textContent = cap;
+      lbCount.textContent = `${cur + 1} / ${def.count}`;
+      lbImg.classList.remove('fading');
+    }, 160);
+
+    lbPrev.disabled = cur === 0;
+    lbNext.disabled = cur === def.count - 1;
+
+    /* Thumbnail aktif + scroll */
+    $$('.lb-thumb, .lb-thumb-ph', lbThEl).forEach(t => {
+      const active = +t.dataset.index === cur;
+      t.classList.toggle('active', active);
+      if (active) t.scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
+    });
+  }
+
+  function _go(idx) {
+    if (idx < 0 || idx >= def.count) return;
+    cur = idx;
+    _show();
+  }
+
+  lbPrev .addEventListener('click', () => _go(cur - 1));
+  lbNext .addEventListener('click', () => _go(cur + 1));
+  lbClose.addEventListener('click', close);
+
+  el.addEventListener('click', e => {
+    if (e.target === el) close();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (!el.classList.contains('open')) return;
+    if (e.key === 'Escape')     close();
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); _go(cur - 1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); _go(cur + 1); }
+  });
+
+  /* Lightbox swipe */
+  let ltx = null;
+  el.addEventListener('touchstart', e => { ltx = e.touches[0].clientX; }, {passive:true});
+  el.addEventListener('touchend',   e => {
+    if (ltx === null) return;
+    const dx = e.changedTouches[0].clientX - ltx;
+    ltx = null;
+    if (Math.abs(dx) < 40) return;
+    _go(dx < 0 ? cur + 1 : cur - 1);
+  }, {passive:true});
+
+  return { open, close };
+})();
+
+/* ════════════════════════════════════════════
+   SLIDER'LARI BAŞLAT
+════════════════════════════════════════════ */
+$$('.gs-slider-wrap').forEach((wrap, i) => {
+  const def = SECTIONS[+wrap.dataset.sid];
+  if (def) new Slider(wrap, def, i);
+});
+
+/* ════════════════════════════════════════════
+   HAMBURGEr
+════════════════════════════════════════════ */
+(function(){
+  const ham = $('#hamburger');
+  const mob = $('#mobileMenu');
+  if (!ham || !mob) return;
+
+  const close = () => {
+    ham.classList.remove('open');
+    mob.classList.remove('open');
+    ham.setAttribute('aria-expanded','false');
+    mob.setAttribute('aria-hidden','true');
+  };
+
+  ham.addEventListener('click', e => {
+    e.stopPropagation();
+    const open = ham.classList.contains('open');
+    if (open) { close(); } else {
+      ham.classList.add('open'); mob.classList.add('open');
+      ham.setAttribute('aria-expanded','true'); mob.removeAttribute('aria-hidden');
+    }
+  });
+
+  document.addEventListener('click', e => { if (!mob.contains(e.target) && e.target !== ham) close(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+  $$('a', mob).forEach(l => l.addEventListener('click', close));
+})();
+
+/* ════════════════════════════════════════════
+   BACK TO TOP
+════════════════════════════════════════════ */
+(function(){
+  const btt = $('#btt');
+  if (!btt) return;
+  let tick = false;
+  window.addEventListener('scroll', () => {
+    if (!tick) {
+      requestAnimationFrame(() => { btt.classList.toggle('show', scrollY > 400); tick = false; });
+      tick = true;
+    }
+  }, {passive:true});
+  btt.addEventListener('click', () => scrollTo({top:0, behavior:'smooth'}));
+})();
+
+/* ════════════════════════════════════════════
+   STICKY NAV — AKTİF BÖLÜM İZLEME
+════════════════════════════════════════════ */
+(function(){
+  const navLinks = $$('.bnl');
+  const sectionEls = ['b1','b2','b3','b4','b5','b6','b7','b8','b9']
+    .map(id => document.getElementById(id)).filter(Boolean);
+
+  const navbarH  = () => ($('#navbar')?.offsetHeight || 72);
+  const bolumH   = () => ($('#bolum-nav')?.offsetHeight || 44);
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const id = entry.target.id;
+      navLinks.forEach(l => {
+        const active = l.getAttribute('href') === '#' + id;
+        l.classList.toggle('active', active);
+        if (active) l.scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
+      });
+    });
+  }, { rootMargin: `-${navbarH() + bolumH()}px 0px -55% 0px`, threshold: 0 });
+
+  sectionEls.forEach(s => io.observe(s));
+})();
+
+/* ════════════════════════════════════════════
+   SMOOTH SCROLL — offset için
+════════════════════════════════════════════ */
+$$('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const href = a.getAttribute('href');
+    if (href === '#') return;
+    const target = document.querySelector(href);
+    if (!target) return;
+    e.preventDefault();
+    const offset = ($('#navbar')?.offsetHeight || 72) + ($('#bolum-nav')?.offsetHeight || 44) + 12;
+    scrollTo({ top: target.getBoundingClientRect().top + scrollY - offset, behavior:'smooth' });
+  });
+});
+
+/* ════════════════════════════════════════════
+   SCROLL REVEAL
+════════════════════════════════════════════ */
+(function(){
+  const els = $$('.reveal');
+  if (!els.length) return;
+  if (matchMedia('(prefers-reduced-motion:reduce)').matches) {
+    els.forEach(el => el.classList.add('visible')); return;
+  }
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold:0.1, rootMargin:'0px 0px -40px 0px' });
+  els.forEach(el => io.observe(el));
+})();
+</script>
+</body>
+</html>
