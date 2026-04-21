@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Tarihçe — Sultan II. Bayezid Külliyesi Sağlık Müzesi · Şifanın, Bilimin ve Merhametin Asırlık Mirası">
+<meta name="theme-color" content="#1a1008">
+<title>Tarihçe · Sultan II. Bayezid Külliyesi Sağlık Müzesi</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=IM+Fell+English:ital@0;1&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+/* ═══════════════════════════════════════
+   CUSTOM PROPERTIES
+═══════════════════════════════════════ */
+:root {
+  --gold:        #c9a84c;
+  --gold-light:  #e8d08a;
+  --gold-dark:   #8b6914;
+  --ink:         #1a1008;
+  --ink-soft:    #2e1f0a;
+  --parchment:   #f5e9c8;
+  --parchment-d: #e8d5a3;
+  --crimson:     #7a1c1c;
+  --tile:        #1e4a5c;
+
+  --sp-xs:8px; --sp-sm:16px; --sp-md:24px;
+  --sp-lg:40px; --sp-xl:60px; --sp-2xl:80px;
+
+  --max-w:1260px; --max-md:900px;
+  --nav-h:72px;
+  --r-sm:6px; --r-md:10px; --r-lg:14px;
+
+  --tf:0.2s ease; --tm:0.35s ease; --ts:0.6s ease;
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;font-size:16px;-webkit-text-size-adjust:100%;}
+
+body{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  background:var(--parchment);color:var(--ink);
+  overflow-x:hidden;line-height:1.6;
+}
+
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E"),
+    radial-gradient(ellipse at 20% 20%,#f7edce 0%,transparent 60%),
+    radial-gradient(ellipse at 80% 80%,#e8d5a3 0%,transparent 55%),
+    linear-gradient(160deg,#f5e9c8 0%,#ecddb4 40%,#f0e3be 100%);
+  pointer-events:none;
+}
+
+img{max-width:100%;height:auto;display:block;}
+ul{list-style:none;} a{color:inherit;} button{cursor:pointer;}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:2px;}
+
+/* ═══════════════════════════════════════
+   NAV
+═══════════════════════════════════════ */
+#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;}
+
+.nav-inner{
+  max-width:var(--max-w);margin:0 auto;
+  background:var(--ink);border:1px solid var(--gold-dark);
+  border-top:none;border-bottom-left-radius:var(--r-lg);border-bottom-right-radius:var(--r-lg);
+  padding:0 clamp(16px,4vw,30px);
+  display:flex;align-items:center;justify-content:space-between;gap:var(--sp-md);
+  min-height:var(--nav-h);
+  box-shadow:0 8px 40px rgba(0,0,0,.5),inset 0 1px 0 rgba(201,168,76,.2);
+  position:relative;
+}
+
+.nav-inner::before{
+  content:'✦ ───── ✦ ───── ✦';position:absolute;top:6px;left:50%;
+  transform:translateX(-50%);font-size:8px;color:rgba(201,168,76,.4);
+  letter-spacing:4px;pointer-events:none;white-space:nowrap;
+}
+
+.nav-logo{display:flex;align-items:center;gap:14px;text-decoration:none;flex-shrink:0;}
+.nav-logo-icon{width:44px;height:44px;border:1px solid var(--gold-dark);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;background:rgba(201,168,76,.05);}
+.nav-logo-img{width:100%;height:100%;object-fit:contain;padding:6px;}
+.nav-logo-text{display:flex;flex-direction:column;}
+.nav-logo-top{font-family:'Cinzel',serif;font-size:9px;color:rgba(201,168,76,.7);letter-spacing:2px;line-height:1.4;}
+.nav-logo-main{font-family:'Cinzel',serif;font-size:13px;font-weight:700;color:var(--gold);letter-spacing:1px;line-height:1.2;}
+
+.nav-links ul{display:flex;align-items:center;gap:2px;flex-wrap:nowrap;}
+.nav-links a{font-family:'Cinzel',serif;font-size:10px;font-weight:600;color:rgba(201,168,76,.75);text-decoration:none;padding:8px 10px;border-radius:var(--r-sm);letter-spacing:.5px;white-space:nowrap;display:block;transition:color var(--tf),background var(--tf);}
+.nav-links a:hover,.nav-links a.active{color:var(--gold);background:rgba(201,168,76,.1);}
+
+.nav-hamburger{display:none;flex-direction:column;gap:5px;background:none;border:1px solid var(--gold-dark);border-radius:var(--r-sm);padding:10px 12px;flex-shrink:0;touch-action:manipulation;}
+.nav-hamburger span{display:block;width:22px;height:1.5px;background:var(--gold);transition:transform var(--tm),opacity var(--tf);transform-origin:center;}
+.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+
+#mobileMenu{position:absolute;top:100%;left:0;right:0;background:var(--ink);border:1px solid var(--gold-dark);border-top:none;border-bottom-left-radius:var(--r-md);border-bottom-right-radius:var(--r-md);display:flex;flex-wrap:wrap;gap:var(--sp-xs);padding:var(--sp-sm);max-height:0;overflow:hidden;opacity:0;pointer-events:none;transition:max-height .4s ease,opacity .3s ease;}
+#mobileMenu.open{max-height:520px;opacity:1;pointer-events:auto;}
+#mobileMenu a{font-family:'Cinzel',serif;font-size:10px;font-weight:600;color:rgba(201,168,76,.75);text-decoration:none;padding:8px 12px;border-radius:var(--r-sm);border:1px solid rgba(201,168,76,.15);transition:background var(--tf),color var(--tf);}
+#mobileMenu a:hover{background:rgba(201,168,76,.12);color:var(--gold);}
+
+/* ═══════════════════════════════════════
+   HERO
+═══════════════════════════════════════ */
+.page-hero{
+  position:relative;padding-top:var(--nav-h);
+  min-height:62vh;display:flex;align-items:center;justify-content:center;
+  overflow:hidden;background:var(--ink);
+}
+
+.page-hero-bg{position:absolute;inset:0;z-index:0;}
+.page-hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.2;filter:sepia(40%) contrast(1.1);display:block;}
+
+.page-hero::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:
+    radial-gradient(ellipse at 50% 0%,rgba(201,168,76,.15) 0%,transparent 60%),
+    radial-gradient(ellipse at 0% 100%,rgba(122,28,28,.15) 0%,transparent 50%),
+    radial-gradient(ellipse at 100% 100%,rgba(30,74,92,.15) 0%,transparent 50%);
+}
+
+.page-hero::after{
+  content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M40 0 L80 40 L40 80 L0 40 Z' fill='none' stroke='rgba(201,168,76,0.04)' stroke-width='1'/%3E%3Ccircle cx='40' cy='40' r='20' fill='none' stroke='rgba(201,168,76,0.03)' stroke-width='1'/%3E%3C/svg%3E");
+}
+
+.page-hero-inner{position:relative;z-index:2;text-align:center;padding:clamp(48px,8vw,80px) var(--sp-sm);max-width:760px;}
+
+.hero-eyebrow{font-family:'Cinzel',serif;font-size:clamp(9px,2vw,11px);letter-spacing:4px;color:rgba(201,168,76,.6);display:block;margin-bottom:20px;}
+
+.hero-ornament{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:26px;}
+.h-orn-line{height:1px;width:60px;background:linear-gradient(90deg,transparent,var(--gold-dark));}
+.h-orn-line:last-child{background:linear-gradient(270deg,transparent,var(--gold-dark));}
+.h-orn-gem{color:var(--gold);font-size:16px;animation:gemPulse 3s ease-in-out infinite;}
+@keyframes gemPulse{0%,100%{opacity:.7;transform:scale(1);}50%{opacity:1;transform:scale(1.1);}}
+
+.hero-title{font-family:'Cinzel',serif;font-size:clamp(34px,8vw,72px);font-weight:700;color:var(--gold);letter-spacing:5px;line-height:1;margin-bottom:16px;text-shadow:0 0 60px rgba(201,168,76,.3);}
+.hero-subtitle{font-family:'IM Fell English',serif;font-style:italic;font-size:clamp(14px,3vw,20px);color:rgba(201,168,76,.7);letter-spacing:1px;margin-bottom:18px;}
+.hero-desc{font-size:clamp(13px,2.5vw,16px);color:rgba(245,233,200,.6);line-height:1.85;max-width:540px;margin:0 auto 28px;}
+
+.hero-date-badge{
+  display:inline-flex;align-items:center;gap:12px;
+  font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;
+  color:rgba(201,168,76,.5);
+  border:1px solid rgba(201,168,76,.2);
+  padding:8px 20px;border-radius:30px;
+  background:rgba(201,168,76,.05);
+}
+
+.hero-scroll-btn{
+  position:absolute;bottom:24px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:5px;
+  font-family:'Cinzel',serif;font-size:8px;letter-spacing:3px;
+  color:rgba(201,168,76,.45);text-decoration:none;
+  animation:scrollBounce 2s ease-in-out infinite;z-index:3;
+}
+@keyframes scrollBounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(6px);}}
+
+/* ═══════════════════════════════════════
+   ORTAK BÖLÜM
+═══════════════════════════════════════ */
+.page-section{position:relative;z-index:1;padding:clamp(56px,8vw,96px) var(--sp-sm);}
+.page-section--alt{background:rgba(26,16,8,.03);border-top:1px solid rgba(201,168,76,.1);border-bottom:1px solid rgba(201,168,76,.1);}
+.page-section--dark{background:var(--ink);border-top:1px solid var(--gold-dark);border-bottom:1px solid var(--gold-dark);}
+
+.container{max-width:var(--max-w);margin:0 auto;}
+.container-md{max-width:var(--max-md);margin:0 auto;}
+
+/* Bölüm başlıkları */
+.sec-header{text-align:center;margin-bottom:clamp(32px,5vw,52px);}
+.sec-eyebrow{font-family:'Cinzel',serif;font-size:10px;letter-spacing:5px;color:var(--gold-dark);text-transform:uppercase;display:block;margin-bottom:10px;}
+.sec-title{font-family:'Cinzel',serif;font-size:clamp(20px,4.5vw,36px);font-weight:700;color:var(--ink);letter-spacing:2px;line-height:1.2;margin-bottom:14px;}
+.sec-title span{color:var(--crimson);}
+.sec-title--light{color:var(--gold);}
+.sec-title--light span{color:var(--gold-light);}
+.sec-ornament{display:flex;align-items:center;justify-content:center;gap:14px;}
+.sec-orn-line{height:1px;width:60px;background:var(--gold-dark);}
+.sec-orn-gem{color:var(--gold);font-size:14px;}
+
+/* ═══════════════════════════════════════
+   GÖRSEL ALANI — YARDIMCI SINIFLAR
+═══════════════════════════════════════ */
+/* Altın çerçeveli görsel kutusu */
+.img-frame{
+  position:relative;border-radius:var(--r-lg);overflow:hidden;
+  border:1px solid var(--gold-dark);
+  background:var(--ink-soft);
+}
+
+.img-frame img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  filter:sepia(12%) contrast(1.05);
+  transition:transform .6s ease,filter .4s ease;
+}
+
+.img-frame:hover img{transform:scale(1.03);filter:sepia(0%) contrast(1.08);}
+
+/* Altın köşe süslemeleri */
+.img-frame::before,.img-frame::after{
+  content:'';position:absolute;z-index:2;
+  width:22px;height:22px;border-color:var(--gold);border-style:solid;pointer-events:none;
+}
+.img-frame::before{top:10px;left:10px;border-width:2px 0 0 2px;}
+.img-frame::after {bottom:10px;right:10px;border-width:0 2px 2px 0;}
+
+/* Görsel alt etiketi */
+.img-caption{
+  position:absolute;bottom:0;left:0;right:0;
+  background:linear-gradient(to top,rgba(26,16,8,.82),transparent);
+  padding:24px 16px 12px;
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;
+  color:rgba(201,168,76,.8);
+}
+
+/* Placeholder */
+.img-ph{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:10px;
+  background:rgba(26,16,8,.9);
+}
+.img-ph-icon{font-size:36px;opacity:.2;color:var(--gold);}
+.img-ph-txt{font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;color:rgba(201,168,76,.2);text-align:center;padding:0 16px;line-height:1.8;}
+
+/* ═══════════════════════════════════════
+   BÖLÜM 1 — GİRİŞ (2 sütun)
+═══════════════════════════════════════ */
+.intro-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:clamp(32px,6vw,64px);align-items:start;
+}
+
+.intro-text p{
+  font-size:clamp(15px,2vw,17px);line-height:1.95;
+  color:var(--ink-soft);margin-bottom:20px;
+}
+.intro-text p:last-child{margin-bottom:0;}
+
+/* Büyük başlangıç harfi */
+.intro-text p:first-child::first-letter{
+  font-family:'Cinzel',serif;font-size:3.6em;font-weight:700;
+  color:var(--crimson);float:left;line-height:.8;
+  margin:.05em .12em -.02em 0;
+}
+
+.intro-img-wrap{
+  position:sticky;top:calc(var(--nav-h) + 20px);
+}
+
+.intro-img-wrap .img-frame{aspect-ratio:3/4;}
+
+/* ═══════════════════════════════════════
+   TAM GENİŞLİK GÖRSEL BANDI
+═══════════════════════════════════════ */
+.fullwidth-img{
+  position:relative;z-index:1;overflow:hidden;
+  height:clamp(200px,32vw,460px);
+}
+
+.fullwidth-img img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  filter:sepia(18%) contrast(1.06);
+}
+
+.fullwidth-img-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(
+    to right,
+    rgba(26,16,8,.65) 0%,rgba(26,16,8,.12) 40%,
+    rgba(26,16,8,.12) 60%,rgba(26,16,8,.65) 100%
+  );
+  display:flex;align-items:center;justify-content:center;
+}
+
+.fullwidth-img-label{
+  font-family:'Cinzel',serif;font-size:clamp(12px,2.5vw,20px);
+  letter-spacing:clamp(4px,2vw,12px);color:rgba(201,168,76,.85);
+  text-align:center;text-shadow:0 2px 20px rgba(0,0,0,.8);
+}
+
+.fullwidth-img-ph{
+  width:100%;height:100%;background:var(--ink-soft);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+}
+.fullwidth-img-ph span{font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;color:rgba(201,168,76,.2);}
+
+/* ═══════════════════════════════════════
+   BÖLÜM 2 — İNŞAAT (metin + yan görsel)
+═══════════════════════════════════════ */
+.content-split{
+  display:grid;gap:clamp(28px,5vw,56px);align-items:center;
+}
+.content-split--img-right{grid-template-columns:1fr 1fr;}
+.content-split--img-left {grid-template-columns:1fr 1fr;}
+
+.content-split--img-left .split-img{order:-1;}
+
+.split-body{}
+.split-body h3{
+  font-family:'Cinzel',serif;font-size:clamp(16px,3vw,22px);
+  color:var(--crimson);letter-spacing:2px;margin-bottom:18px;line-height:1.3;
+}
+.split-body p{
+  font-size:clamp(14px,2vw,16.5px);line-height:1.95;
+  color:var(--ink-soft);margin-bottom:16px;
+}
+.split-body p:last-child{margin-bottom:0;}
+
+.split-img .img-frame{aspect-ratio:4/3;}
+
+/* ═══════════════════════════════════════
+   BÖLÜM 3 — KÜLLİYE BİRİMLERİ
+═══════════════════════════════════════ */
+.units-layout{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:clamp(28px,5vw,56px);align-items:start;
+}
+
+.units-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.unit-card{
+  background:rgba(255,255,255,.45);
+  border:1px solid rgba(201,168,76,.25);
+  border-radius:var(--r-md);
+  padding:14px 16px;
+  display:flex;gap:12px;align-items:flex-start;
+  transition:border-color var(--tf),background var(--tf),transform var(--tf);
+}
+.unit-card:hover{border-color:var(--gold-dark);background:rgba(255,255,255,.65);transform:translateY(-2px);}
+
+.unit-num{
+  font-family:'Cinzel',serif;font-size:18px;font-weight:900;
+  color:rgba(201,168,76,.2);line-height:1;flex-shrink:0;min-width:24px;
+}
+.unit-name{font-family:'Cinzel',serif;font-size:11px;letter-spacing:1px;color:var(--ink);line-height:1.4;padding-top:2px;}
+
+.units-img-wrap .img-frame{aspect-ratio:3/4;}
+
+/* ═══════════════════════════════════════
+   BÖLÜM 4 — ZORLU GÜNLER (alıntı + görsel)
+═══════════════════════════════════════ */
+.challenge-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:clamp(28px,5vw,56px);align-items:center;
+}
+
+.challenge-quote-block{
+  background:var(--ink);border:1px solid var(--gold-dark);
+  border-radius:var(--r-lg);padding:clamp(28px,5vw,44px);
+  position:relative;overflow:hidden;
+}
+
+.challenge-quote-block::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+
+.challenge-quote-block::after{
+  content:'"';position:absolute;bottom:-20px;right:20px;
+  font-family:'IM Fell English',serif;font-size:140px;line-height:1;
+  color:rgba(201,168,76,.05);pointer-events:none;
+}
+
+.cqb-label{font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;color:rgba(201,168,76,.45);display:block;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid rgba(201,168,76,.15);}
+.cqb-text{font-size:clamp(14px,2vw,16.5px);color:rgba(201,168,76,.7);line-height:1.95;margin-bottom:20px;}
+.cqb-quote{
+  font-family:'IM Fell English',serif;font-style:italic;
+  font-size:clamp(15px,2.5vw,19px);color:var(--gold);line-height:1.75;
+  padding:16px 20px;border-left:2px solid var(--gold-dark);
+  background:rgba(201,168,76,.05);border-radius:0 var(--r-sm) var(--r-sm) 0;
+  margin-bottom:16px;
+}
+
+.challenge-img .img-frame{aspect-ratio:4/3;}
+
+/* ═══════════════════════════════════════
+   BÖLÜM 5 — MÜZEYE DÖNÜŞÜM (dark bg)
+═══════════════════════════════════════ */
+.revival-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:clamp(28px,5vw,56px);align-items:center;
+}
+
+.revival-text h3{
+  font-family:'Cinzel',serif;font-size:clamp(16px,3vw,22px);
+  color:var(--gold-light);letter-spacing:2px;margin-bottom:16px;line-height:1.3;
+}
+.revival-text p{
+  font-size:clamp(14px,2vw,16.5px);line-height:1.95;
+  color:rgba(201,168,76,.7);margin-bottom:16px;
+}
+.revival-text p:last-child{margin-bottom:0;}
+
+/* Tarih çizgisi (dark içinde) */
+.revival-timeline{margin-top:28px;display:flex;flex-direction:column;gap:0;}
+
+.rtl-item{display:flex;gap:18px;align-items:flex-start;position:relative;padding-bottom:22px;}
+.rtl-item:last-child{padding-bottom:0;}
+
+.rtl-item::before{
+  content:'';position:absolute;left:6px;top:16px;bottom:0;width:1px;
+  background:rgba(201,168,76,.2);
+}
+.rtl-item:last-child::before{display:none;}
+
+.rtl-dot{
+  width:14px;height:14px;border-radius:50%;
+  background:var(--gold);border:2px solid var(--ink);
+  box-shadow:0 0 0 2px var(--gold-dark);
+  flex-shrink:0;margin-top:4px;
+}
+
+.rtl-content{}
+.rtl-year{font-family:'Cinzel',serif;font-size:12px;letter-spacing:2px;color:var(--gold);margin-bottom:4px;}
+.rtl-text{font-size:14px;color:rgba(201,168,76,.65);line-height:1.6;}
+
+.revival-img .img-frame{aspect-ratio:4/3;}
+
+/* ═══════════════════════════════════════
+   GÖRSEL GALERİ BANDI (3'lü ızgara)
+═══════════════════════════════════════ */
+.photo-strip{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:0;
+}
+
+.photo-strip-item{
+  position:relative;overflow:hidden;aspect-ratio:4/3;
+  background:var(--ink-soft);cursor:zoom-in;
+}
+
+.photo-strip-item img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  filter:sepia(15%) contrast(1.04);
+  transition:transform .6s ease,filter .4s ease;
+}
+
+.photo-strip-item:hover img{transform:scale(1.06);filter:sepia(0%) contrast(1.08);}
+
+.photo-strip-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(26,16,8,.75) 0%,transparent 55%);
+  opacity:0;transition:opacity var(--tm);
+  display:flex;align-items:flex-end;padding:14px 16px;
+}
+
+.photo-strip-item:hover .photo-strip-overlay{opacity:1;}
+
+.photo-strip-cap{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:rgba(201,168,76,.85);}
+
+.photo-strip-ph{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:8px;
+  background:rgba(26,16,8,.88);
+}
+.photo-strip-ph-icon{font-size:24px;opacity:.2;color:var(--gold);}
+.photo-strip-ph-txt{font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;color:rgba(201,168,76,.2);text-align:center;padding:0 12px;line-height:1.7;}
+
+/* ═══════════════════════════════════════
+   KAPANIŞ BANNER
+═══════════════════════════════════════ */
+.close-banner{
+  text-align:center;
+  padding:clamp(48px,8vw,80px) var(--sp-sm);
+  background:var(--ink);border-top:1px solid var(--gold-dark);
+  position:relative;z-index:1;
+}
+
+.close-orn{display:flex;align-items:center;justify-content:center;gap:20px;margin-bottom:32px;}
+.close-orn-line{height:1px;flex:1;max-width:120px;background:linear-gradient(90deg,transparent,var(--gold-dark));}
+.close-orn-line:last-child{background:linear-gradient(270deg,transparent,var(--gold-dark));}
+.close-orn-symbol{color:var(--gold);font-size:22px;letter-spacing:8px;}
+
+.close-quote{font-family:'IM Fell English',serif;font-style:italic;font-size:clamp(17px,3.5vw,26px);color:var(--gold);max-width:680px;margin:0 auto 24px;line-height:1.7;}
+.close-sub{font-family:'Cinzel',serif;font-size:10px;letter-spacing:4px;color:rgba(201,168,76,.4);margin-bottom:36px;}
+
+.close-nav{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+
+.btn-primary{font-family:'Cinzel',serif;font-size:11px;font-weight:700;letter-spacing:2px;padding:14px 28px;border-radius:var(--r-sm);background:var(--gold);color:var(--ink);text-decoration:none;border:1px solid var(--gold);transition:background var(--tf),transform var(--tf);display:inline-block;}
+.btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);}
+
+.btn-secondary{font-family:'Cinzel',serif;font-size:11px;font-weight:700;letter-spacing:2px;padding:14px 28px;border-radius:var(--r-sm);background:transparent;color:var(--gold);text-decoration:none;border:1px solid var(--gold-dark);transition:background var(--tf),transform var(--tf);display:inline-block;}
+.btn-secondary:hover{background:rgba(201,168,76,.1);transform:translateY(-2px);}
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+footer{background:var(--ink);border-top:1px solid var(--gold-dark);padding:clamp(32px,6vw,48px) var(--sp-sm) var(--sp-lg);position:relative;z-index:1;}
+.footer-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:clamp(24px,5vw,40px);margin-bottom:clamp(24px,4vw,36px);}
+.footer-brand-title{font-family:'Cinzel',serif;font-size:clamp(14px,2.5vw,16px);font-weight:700;color:var(--gold);margin-bottom:4px;line-height:1.3;}
+.footer-brand-sub{font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,168,76,.6);margin-bottom:var(--sp-sm);}
+.footer-brand-desc{font-size:14px;color:rgba(201,168,76,.55);line-height:1.7;}
+.footer-col-title{font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;color:var(--gold);margin-bottom:var(--sp-sm);padding-bottom:10px;border-bottom:1px solid rgba(201,168,76,.2);}
+.footer-links{display:flex;flex-direction:column;gap:10px;}
+.footer-links a{font-size:13px;color:rgba(201,168,76,.6);text-decoration:none;transition:color var(--tf);}
+.footer-links a:hover{color:var(--gold);}
+.footer-bottom{border-top:1px solid rgba(201,168,76,.15);padding-top:var(--sp-md);text-align:center;font-family:'Cinzel',serif;font-size:clamp(8px,1.5vw,10px);letter-spacing:2px;color:rgba(201,168,76,.4);line-height:1.6;}
+
+/* ═══════════════════════════════════════
+   BACK TO TOP
+═══════════════════════════════════════ */
+#btt{position:fixed;bottom:28px;right:20px;z-index:500;width:48px;height:48px;border-radius:50%;background:var(--ink);border:1px solid var(--gold-dark);color:var(--gold);font-size:16px;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity var(--tm),background var(--tf),transform var(--tf);box-shadow:0 4px 16px rgba(0,0,0,.3);touch-action:manipulation;}
+#btt.show{opacity:1;pointer-events:auto;}
+#btt:hover{background:var(--gold-dark);color:var(--ink);transform:translateY(-2px);}
+
+/* ═══════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════ */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-d1{transition-delay:.1s;} .reveal-d2{transition-delay:.2s;}
+.reveal-d3{transition-delay:.3s;} .reveal-d4{transition-delay:.4s;}
+
+/* ═══════════════════════════════════════
+   LIGHTBOX
+═══════════════════════════════════════ */
+#lightbox{position:fixed;inset:0;z-index:9900;background:rgba(6,3,1,.97);display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .28s ease;}
+#lightbox.open{opacity:1;pointer-events:auto;}
+.lb-bar{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:14px clamp(16px,4vw,32px);background:linear-gradient(to bottom,rgba(6,3,1,.88),transparent);z-index:2;}
+.lb-bar-cap{font-family:'IM Fell English',serif;font-style:italic;font-size:15px;color:rgba(201,168,76,.8);}
+.lb-close-btn{width:38px;height:38px;border-radius:50%;border:1px solid rgba(201,168,76,.3);background:none;color:var(--gold);font-size:14px;display:flex;align-items:center;justify-content:center;transition:background var(--tf),border-color var(--tf);}
+.lb-close-btn:hover{background:rgba(201,168,76,.15);border-color:var(--gold);}
+.lb-img-wrap{flex:1;display:flex;align-items:center;justify-content:center;width:100%;padding:70px clamp(48px,6vw,90px) 50px;position:relative;}
+#lbImg{max-width:100%;max-height:calc(100vh - 130px);object-fit:contain;display:block;border:1px solid rgba(201,168,76,.12);box-shadow:0 24px 80px rgba(0,0,0,.9);transition:opacity .18s ease;}
+#lbImg.fading{opacity:0;}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media(max-width:1100px){.nav-links{display:none;}.nav-hamburger{display:flex;}}
+@media(max-width:900px){
+  .intro-grid{grid-template-columns:1fr;}
+  .intro-img-wrap{position:static;}
+  .content-split--img-right,.content-split--img-left{grid-template-columns:1fr;}
+  .content-split--img-left .split-img{order:0;}
+  .challenge-grid,.revival-grid,.units-layout{grid-template-columns:1fr;}
+}
+@media(max-width:768px){
+  .nav-logo-top{display:none;}
+  .footer-inner{grid-template-columns:1fr;}
+  .photo-strip{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:480px){
+  #btt{bottom:16px;right:14px;width:42px;height:42px;}
+  .photo-strip{grid-template-columns:1fr;}
+  .units-grid{grid-template-columns:1fr;}
+  .close-nav{flex-direction:column;align-items:center;}
+  .btn-primary,.btn-secondary{width:100%;max-width:280px;text-align:center;}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}html{scroll-behavior:auto;}}
+@media print{#navbar,#btt,#lightbox{display:none;}body{background:white;color:black;}.reveal{opacity:1;transform:none;}.page-hero{min-height:auto;background:white;}}
+</style>
+</head>
+<body>
+
+<!-- ═══════ NAV ═══════ -->
+<header id="navbar" role="banner">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo" aria-label="Ana Sayfa">
+      <div class="nav-logo-icon" aria-hidden="true">
+        <img src="../images/logo.png" alt="Logo" class="nav-logo-img">
+      </div>
+      <div class="nav-logo-text">
+        <span class="nav-logo-top">T.C. TRAKYA ÜNİVERSİTESİ</span>
+        <span class="nav-logo-main">Sultan II. Bayezid<br>Külliyesi Sağlık Müzesi</span>
+      </div>
+    </a>
+
+    <nav class="nav-links" aria-label="Ana menü">
+      <ul>
+        <li><a href="../index.html#explore">Bölümler</a></li>
+        <li><a href="../tarihce/tarihce.html" class="active">Tarihçe</a></li>
+        <li><a href="../bayezid/bayezid.html">Sultan II. Bayezid</a></li>
+        <li><a href="../hastane/hastane.html">Darüşşifa</a></li>
+        <li><a href="../music/music.html">Müzikle Tedavi</a></li>
+        <li><a href="../galeri/galeri.html">Galeri</a></li>
+        <li><a href="../siir/siir.html">Sarmaşık</a></li>
+        <li><a href="../index.html#contact">İletişim</a></li>
+      </ul>
+    </nav>
+
+    <button class="nav-hamburger" id="hamburger" aria-label="Menüyü aç/kapat" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <nav id="mobileMenu" aria-label="Mobil menü" aria-hidden="true">
+    <a href="../index.html">Ana Sayfa</a>
+    <a href="../tarihce/tarihce.html">Tarihçe</a>
+    <a href="../bayezid/bayezid.html">Sultan II. Bayezid</a>
+    <a href="../evliya/evliya.html">Evliya Çelebi</a>
+    <a href="../medrese/medrese.html">Tıp Medresesi</a>
+    <a href="../hastane/hastane.html">Darüşşifa</a>
+    <a href="../imaret/imaret.html">İmarethane</a>
+    <a href="../music/music.html">Müzikle Tedavi</a>
+    <a href="../geziplani/geziplani.html">Gezi Planı</a>
+    <a href="../galeri/galeri.html">Görsel Galeri</a>
+    <a href="../siir/siir.html">Sarmaşık</a>
+    <a href="../oduller/oduller.html">Ödüller</a>
+    <a href="../personel/personel.html">Personelimiz</a>
+    <a href="../index.html#contact">İletişim</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- ═══════ HERO ═══════ -->
+<section class="page-hero" aria-label="Tarihçe — Külliyenin Doğuşu">
+
+  <!-- HERO ARKA PLAN GÖRSELİ — images/hero.jpg -->
+  <div class="page-hero-bg" aria-hidden="true">
+    <img src="images/hero.jpg" alt="Sultan II. Bayezid Külliyesi"
+         onerror="this.style.display='none'">
+  </div>
+
+  <div class="page-hero-inner">
+    <span class="hero-eyebrow">Sultan II. Bayezid Külliyesi · Edirne</span>
+    <div class="hero-ornament" aria-hidden="true">
+      <div class="h-orn-line"></div>
+      <span class="h-orn-gem">✦</span>
+      <div class="h-orn-line"></div>
+    </div>
+    <h1 class="hero-title">TARİHÇE</h1>
+    <p class="hero-subtitle">Şifanın, Bilimin ve Merhametin Asırlık Mirası</p>
+    <p class="hero-desc">
+      Edirne Sultan II. Bayezid Külliyesi Sağlık Müzesi — 1488'den bugüne,
+      insanlığa adanmış beş asırlık bir hizmet ve medeniyetin hikâyesi.
+    </p>
+    <div class="hero-date-badge" aria-label="Kuruluş tarihi">
+      <span aria-hidden="true">✦</span>
+      H. 893 — M. 1488 — EDİRNE
+      <span aria-hidden="true">✦</span>
+    </div>
+  </div>
+
+  <a class="hero-scroll-btn" href="#giris" aria-label="İçeriğe geç">
+    <span>TARİHİ KEŞFET</span>
+    <i class="fa fa-chevron-down" aria-hidden="true"></i>
+  </a>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     BÖLÜM 1 — GİRİŞ: BİR TALEBİN HİKÂYESİ
+═══════════════════════════════════════════ -->
+<section id="giris" class="page-section" aria-labelledby="giris-title">
+  <div class="container">
+    <div class="sec-header reveal">
+      <span class="sec-eyebrow">Bir Şehrin Talebi</span>
+      <h2 class="sec-title" id="giris-title">Bir <span>Dileğin</span> Doğuşu</h2>
+      <div class="sec-ornament">
+        <div class="sec-orn-line"></div>
+        <span class="sec-orn-gem">✦</span>
+        <div class="sec-orn-line"></div>
+      </div>
+    </div>
+
+    <div class="intro-grid">
+
+      <div class="intro-text reveal">
+        <p>
+          1488 yılında 8. Osmanlı Padişahı Sultan II. Bayezid, şu an Ukrayna sınırları içinde olan Kili ve Akkerman Kalelerinin fethi için yapılacak sefer hazırlıklarını görmek amacıyla Edirne'ye geldiğinde, şehrin ileri gelenleri sarayın divanhanesinde padişahın huzuruna çıkarak, adaletin hâkimi ulu padişahtan bir dilekte bulunurlar.
+        </p>
+        <p>
+          Büyük bir şehir olan, yolcuların, tüccarların, seyyahların uğrak noktası Edirne'ye bir hastane yaptırmasını isterler. Sultan II. Bayezid, babası Fatih Sultan Mehmet'in doğduğu şehir olan Edirne'yi çok sevdiği için bu isteği geri çevirmez ve Tunca Nehri'nin kıyısında, yemyeşil bir arazide içinde bir darüşşifa, yani hastanenin de bulunduğu büyük bir külliye yapılmasını emreder.
+        </p>
+      </div>
+
+      <!-- GİRİŞ GÖRSELİ — images/giris.jpg -->
+      <div class="intro-img-wrap reveal reveal-d2">
+        <div class="img-frame">
+          <img src="images/giris.jpg" alt="Sultan II. Bayezid ve Edirne" loading="lazy"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-ph" style="display:none;">
+            <span class="img-ph-icon">🏛️</span>
+            <span class="img-ph-txt">GÖRSEL ALANI<br>images/giris.jpg</span>
+          </div>
+          <div class="img-caption">SULTAN II. BAYEZİD · EDİRNE, 1488</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ TAM GENİŞLİK GÖRSEL 1 — images/panorama-1.jpg ═══════ -->
+<div class="fullwidth-img" aria-hidden="true">
+  <img src="images/panorama-1.jpg" alt="Külliye panoramik görünüm"
+       loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+  <div class="fullwidth-img-ph" style="display:none;">
+    <span>🏛</span>
+    <span>TAM GENİŞLİK GÖRSEL · images/panorama-1.jpg</span>
+  </div>
+  <div class="fullwidth-img-overlay">
+    <span class="fullwidth-img-label">TUNCA NEHRİ KIRINDA · EDIRNE · M. 1488</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     BÖLÜM 2 — BİR MEDENİYETİN TEMELLERİ
+═══════════════════════════════════════════ -->
+<section id="insaat" class="page-section page-section--alt" aria-labelledby="insaat-title">
+  <div class="container">
+    <div class="sec-header reveal">
+      <span class="sec-eyebrow">İnşa Süreci</span>
+      <h2 class="sec-title" id="insaat-title">Bir Medeniyetin Temelleri <span>Yükseliyor</span></h2>
+      <div class="sec-ornament">
+        <div class="sec-orn-line"></div>
+        <span class="sec-orn-gem">✦</span>
+        <div class="sec-orn-line"></div>
+      </div>
+    </div>
+
+    <div class="content-split content-split--img-right">
+
+      <div class="split-body reveal">
+        <h3>Mimarbaşı Hayrettin'in Eseri</h3>
+        <p>
+          Bu önemli görev dönemin mimarbaşısı Hayrettin'e verilir. Hemen hazırlıklara başlanır, yapılacak külliyenin planları çizilir, maketleri hazırlanır ve imparatorluğun en maharetli taş ve mermer ustaları bu iş için görevlendirilir.
+        </p>
+        <p>
+          Aynı yılın mayıs ayında, Padişahın da katıldığı görkemli bir törenle, dualar eşliğinde Külliyenin temeli atılır. Osmanlı'nın sosyal devlet anlayışının en önemli simgelerinden biri olacak o büyük külliyenin taş duvarları yavaş yavaş yükselmeye başlar.
+        </p>
+        <p>
+          İnşaat, zamanın teknik ve ekonomik şartları düşünüldüğünde çok kısa sayılabilecek bir sürede, sadece dört yıl içinde tamamlanarak 1488 yılında büyük bir törenle hizmete açılır.
+        </p>
+      </div>
+
+      <!-- İNŞAAT GÖRSELİ — images/insaat.jpg -->
+      <div class="split-img reveal reveal-d2">
+        <div class="img-frame">
+          <img src="images/insaat.jpg" alt="Külliye inşaat dönemi" loading="lazy"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-ph" style="display:none;">
+            <span class="img-ph-icon">🏗️</span>
+            <span class="img-ph-txt">GÖRSEL ALANI<br>images/insaat.jpg</span>
+          </div>
+          <div class="img-caption">MİMARBAŞI HAYRETTİN'İN KÜLLİYESİ</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     BÖLÜM 3 — KÜLLİYENİN BİRİMLERİ
+═══════════════════════════════════════════ -->
+<section id="birimler" class="page-section" aria-labelledby="birimler-title">
+  <div class="container">
+    <div class="sec-header reveal">
+      <span class="sec-eyebrow">Yapısal Bütünlük</span>
+      <h2 class="sec-title" id="birimler-title">Külliyenin <span>Birimleri</span></h2>
+      <div class="sec-ornament">
+        <div class="sec-orn-line"></div>
+        <span class="sec-orn-gem">✦</span>
+        <div class="sec-orn-line"></div>
+      </div>
+    </div>
+
+    <div class="units-layout">
+
+      <!-- Sol: Birim kartları -->
+      <div class="reveal">
+        <p style="font-size:clamp(14px,2vw,16.5px);color:var(--ink-soft);line-height:1.9;margin-bottom:24px;">
+          Eski payitaht Edirne'ye çok büyük bir değer katan bu külliye, aşağıdaki ana bölümlerden oluşmaktadır:
+        </p>
+        <div class="units-grid">
+          <div class="unit-card"><span class="unit-num">1</span><span class="unit-name">Darüşşifa<br>(Hastane)</span></div>
+          <div class="unit-card"><span class="unit-num">2</span><span class="unit-name">Tabhane<br>(Misafirhane)</span></div>
+          <div class="unit-card"><span class="unit-num">3</span><span class="unit-name">Tıp<br>Medresesi</span></div>
+          <div class="unit-card"><span class="unit-num">4</span><span class="unit-name">Camii</span></div>
+          <div class="unit-card"><span class="unit-num">5</span><span class="unit-name">İmaret<br>(Mutfak, Aşevi)</span></div>
+          <div class="unit-card"><span class="unit-num">6</span><span class="unit-name">Köprü</span></div>
+          <div class="unit-card"><span class="unit-num">7</span><span class="unit-name">Hamam</span></div>
+          <div class="unit-card"><span class="unit-num">8</span><span class="unit-name">Değirmen ve<br>Su Deposu</span></div>
+          <div class="unit-card"><span class="unit-num">9</span><span class="unit-name">Sıbyan Mektebi<br>(İlkokul)</span></div>
+          <div class="unit-card"><span class="unit-num">10</span><span class="unit-name">Mehteran<br>Mektebi</span></div>
+          <div class="unit-card"><span class="unit-num">11</span><span class="unit-name">Muvakkithane<br>(Zaman Merkezi)</span></div>
+        </div>
+      </div>
+
+      <!-- Sağ: Görsel -->
+      <!-- BİRİMLER GÖRSELİ — images/birimler.jpg -->
+      <div class="units-img-wrap reveal reveal-d2">
+        <div class="img-frame">
+          <img src="images/birimler.jpg" alt="Külliye vaziyet planı veya hava fotoğrafı" loading="lazy"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-ph" style="display:none;">
+            <span class="img-ph-icon">🗺️</span>
+            <span class="img-ph-txt">GÖRSEL ALANI<br>images/birimler.jpg</span>
+          </div>
+          <div class="img-caption">KÜLLİYE VAZİYET PLANI</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ 3'LÜ FOTOĞRAF ŞERİDİ ═══════ -->
+<div class="photo-strip" role="list" aria-label="Külliye fotoğrafları">
+
+  <!-- FOTOĞRAF 1 — images/strip-1.jpg -->
+  <div class="photo-strip-item" role="listitem" data-cap="Darüşşifa Avlusu"
+       tabindex="0" aria-label="Fotoğrafı büyüt: Darüşşifa Avlusu">
+    <img src="images/strip-1.jpg" alt="Darüşşifa avlusu" loading="lazy"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="photo-strip-ph" style="display:none;" aria-hidden="true">
+      <span class="photo-strip-ph-icon">📷</span>
+      <span class="photo-strip-ph-txt">FOTOĞRAF 1<br>images/strip-1.jpg</span>
+    </div>
+    <div class="photo-strip-overlay" aria-hidden="true">
+      <span class="photo-strip-cap">DARÜŞŞİFA AVLUSU</span>
+    </div>
+  </div>
+
+  <!-- FOTOĞRAF 2 — images/strip-2.jpg -->
+  <div class="photo-strip-item" role="listitem" data-cap="Tıp Medresesi"
+       tabindex="0" aria-label="Fotoğrafı büyüt: Tıp Medresesi">
+    <img src="images/strip-2.jpg" alt="Tıp Medresesi" loading="lazy"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="photo-strip-ph" style="display:none;" aria-hidden="true">
+      <span class="photo-strip-ph-icon">📷</span>
+      <span class="photo-strip-ph-txt">FOTOĞRAF 2<br>images/strip-2.jpg</span>
+    </div>
+    <div class="photo-strip-overlay" aria-hidden="true">
+      <span class="photo-strip-cap">TIP MEDRESESİ</span>
+    </div>
+  </div>
+
+  <!-- FOTOĞRAF 3 — images/strip-3.jpg -->
+  <div class="photo-strip-item" role="listitem" data-cap="İmarethane"
+       tabindex="0" aria-label="Fotoğrafı büyüt: İmarethane">
+    <img src="images/strip-3.jpg" alt="İmarethane" loading="lazy"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="photo-strip-ph" style="display:none;" aria-hidden="true">
+      <span class="photo-strip-ph-icon">📷</span>
+      <span class="photo-strip-ph-txt">FOTOĞRAF 3<br>images/strip-3.jpg</span>
+    </div>
+    <div class="photo-strip-overlay" aria-hidden="true">
+      <span class="photo-strip-cap">İMARETHANE</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════
+     BÖLÜM 4 — HİZMET DOLU ASIRLAR VE ZORLU GÜNLER
+═══════════════════════════════════════════ -->
+<section id="zorlu" class="page-section page-section--alt" aria-labelledby="zorlu-title">
+  <div class="container">
+    <div class="sec-header reveal">
+      <span class="sec-eyebrow">Tarihsel Süreç</span>
+      <h2 class="sec-title" id="zorlu-title">Hizmet Dolu Asırlar ve <span>Zorlu Günler</span></h2>
+      <div class="sec-ornament">
+        <div class="sec-orn-line"></div>
+        <span class="sec-orn-gem">✦</span>
+        <div class="sec-orn-line"></div>
+      </div>
+    </div>
+
+    <div class="challenge-grid">
+
+      <div class="challenge-quote-block reveal">
+        <span class="cqb-label">400 YILLIK HİZMET · OSMANLI DÖNEMI</span>
+        <p class="cqb-text">
+          Sadece Edirne'ye değil, çevresindeki şehir ve köylere de aralıksız olarak 400 yıl gibi uzun süre hizmet vermiş olan bu şifa yurdu, Osmanlı İmparatorluğu'nun zayıflaması, vakıf sisteminin dağılması ve ardından gelen işgallerle önemini yitirmeye başlar.
+        </p>
+        <blockquote class="cqb-quote">
+          "Edirne'nin Ruslar tarafından işgal edildiği Osmanlı-Rus Savaşı sonrası başlayan ve Balkan Savaşları ile zirveye ulaşan zorlu yıllar, külliye gibi birçok yapının da maalesef sahipsiz kalmasına yol açmıştır."
+        </blockquote>
+      </div>
+
+      <!-- ZORLU GÜNLER GÖRSELİ — images/zorlu.jpg -->
+      <div class="challenge-img reveal reveal-d2">
+        <div class="img-frame">
+          <img src="images/zorlu.jpg" alt="Külliye harap dönem fotoğrafı" loading="lazy"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-ph" style="display:none;">
+            <span class="img-ph-icon">📜</span>
+            <span class="img-ph-txt">GÖRSEL ALANI<br>images/zorlu.jpg</span>
+          </div>
+          <div class="img-caption">HARAP DÖNEM · 19. YÜZYIL</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ TAM GENİŞLİK GÖRSEL 2 — images/panorama-2.jpg ═══════ -->
+<div class="fullwidth-img" aria-hidden="true">
+  <img src="images/panorama-2.jpg" alt="Külliye restorasyon sonrası"
+       loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+  <div class="fullwidth-img-ph" style="display:none;">
+    <span>🏛</span>
+    <span>TAM GENİŞLİK GÖRSEL · images/panorama-2.jpg</span>
+  </div>
+  <div class="fullwidth-img-overlay">
+    <span class="fullwidth-img-label">RESTORASYON SONRASI · TRAKYA ÜNİVERSİTESİ</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     BÖLÜM 5 — YENİDEN DOĞUŞ: MÜZEYE DÖNÜŞÜM
+═══════════════════════════════════════════ -->
+<section id="yenidendogus" class="page-section page-section--dark" aria-labelledby="yenidendogus-title">
+  <div class="container">
+    <div class="sec-header reveal">
+      <span class="sec-eyebrow" style="color:rgba(201,168,76,.5)">Çağdaş Dönem</span>
+      <h2 class="sec-title sec-title--light" id="yenidendogus-title">Yeniden <span>Doğuş</span></h2>
+      <div class="sec-ornament">
+        <div class="sec-orn-line" style="background:var(--gold-dark)"></div>
+        <span class="sec-orn-gem">✦</span>
+        <div class="sec-orn-line" style="background:var(--gold-dark)"></div>
+      </div>
+    </div>
+
+    <div class="revival-grid">
+
+      <div class="revival-text reveal">
+        <h3>Müzeye Dönüşüm Hikâyesi</h3>
+        <p>
+          Cumhuriyet sonrası yaşanan ekonomik sıkıntılar nedeniyle yıkılıp yok olma tehlikesi ile karşı karşıya kalan bu abidevi yapı, 1984 yılında Trakya Üniversitesi'ne devredilir. Kapsamlı bir restorasyon sonrası eğitim alanları olarak kullanılmaya başlanan binaların kaderi, Darüşşifa'nın açılışıyla tamamen değişir.
+        </p>
+        <p>
+          Bugün Sultan II. Bayezid Külliyesi, zaman içinde ülkemizin en seçkin kültür varlıklarından biri haline gelmiş, geçmişin şifa yöntemlerini geleceğe aktaran canlı bir tarih hazinesidir.
+        </p>
+
+        <!-- Tarih çizgisi -->
+        <div class="revival-timeline">
+          <div class="rtl-item">
+            <div class="rtl-dot"></div>
+            <div class="rtl-content">
+              <div class="rtl-year">1984</div>
+              <div class="rtl-text">Yapı Trakya Üniversitesi'ne devredilir ve kapsamlı restorasyon başlar.</div>
+            </div>
+          </div>
+          <div class="rtl-item">
+            <div class="rtl-dot"></div>
+            <div class="rtl-content">
+              <div class="rtl-year">23 Nisan 1997</div>
+              <div class="rtl-text">Darüşşifa, Sağlık Müzesi olarak hizmete açılır; köklü bir dönüşüm tamamlanır.</div>
+            </div>
+          </div>
+          <div class="rtl-item">
+            <div class="rtl-dot"></div>
+            <div class="rtl-content">
+              <div class="rtl-year">Günümüz</div>
+              <div class="rtl-text">Müze, ülkemizin en seçkin kültür varlıklarından biri olarak ziyaretçilerini ağırlamaya devam eder.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- YENİDEN DOĞUŞ GÖRSELİ — images/muze.jpg -->
+      <div class="revival-img reveal reveal-d2">
+        <div class="img-frame">
+          <img src="images/muze.jpg" alt="Müze açılış töreni veya bugünkü görünüm" loading="lazy"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-ph" style="display:none;">
+            <span class="img-ph-icon">🏛️</span>
+            <span class="img-ph-txt">GÖRSEL ALANI<br>images/muze.jpg</span>
+          </div>
+          <div class="img-caption">SAĞLIK MÜZESİ · 23 NİSAN 1997</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     BÖLÜM 6 — SON GÖRSEL ŞERİDİ (2 görsel)
+═══════════════════════════════════════════ -->
+<section class="page-section" aria-label="Ek görseller" style="padding-top:0;padding-bottom:0;">
+  <div style="display:grid;grid-template-columns:1fr 1fr;max-width:var(--max-w);margin:0 auto;">
+
+    <!-- GÖRSEL 4 — images/guncel-1.jpg -->
+    <div class="photo-strip-item" style="aspect-ratio:16/9;" data-cap="Güncel Müze Görünümü"
+         tabindex="0" aria-label="Fotoğrafı büyüt">
+      <img src="images/guncel-1.jpg" alt="Güncel müze görünümü" loading="lazy"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="photo-strip-ph" style="display:none;" aria-hidden="true">
+        <span class="photo-strip-ph-icon">📷</span>
+        <span class="photo-strip-ph-txt">GÖRSEL<br>images/guncel-1.jpg</span>
+      </div>
+      <div class="photo-strip-overlay" aria-hidden="true">
+        <span class="photo-strip-cap">GÜNCEL MÜZE GÖRÜNÜMÜ</span>
+      </div>
+    </div>
+
+    <!-- GÖRSEL 5 — images/guncel-2.jpg -->
+    <div class="photo-strip-item" style="aspect-ratio:16/9;" data-cap="Müze İç Mekânı"
+         tabindex="0" aria-label="Fotoğrafı büyüt">
+      <img src="images/guncel-2.jpg" alt="Müze iç mekânı" loading="lazy"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="photo-strip-ph" style="display:none;" aria-hidden="true">
+        <span class="photo-strip-ph-icon">📷</span>
+        <span class="photo-strip-ph-txt">GÖRSEL<br>images/guncel-2.jpg</span>
+      </div>
+      <div class="photo-strip-overlay" aria-hidden="true">
+        <span class="photo-strip-cap">MÜZE İÇ MEKÂNI</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     KAPANIŞ
+═══════════════════════════════════════════ -->
+<div class="close-banner" aria-label="Kapanış">
+  <div class="close-orn" aria-hidden="true">
+    <div class="close-orn-line"></div>
+    <span class="close-orn-symbol">✦ ✦ ✦</span>
+    <div class="close-orn-line"></div>
+  </div>
+  <p class="close-quote reveal">
+    "Geçmişin Şifası, Geleceğin Mirası: İnsanlığın Hizmetinde Bir Ömür."
+  </p>
+  <p class="close-sub reveal">ŞİFAYI SANAT VE BİLİMLE BULUŞTURAN ASIRLIK MİRAS · H. 893 – M. 1488</p>
+  <nav class="close-nav reveal" aria-label="İlgili sayfalar">
+    <a href="../hastane/hastane.html" class="btn-primary">DARÜŞŞİFA →</a>
+    <a href="../galeri/galeri.html"   class="btn-secondary">GÖRSEL GALERİ</a>
+    <a href="../index.html"           class="btn-secondary">ANA SAYFA</a>
+  </nav>
+</div>
+
+</main>
+
+<!-- FOOTER -->
+<footer role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-brand-title">Sultan II. Bayezid Külliyesi Sağlık Müzesi</div>
+      <div class="footer-brand-sub">T.C. TRAKYA ÜNİVERSİTESİ · EDİRNE</div>
+      <p class="footer-brand-desc">1484 yılında Sultan II. Bayezid tarafından yaptırılan bu eşsiz külliye, Osmanlı sağlık anlayışının en nadide örneğini sunar. Müzikle tedaviden tıp eğitimine uzanan kapsamlı bir kültür mirası.</p>
+    </div>
+    <nav class="footer-nav" aria-label="Sayfalar">
+      <div class="footer-col-title">SAYFALAR</div>
+      <ul class="footer-links">
+        <li><a href="../tarihce/tarihce.html">Tarihçe</a></li>
+        <li><a href="../bayezid/bayezid.html">Sultan II. Bayezid</a></li>
+        <li><a href="../evliya/evliya.html">Evliya Çelebi</a></li>
+        <li><a href="../hastane/hastane.html">Darüşşifa</a></li>
+        <li><a href="../medrese/medrese.html">Tıp Medresesi</a></li>
+        <li><a href="../imaret/imaret.html">İmarethane</a></li>
+        <li><a href="../music/music.html">Müzikle Tedavi</a></li>
+      </ul>
+    </nav>
+    <nav class="footer-nav" aria-label="Diğer">
+      <div class="footer-col-title">DİĞER</div>
+      <ul class="footer-links">
+        <li><a href="../geziplani/geziplani.html">Gezi Planı</a></li>
+        <li><a href="../galeri/galeri.html">Görsel Galeri</a></li>
+        <li><a href="../siir/siir.html">Sarmaşık</a></li>
+        <li><a href="../oduller/oduller.html">Ödüller</a></li>
+        <li><a href="../personel/personel.html">Personelimiz</a></li>
+        <li><a href="../haberler/haberler.html">Haberler</a></li>
+        <li><a href="../duyurular/duyurular.html">Duyurular</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <span aria-hidden="true">✦</span>
+    © 2026 T.C. TRAKYA ÜNİVERSİTESİ · SULTAN II. BAYEZİD KÜLLİYESİ SAĞLIK MÜZESİ · TÜM HAKLARI SAKLIDIR
+    <span aria-hidden="true">✦</span>
+  </div>
+</footer>
+
+<button id="btt" aria-label="Sayfanın başına dön"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Tam ekran görsel" aria-hidden="true">
+  <div class="lb-bar">
+    <span class="lb-bar-cap" id="lbCap"></span>
+    <button class="lb-close-btn" id="lbClose" aria-label="Kapat"><i class="fa fa-times"></i></button>
+  </div>
+  <div class="lb-img-wrap">
+    <img id="lbImg" src="" alt="">
+  </div>
+</div>
+
+<script>
+'use strict';
+
+/* ─── YARDIMCI ─── */
+const $ = (s,p=document) => p.querySelector(s);
+const $$ = (s,p=document) => [...p.querySelectorAll(s)];
+
+/* ─── HAMBURGEr ─── */
+(function(){
+  const ham = $('#hamburger'), mob = $('#mobileMenu');
+  if(!ham||!mob) return;
+  const close = () => { ham.classList.remove('open'); mob.classList.remove('open'); ham.setAttribute('aria-expanded','false'); mob.setAttribute('aria-hidden','true'); };
+  ham.addEventListener('click', e => { e.stopPropagation(); ham.classList.contains('open') ? close() : (ham.classList.add('open'),mob.classList.add('open'),ham.setAttribute('aria-expanded','true'),mob.removeAttribute('aria-hidden')); });
+  document.addEventListener('click', e => { if(!mob.contains(e.target)&&e.target!==ham) close(); });
+  document.addEventListener('keydown', e => { if(e.key==='Escape') close(); });
+  $$('a',mob).forEach(l=>l.addEventListener('click',close));
+})();
+
+/* ─── BACK TO TOP ─── */
+(function(){
+  const btt = $('#btt'); if(!btt) return;
+  let tick=false;
+  window.addEventListener('scroll',()=>{ if(!tick){requestAnimationFrame(()=>{btt.classList.toggle('show',scrollY>400);tick=false;});tick=true;}},{passive:true});
+  btt.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
+})();
+
+/* ─── SCROLL REVEAL ─── */
+(function(){
+  const els = $$('.reveal'); if(!els.length) return;
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches){els.forEach(el=>el.classList.add('visible'));return;}
+  const io = new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+  els.forEach(el=>io.observe(el));
+})();
+
+/* ─── SMOOTH SCROLL ─── */
+$$('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const href=a.getAttribute('href'); if(href==='#') return;
+    const target=document.querySelector(href); if(!target) return;
+    e.preventDefault();
+    const navH=$('#navbar')?.offsetHeight||72;
+    scrollTo({top:target.getBoundingClientRect().top+scrollY-navH-12,behavior:'smooth'});
+  });
+});
+
+/* ─── LIGHTBOX (fotoğraf şeridi tıklama) ─── */
+(function(){
+  const lb     = $('#lightbox');
+  const lbImg  = $('#lbImg');
+  const lbCap  = $('#lbCap');
+  const lbClose= $('#lbClose');
+  if(!lb) return;
+
+  function open(src,cap){
+    lbImg.classList.add('fading');
+    setTimeout(()=>{ lbImg.src=src; lbImg.alt=cap||''; lbCap.textContent=cap||''; lbImg.classList.remove('fading'); },140);
+    lb.classList.add('open'); lb.removeAttribute('aria-hidden');
+    document.body.style.overflow='hidden'; lbClose.focus();
+  }
+
+  function close(){
+    lb.classList.remove('open'); lb.setAttribute('aria-hidden','true');
+    document.body.style.overflow=''; setTimeout(()=>{lbImg.src='';},300);
+  }
+
+  /* Fotoğraf şeridindeki her öğe */
+  $$('.photo-strip-item, .img-frame').forEach(item=>{
+    function tryOpen(){
+      const img=item.tagName==='DIV'?$('img',item):item;
+      if(!img||!img.src||img.naturalWidth===0) return;
+      const cap = item.dataset.cap || img.alt || '';
+      open(img.src, cap);
+    }
+    item.addEventListener('click', tryOpen);
+    item.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();tryOpen();}});
+  });
+
+  lbClose.addEventListener('click',close);
+  lb.addEventListener('click',e=>{ if(e.target===lb) close(); });
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&lb.classList.contains('open')) close(); });
+})();
+</script>
+</body>
+</html>
