@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Müzikle Tedavi — Sultan II. Bayezid Külliyesi Sağlık Müzesi · Her makamın ruhsal ve bedensel şifa gücü">
+<meta name="theme-color" content="#1a1008">
+<title>Müzikle Tedavi · Sultan II. Bayezid Külliyesi Sağlık Müzesi</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=IM+Fell+English:ital@0;1&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+/* ═══════════════════════════════════════
+   CUSTOM PROPERTIES
+═══════════════════════════════════════ */
+:root {
+  --gold:        #c9a84c;
+  --gold-light:  #e8d08a;
+  --gold-dark:   #8b6914;
+  --ink:         #1a1008;
+  --ink-soft:    #2e1f0a;
+  --parchment:   #f5e9c8;
+  --parchment-d: #e8d5a3;
+  --crimson:     #7a1c1c;
+  --tile:        #1e4a5c;
+
+  --sp-xs:8px; --sp-sm:16px; --sp-md:24px;
+  --sp-lg:40px; --sp-xl:60px; --sp-2xl:80px;
+
+  --max-w:1260px; --max-md:900px;
+  --nav-h:72px;
+  --r-sm:6px; --r-md:10px; --r-lg:14px;
+
+  --tf:0.2s ease; --tm:0.35s ease; --ts:0.6s ease;
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;font-size:16px;-webkit-text-size-adjust:100%;}
+
+body{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  background:var(--parchment);color:var(--ink);
+  overflow-x:hidden;line-height:1.6;
+}
+
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E"),
+    radial-gradient(ellipse at 20% 20%,#f7edce 0%,transparent 60%),
+    radial-gradient(ellipse at 80% 80%,#e8d5a3 0%,transparent 55%),
+    linear-gradient(160deg,#f5e9c8 0%,#ecddb4 40%,#f0e3be 100%);
+  pointer-events:none;
+}
+
+img{max-width:100%;height:auto;display:block;}
+ul{list-style:none;} a{color:inherit;} button{cursor:pointer;}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:2px;}
+
+/* ═══════════════════════════════════════
+   NAV — STANDART
+═══════════════════════════════════════ */
+#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;}
+
+.nav-inner{
+  max-width:var(--max-w);margin:0 auto;
+  background:var(--ink);border:1px solid var(--gold-dark);
+  border-top:none;border-bottom-left-radius:var(--r-lg);border-bottom-right-radius:var(--r-lg);
+  padding:0 clamp(16px,4vw,30px);
+  display:flex;align-items:center;justify-content:space-between;gap:var(--sp-md);
+  min-height:var(--nav-h);
+  box-shadow:0 8px 40px rgba(0,0,0,.5),inset 0 1px 0 rgba(201,168,76,.2);
+  position:relative;
+}
+
+.nav-inner::before{
+  content:'✦ ───── ✦ ───── ✦';position:absolute;top:6px;left:50%;
+  transform:translateX(-50%);font-size:8px;color:rgba(201,168,76,.4);
+  letter-spacing:4px;pointer-events:none;white-space:nowrap;
+}
+
+.nav-logo{display:flex;align-items:center;gap:14px;text-decoration:none;flex-shrink:0;}
+.nav-logo-icon{width:44px;height:44px;border:1px solid var(--gold-dark);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;background:rgba(201,168,76,.05);}
+.nav-logo-img{width:100%;height:100%;object-fit:contain;padding:6px;}
+.nav-logo-text{display:flex;flex-direction:column;}
+.nav-logo-top{font-family:'Cinzel',serif;font-size:9px;color:rgba(201,168,76,.7);letter-spacing:2px;line-height:1.4;}
+.nav-logo-main{font-family:'Cinzel',serif;font-size:13px;font-weight:700;color:var(--gold);letter-spacing:1px;line-height:1.2;}
+
+.nav-links ul{display:flex;align-items:center;gap:2px;flex-wrap:nowrap;}
+.nav-links a{font-family:'Cinzel',serif;font-size:10px;font-weight:600;color:rgba(201,168,76,.75);text-decoration:none;padding:8px 10px;border-radius:var(--r-sm);letter-spacing:.5px;white-space:nowrap;display:block;transition:color var(--tf),background var(--tf);}
+.nav-links a:hover,.nav-links a.active{color:var(--gold);background:rgba(201,168,76,.1);}
+
+.nav-hamburger{display:none;flex-direction:column;gap:5px;background:none;border:1px solid var(--gold-dark);border-radius:var(--r-sm);padding:10px 12px;flex-shrink:0;touch-action:manipulation;}
+.nav-hamburger span{display:block;width:22px;height:1.5px;background:var(--gold);transition:transform var(--tm),opacity var(--tf);transform-origin:center;}
+.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+
+#mobileMenu{position:absolute;top:100%;left:0;right:0;background:var(--ink);border:1px solid var(--gold-dark);border-top:none;border-bottom-left-radius:var(--r-md);border-bottom-right-radius:var(--r-md);display:flex;flex-wrap:wrap;gap:var(--sp-xs);padding:var(--sp-sm);max-height:0;overflow:hidden;opacity:0;pointer-events:none;transition:max-height .4s ease,opacity .3s ease;}
+#mobileMenu.open{max-height:520px;opacity:1;pointer-events:auto;}
+#mobileMenu a{font-family:'Cinzel',serif;font-size:10px;font-weight:600;color:rgba(201,168,76,.75);text-decoration:none;padding:8px 12px;border-radius:var(--r-sm);border:1px solid rgba(201,168,76,.15);transition:background var(--tf),color var(--tf);}
+#mobileMenu a:hover{background:rgba(201,168,76,.12);color:var(--gold);}
+
+/* ═══════════════════════════════════════
+   HERO
+═══════════════════════════════════════ */
+.page-hero{
+  position:relative;padding-top:var(--nav-h);
+  min-height:60vh;display:flex;align-items:center;justify-content:center;
+  overflow:hidden;background:var(--ink);
+}
+
+.page-hero-bg{position:absolute;inset:0;z-index:0;}
+.page-hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.18;filter:sepia(40%) contrast(1.1);display:block;}
+
+.page-hero::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:
+    radial-gradient(ellipse at 50% 0%,rgba(201,168,76,.15) 0%,transparent 60%),
+    radial-gradient(ellipse at 0% 100%,rgba(122,28,28,.15) 0%,transparent 50%),
+    radial-gradient(ellipse at 100% 100%,rgba(30,74,92,.15) 0%,transparent 50%);
+}
+
+.page-hero::after{
+  content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M40 0 L80 40 L40 80 L0 40 Z' fill='none' stroke='rgba(201,168,76,0.04)' stroke-width='1'/%3E%3Ccircle cx='40' cy='40' r='20' fill='none' stroke='rgba(201,168,76,0.03)' stroke-width='1'/%3E%3C/svg%3E");
+}
+
+.page-hero-inner{position:relative;z-index:2;text-align:center;padding:clamp(48px,8vw,80px) var(--sp-sm);max-width:760px;}
+
+.hero-eyebrow{font-family:'Cinzel',serif;font-size:clamp(9px,2vw,11px);letter-spacing:4px;color:rgba(201,168,76,.6);display:block;margin-bottom:20px;}
+.hero-ornament{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:26px;}
+.h-orn-line{height:1px;width:60px;background:linear-gradient(90deg,transparent,var(--gold-dark));}
+.h-orn-line:last-child{background:linear-gradient(270deg,transparent,var(--gold-dark));}
+.h-orn-gem{color:var(--gold);font-size:16px;animation:gemPulse 3s ease-in-out infinite;}
+@keyframes gemPulse{0%,100%{opacity:.7;transform:scale(1);}50%{opacity:1;transform:scale(1.1);}}
+
+.hero-title{font-family:'Cinzel',serif;font-size:clamp(30px,7vw,66px);font-weight:700;color:var(--gold);letter-spacing:5px;line-height:1;margin-bottom:16px;text-shadow:0 0 60px rgba(201,168,76,.3);}
+.hero-subtitle{font-family:'IM Fell English',serif;font-style:italic;font-size:clamp(14px,3vw,20px);color:rgba(201,168,76,.7);letter-spacing:1px;margin-bottom:18px;}
+.hero-desc{font-size:clamp(13px,2.5vw,16px);color:rgba(245,233,200,.6);line-height:1.85;max-width:560px;margin:0 auto 28px;}
+
+.hero-badge{display:inline-flex;align-items:center;gap:12px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;color:rgba(201,168,76,.5);border:1px solid rgba(201,168,76,.2);padding:8px 20px;border-radius:30px;background:rgba(201,168,76,.05);}
+
+.hero-scroll-btn{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:5px;font-family:'Cinzel',serif;font-size:8px;letter-spacing:3px;color:rgba(201,168,76,.45);text-decoration:none;animation:scrollBounce 2s ease-in-out infinite;z-index:3;}
+@keyframes scrollBounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(6px);}}
+
+/* ═══════════════════════════════════════
+   ORTAK BÖLÜM
+═══════════════════════════════════════ */
+.page-section{position:relative;z-index:1;padding:clamp(56px,8vw,96px) var(--sp-sm);}
+.page-section--alt{background:rgba(26,16,8,.03);border-top:1px solid rgba(201,168,76,.1);border-bottom:1px solid rgba(201,168,76,.1);}
+.page-section--dark{background:var(--ink);border-top:1px solid var(--gold-dark);}
+
+.container{max-width:var(--max-w);margin:0 auto;}
+.container-md{max-width:var(--max-md);margin:0 auto;}
+
+.sec-header{text-align:center;margin-bottom:clamp(32px,5vw,52px);}
+.sec-eyebrow{font-family:'Cinzel',serif;font-size:10px;letter-spacing:5px;color:var(--gold-dark);text-transform:uppercase;display:block;margin-bottom:10px;}
+.sec-title{font-family:'Cinzel',serif;font-size:clamp(20px,4.5vw,36px);font-weight:700;color:var(--ink);letter-spacing:2px;line-height:1.2;margin-bottom:14px;}
+.sec-title span{color:var(--crimson);}
+.sec-title--light{color:var(--gold);}
+.sec-title--light span{color:var(--gold-light);}
+.sec-ornament{display:flex;align-items:center;justify-content:center;gap:14px;}
+.sec-orn-line{height:1px;width:60px;background:var(--gold-dark);}
+.sec-orn-gem{color:var(--gold);font-size:14px;}
+
+/* ═══════════════════════════════════════
+   GÖRSEL FRAME
+═══════════════════════════════════════ */
+.img-frame{position:relative;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--gold-dark);background:var(--ink-soft);}
+.img-frame img{width:100%;height:100%;object-fit:cover;display:block;filter:sepia(12%) contrast(1.05);transition:transform .6s ease,filter .4s ease;}
+.img-frame:hover img{transform:scale(1.03);filter:sepia(0%) contrast(1.08);}
+.img-frame::before,.img-frame::after{content:'';position:absolute;z-index:2;width:22px;height:22px;border-color:var(--gold);border-style:solid;pointer-events:none;}
+.img-frame::before{top:10px;left:10px;border-width:2px 0 0 2px;}
+.img-frame::after{bottom:10px;right:10px;border-width:0 2px 2px 0;}
+.img-caption{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(26,16,8,.82),transparent);padding:24px 16px 12px;font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:rgba(201,168,76,.8);}
+.img-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:rgba(26,16,8,.9);}
+.img-ph-icon{font-size:36px;opacity:.2;color:var(--gold);}
+.img-ph-txt{font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;color:rgba(201,168,76,.2);text-align:center;padding:0 16px;line-height:1.8;}
+
+/* ═══════════════════════════════════════
+   INTRO 2 SÜTUN
+═══════════════════════════════════════ */
+.intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,64px);align-items:start;}
+.intro-img-wrap{position:sticky;top:calc(var(--nav-h)+20px);}
+.intro-img-wrap .img-frame{aspect-ratio:3/4;}
+.intro-text p{font-size:clamp(15px,2vw,17px);line-height:1.95;color:var(--ink-soft);margin-bottom:18px;}
+.intro-text p:last-child{margin-bottom:0;}
+.intro-text p:first-child::first-letter{font-family:'Cinzel',serif;font-size:3.6em;font-weight:700;color:var(--crimson);float:left;line-height:.8;margin:.05em .12em -.02em 0;}
+
+/* Alıntı kutusu */
+.quote-block{
+  background:var(--ink);border:1px solid var(--gold-dark);
+  border-radius:var(--r-lg);padding:clamp(24px,4vw,36px);
+  position:relative;overflow:hidden;margin-top:28px;
+}
+.quote-block::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+.quote-block::after{content:'"';position:absolute;bottom:-16px;right:20px;font-family:'IM Fell English',serif;font-size:120px;line-height:1;color:rgba(201,168,76,.06);pointer-events:none;}
+.qb-label{font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;color:rgba(201,168,76,.45);display:block;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid rgba(201,168,76,.12);}
+.qb-quote{font-family:'IM Fell English',serif;font-style:italic;font-size:clamp(15px,2.5vw,20px);color:var(--gold);line-height:1.7;}
+.qb-cite{display:block;margin-top:12px;font-style:normal;font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:rgba(201,168,76,.4);}
+
+/* ═══════════════════════════════════════
+   TAM GENİŞLİK GÖRSEL BANDI
+═══════════════════════════════════════ */
+.fullwidth-img{position:relative;z-index:1;overflow:hidden;height:clamp(180px,28vw,420px);}
+.fullwidth-img img{width:100%;height:100%;object-fit:cover;display:block;filter:sepia(18%) contrast(1.06);}
+.fullwidth-img-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(26,16,8,.65) 0%,rgba(26,16,8,.12) 40%,rgba(26,16,8,.12) 60%,rgba(26,16,8,.65) 100%);display:flex;align-items:center;justify-content:center;}
+.fullwidth-img-label{font-family:'Cinzel',serif;font-size:clamp(11px,2.2vw,18px);letter-spacing:clamp(4px,2vw,12px);color:rgba(201,168,76,.85);text-align:center;text-shadow:0 2px 20px rgba(0,0,0,.8);}
+.fullwidth-img-ph{width:100%;height:100%;background:var(--ink-soft);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;}
+.fullwidth-img-ph span{font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;color:rgba(201,168,76,.2);}
+
+/* ═══════════════════════════════════════
+   MAKAM TABLOSU + PLAYER
+═══════════════════════════════════════ */
+#makamlar{padding:clamp(56px,8vw,96px) var(--sp-sm);}
+
+.makam-intro{
+  max-width:680px;margin:0 auto var(--sp-lg);
+  text-align:center;
+  font-size:clamp(14px,2.3vw,17px);
+  color:var(--ink-soft);line-height:1.85;
+}
+
+.makam-table-wrap{
+  max-width:var(--max-w);margin:0 auto;
+  border:1px solid rgba(201,168,76,.25);
+  border-radius:var(--r-lg);overflow:hidden;
+  box-shadow:0 8px 40px rgba(0,0,0,.1);
+}
+
+/* Tablo başlığı */
+.makam-table-head{
+  background:var(--ink);
+  display:grid;
+  grid-template-columns:200px 1fr 260px;
+  border-bottom:1px solid var(--gold-dark);
+  padding:0 clamp(14px,2vw,24px);
+}
+
+.makam-table-head span{
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;
+  color:rgba(201,168,76,.55);padding:14px 0;
+}
+
+/* Her makam satırı */
+.makam-row{
+  display:grid;
+  grid-template-columns:200px 1fr 260px;
+  align-items:center;
+  gap:0;
+  border-bottom:1px solid rgba(201,168,76,.1);
+  padding:0 clamp(14px,2vw,24px);
+  background:rgba(255,255,255,.35);
+  transition:background var(--tf);
+}
+
+.makam-row:last-child{border-bottom:none;}
+.makam-row:hover{background:rgba(201,168,76,.07);}
+
+/* Makam adı */
+.makam-name{
+  font-family:'Cinzel',serif;font-size:clamp(12px,1.8vw,14px);
+  font-weight:700;color:var(--crimson);letter-spacing:1px;
+  padding:clamp(16px,2.5vw,22px) 0;
+  border-right:1px solid rgba(201,168,76,.1);
+  padding-right:clamp(12px,2vw,20px);
+}
+
+/* Tedavi metni */
+.makam-effect{
+  font-size:clamp(13px,1.8vw,15px);color:var(--ink-soft);line-height:1.6;
+  padding:clamp(14px,2vw,20px) clamp(12px,2vw,20px);
+  border-right:1px solid rgba(201,168,76,.1);
+}
+
+/* Player alanı */
+.makam-player{
+  padding:clamp(10px,1.5vw,16px) 0 clamp(10px,1.5vw,16px) clamp(12px,2vw,20px);
+}
+
+/* ─── CUSTOM AUDIO PLAYER ─── */
+.ap{
+  background:var(--ink);
+  border:1px solid rgba(139,105,20,.5);
+  border-radius:var(--r-md);
+  padding:10px 12px;
+  display:flex;flex-direction:column;gap:8px;
+  position:relative;
+  overflow:hidden;
+}
+
+.ap::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(201,168,76,.3),transparent);
+}
+
+/* Kontroller */
+.ap-controls{display:flex;align-items:center;gap:8px;}
+
+.ap-btn{
+  width:28px;height:28px;border-radius:50%;
+  background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.3);
+  color:var(--gold);font-size:10px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  transition:background var(--tf),border-color var(--tf),transform var(--tf);
+  touch-action:manipulation;
+}
+
+.ap-btn:hover{background:rgba(201,168,76,.22);border-color:var(--gold);transform:scale(1.08);}
+.ap-btn:disabled{opacity:.25;pointer-events:none;}
+
+/* Play/Pause — biraz büyük */
+.ap-btn-play{width:34px;height:34px;font-size:12px;}
+.ap-btn-play.playing{background:rgba(201,168,76,.2);border-color:var(--gold);}
+
+/* İlerleme çubuğu */
+.ap-progress-wrap{
+  flex:1;display:flex;align-items:center;gap:6px;
+}
+
+.ap-time{font-family:'Cinzel',serif;font-size:8px;letter-spacing:1px;color:rgba(201,168,76,.45);flex-shrink:0;min-width:28px;}
+.ap-time-total{text-align:right;}
+
+.ap-progress{
+  flex:1;height:3px;border-radius:3px;
+  background:rgba(201,168,76,.12);
+  cursor:pointer;position:relative;
+  transition:height var(--tf);
+}
+
+.ap-progress:hover{height:5px;}
+
+.ap-progress-fill{
+  height:100%;border-radius:3px;
+  background:linear-gradient(90deg,var(--gold-dark),var(--gold));
+  width:0%;transition:none;
+  pointer-events:none;position:relative;
+}
+
+.ap-progress-fill::after{
+  content:'';position:absolute;right:-4px;top:50%;transform:translateY(-50%);
+  width:8px;height:8px;border-radius:50%;
+  background:var(--gold);opacity:0;transition:opacity var(--tf);
+}
+
+.ap-progress:hover .ap-progress-fill::after{opacity:1;}
+
+/* Ses kontrolü */
+.ap-volume-wrap{display:flex;align-items:center;gap:5px;}
+
+.ap-vol-slider{
+  width:52px;height:3px;border-radius:3px;
+  background:rgba(201,168,76,.12);cursor:pointer;
+  -webkit-appearance:none;appearance:none;
+  transition:height var(--tf);
+}
+
+.ap-vol-slider:hover{height:5px;}
+
+.ap-vol-slider::-webkit-slider-thumb{-webkit-appearance:none;width:10px;height:10px;border-radius:50%;background:var(--gold);cursor:pointer;border:none;}
+.ap-vol-slider::-moz-range-thumb{width:10px;height:10px;border-radius:50%;background:var(--gold);cursor:pointer;border:none;}
+
+/* Dosya yok placeholder */
+.ap-nofile{
+  font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;
+  color:rgba(201,168,76,.2);text-align:center;padding:4px 0;
+}
+
+/* Aktif çalan satır vurgusu */
+.makam-row.playing-row{
+  background:rgba(201,168,76,.06);
+  border-left:2px solid var(--gold);
+}
+
+/* ═══════════════════════════════════════
+   ALT METİN + GÖRSEL
+═══════════════════════════════════════ */
+.split-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,56px);align-items:center;}
+.split-grid--rev .split-img{order:-1;}
+.split-body p{font-size:clamp(14px,2vw,16.5px);line-height:1.95;color:var(--ink-soft);margin-bottom:16px;}
+.split-body p:last-child{margin-bottom:0;}
+.split-img .img-frame{aspect-ratio:4/3;}
+
+/* Vurgulu söz */
+.accent-quote{
+  font-family:'IM Fell English',serif;font-style:italic;
+  font-size:clamp(14px,2.5vw,18px);color:var(--ink-soft);line-height:1.85;
+  padding:16px 22px;border-left:2px solid var(--gold-dark);
+  background:rgba(201,168,76,.05);border-radius:0 var(--r-sm) var(--r-sm) 0;
+  margin-bottom:20px;
+}
+.accent-quote cite{display:block;margin-top:10px;font-style:normal;font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--gold-dark);}
+
+/* ═══════════════════════════════════════
+   KAPANIŞ
+═══════════════════════════════════════ */
+.close-banner{text-align:center;padding:clamp(48px,8vw,80px) var(--sp-sm);background:var(--ink);border-top:1px solid var(--gold-dark);position:relative;z-index:1;}
+.close-orn{display:flex;align-items:center;justify-content:center;gap:20px;margin-bottom:32px;}
+.close-orn-line{height:1px;flex:1;max-width:120px;background:linear-gradient(90deg,transparent,var(--gold-dark));}
+.close-orn-line:last-child{background:linear-gradient(270deg,transparent,var(--gold-dark));}
+.close-orn-sym{color:var(--gold);font-size:22px;letter-spacing:8px;}
+.close-quote{font-family:'IM Fell English',serif;font-style:italic;font-size:clamp(16px,3.5vw,24px);color:var(--gold);max-width:660px;margin:0 auto 20px;line-height:1.7;}
+.close-sub{font-family:'Cinzel',serif;font-size:10px;letter-spacing:4px;color:rgba(201,168,76,.4);margin-bottom:36px;display:block;}
+.close-tags{font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;color:rgba(201,168,76,.3);margin-bottom:32px;}
+.close-nav{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+
+.btn-primary{font-family:'Cinzel',serif;font-size:11px;font-weight:700;letter-spacing:2px;padding:14px 28px;border-radius:var(--r-sm);background:var(--gold);color:var(--ink);text-decoration:none;border:1px solid var(--gold);transition:background var(--tf),transform var(--tf);display:inline-block;}
+.btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);}
+.btn-secondary{font-family:'Cinzel',serif;font-size:11px;font-weight:700;letter-spacing:2px;padding:14px 28px;border-radius:var(--r-sm);background:transparent;color:var(--gold);text-decoration:none;border:1px solid var(--gold-dark);transition:background var(--tf),transform var(--tf);display:inline-block;}
+.btn-secondary:hover{background:rgba(201,168,76,.1);transform:translateY(-2px);}
+
+/* ═══════════════════════════════════════
+   FOOTER — STANDART
+═══════════════════════════════════════ */
+footer{background:var(--ink);border-top:1px solid var(--gold-dark);padding:clamp(32px,6vw,48px) var(--sp-sm) var(--sp-lg);position:relative;z-index:1;}
+.footer-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:clamp(24px,5vw,40px);margin-bottom:clamp(24px,4vw,36px);}
+.footer-brand-title{font-family:'Cinzel',serif;font-size:clamp(14px,2.5vw,16px);font-weight:700;color:var(--gold);margin-bottom:4px;line-height:1.3;}
+.footer-brand-sub{font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,168,76,.6);margin-bottom:var(--sp-sm);}
+.footer-brand-desc{font-size:14px;color:rgba(201,168,76,.55);line-height:1.7;}
+.footer-col-title{font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;color:var(--gold);margin-bottom:var(--sp-sm);padding-bottom:10px;border-bottom:1px solid rgba(201,168,76,.2);}
+.footer-links{display:flex;flex-direction:column;gap:10px;}
+.footer-links a{font-size:13px;color:rgba(201,168,76,.6);text-decoration:none;transition:color var(--tf);}
+.footer-links a:hover{color:var(--gold);}
+.footer-bottom{border-top:1px solid rgba(201,168,76,.15);padding-top:var(--sp-md);text-align:center;font-family:'Cinzel',serif;font-size:clamp(8px,1.5vw,10px);letter-spacing:2px;color:rgba(201,168,76,.4);line-height:1.6;}
+
+/* ═══════════════════════════════════════
+   BACK TO TOP
+═══════════════════════════════════════ */
+#btt{position:fixed;bottom:28px;right:20px;z-index:500;width:48px;height:48px;border-radius:50%;background:var(--ink);border:1px solid var(--gold-dark);color:var(--gold);font-size:16px;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity var(--tm),background var(--tf),transform var(--tf);box-shadow:0 4px 16px rgba(0,0,0,.3);touch-action:manipulation;}
+#btt.show{opacity:1;pointer-events:auto;}
+#btt:hover{background:var(--gold-dark);color:var(--ink);transform:translateY(-2px);}
+
+/* ═══════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════ */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-d1{transition-delay:.1s;} .reveal-d2{transition-delay:.2s;}
+.reveal-d3{transition-delay:.3s;} .reveal-d4{transition-delay:.4s;}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media(max-width:1100px){
+  .nav-links{display:none;}.nav-hamburger{display:flex;}
+  .makam-table-head,.makam-row{grid-template-columns:160px 1fr 220px;}
+}
+
+@media(max-width:900px){
+  .intro-grid{grid-template-columns:1fr;}
+  .intro-img-wrap{position:static;}
+  .split-grid,.split-grid--rev{grid-template-columns:1fr;}
+  .split-grid--rev .split-img{order:0;}
+  .makam-table-head,.makam-row{grid-template-columns:1fr;}
+  .makam-table-head{display:none;}
+  .makam-row{display:flex;flex-direction:column;align-items:stretch;padding:clamp(16px,3vw,24px);}
+  .makam-name{border-right:none;padding-right:0;padding-bottom:8px;border-bottom:1px solid rgba(201,168,76,.1);}
+  .makam-effect{border-right:none;padding:10px 0;}
+  .makam-player{padding:0;}
+}
+
+@media(max-width:768px){
+  .nav-logo-top{display:none;}
+  .footer-inner{grid-template-columns:1fr;}
+}
+
+@media(max-width:480px){
+  #btt{bottom:16px;right:14px;width:42px;height:42px;}
+  .close-nav{flex-direction:column;align-items:center;}
+  .btn-primary,.btn-secondary{width:100%;max-width:280px;text-align:center;}
+  .ap-vol-slider{width:40px;}
+}
+
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}html{scroll-behavior:auto;}}
+@media print{#navbar,#btt{display:none;}body{background:white;color:black;}.reveal{opacity:1;transform:none;}.page-hero{min-height:auto;background:white;}}
+</style>
+</head>
+<body>
+
+<!-- ═══════ NAV ═══════ -->
+<header id="navbar" role="banner">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo" aria-label="Ana Sayfa">
+      <div class="nav-logo-icon" aria-hidden="true">
+        <img src="../images/logo.png" alt="Logo" class="nav-logo-img">
+      </div>
+      <div class="nav-logo-text">
+        <span class="nav-logo-top">T.C. TRAKYA ÜNİVERSİTESİ</span>
+        <span class="nav-logo-main">Sultan II. Bayezid<br>Külliyesi Sağlık Müzesi</span>
+      </div>
+    </a>
+
+    <nav class="nav-links" aria-label="Ana menü">
+      <ul>
+        <li><a href="../index.html#explore">Bölümler</a></li>
+        <li><a href="../tarihce/tarihce.html">Tarihçe</a></li>
+        <li><a href="../bayezid/bayezid.html">Sultan II. Bayezid</a></li>
+        <li><a href="../hastane/hastane.html">Darüşşifa</a></li>
+        <li><a href="../music/music.html" class="active">Müzikle Tedavi</a></li>
+        <li><a href="../galeri/galeri.html">Galeri</a></li>
+        <li><a href="../siir/siir.html">Sarmaşık</a></li>
+        <li><a href="../index.html#contact">İletişim</a></li>
+      </ul>
+    </nav>
+
+    <button class="nav-hamburger" id="hamburger" aria-label="Menüyü aç/kapat" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <nav id="mobileMenu" aria-label="Mobil menü" aria-hidden="true">
+    <a href="../index.html">Ana Sayfa</a>
+    <a href="../tarihce/tarihce.html">Tarihçe</a>
+    <a href="../bayezid/bayezid.html">Sultan II. Bayezid</a>
+    <a href="../evliya/evliya.html">Evliya Çelebi</a>
+    <a href="../medrese/medrese.html">Tıp Medresesi</a>
+    <a href="../hastane/hastane.html">Darüşşifa</a>
+    <a href="../imaret/imaret.html">İmarethane</a>
+    <a href="../music/music.html">Müzikle Tedavi</a>
+    <a href="../geziplani/geziplani.html">Gezi Planı</a>
+    <a href="../galeri/galeri.html">Görsel Galeri</a>
+    <a href="../siir/siir.html">Sarmaşık</a>
+    <a href="../oduller/oduller.html">Ödüller</a>
+    <a href="../personel/personel.html">Personelimiz</a>
+    <a href="../index.html#contact">İletişim</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- ═══════ HERO ═══════ -->
+<section class="page-hero" aria-label="Müzikle Tedavi">
+
+  <!-- HERO GÖRSELİ — images/hero.jpg -->
+  <div class="page-hero-bg" aria-hidden="true">
+    <img src="images/hero.jpg" alt="Müzikle tedavi sahnesi"
+         onerror="this.style.display='none'">
+  </div>
+
+  <div class="page-hero-inner">
+    <span class="hero-eyebrow">Sultan II. Bayezid Darüşşifası · Edirne</span>
+    <div class="hero-ornament" aria-hidden="true">
+      <div class="h-orn-line"></div>
+      <span class="h-orn-gem">🎵</span>
+      <div class="h-orn-line"></div>
+    </div>
+    <h1 class="hero-title">MÜZİKLE TEDAVİ</h1>
+    <p class="hero-subtitle">Ruhun Musikiyle Şifası</p>
+    <p class="hero-desc">
+      Hastalara deva, dertlere şifa, divanelerin ruhuna gıda.<br>
+      Sanat ile tıbbın buluştuğu köprü; beş asırlık Osmanlı bilgeliği.
+    </p>
+    <div class="hero-badge" aria-label="Konu etiketleri">
+      <span aria-hidden="true">✦</span>
+      MÜZİK · SU SESİ · ŞİFA · MEDENİYET
+      <span aria-hidden="true">✦</span>
+    </div>
+  </div>
+
+  <a class="hero-scroll-btn" href="#intro" aria-label="İçeriğe geç">
+    <span>MAKAM KEŞFİ</span>
+    <i class="fa fa-chevron-down" aria-hidden="true"></i>
+  </a>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     BÖLÜM 1 — GİRİŞ
+═══════════════════════════════════════════ -->
+<section id="intro" class="page-section" aria-labelledby="intro-title">
+  <div class="container">
+    <div class="sec-header reveal">
+      <span class="sec-eyebrow">Tarihi Arka Plan</span>
+      <h2 class="sec-title" id="intro-title">Müziğin Şifa Gücü: <span>Ruhun Musikiyle Şifası</span></h2>
+      <div class="sec-ornament">
+        <div class="sec-orn-line"></div>
+        <span class="sec-orn-gem">✦</span>
+        <div class="sec-orn-line"></div>
+      </div>
+    </div>
+
+    <div class="intro-grid">
+
+      <div class="intro-text reveal">
+        <p>
+          Müzikle tedavi, çok eski çağlardan beri çeşitli toplumlarda yardımcı tedavi araçlarından biri olarak kullanılmıştır. Türk toplumlarında da Orta Asya'dan ve Şamanlardan başlayan bu gelenek, oradan Selçuklu Darüşşifaları aracılığıyla Anadolu'ya da gelmiştir. Şam'da bulunan Nurettin Zengi Darüşşifası bunun bilinen ilk örneklerinden biridir.
+        </p>
+        <p>
+          Edirne Sultan II. Bayezid Darüşşifası musikiyle hasta tedavisinin yapıldığı seçkin kurumlardan biridir. Özellikle hastane mimarisinde bir müzik sahnesinin düşünülüp uygulanmış olması son derece ilginçtir. 10 kişiden oluşan hanende ve sazende grubu haftanın belirli günlerinde bu sahnede yer alır ve çoğu müzisyen olan hekimlerin önerisiyle her hastalığa göre farklı makamlar çalıp söylerdi.
+        </p>
+
+        <div class="quote-block reveal reveal-d2">
+          <span class="qb-label">SANAT VE TIP ARASINDA BİR KÖPRÜ</span>
+          <p class="qb-quote">
+            "Osmanlı tıbbında müzik, yalnızca bir sanat değil; aynı zamanda tedavinin önemli bir parçası olarak kabul edilmiştir."
+          </p>
+          <cite class="qb-cite">— Şuuri Hasan Efendi, Tâdilü'l-Emzice (ö. 1639)</cite>
+        </div>
+      </div>
+
+      <!-- INTRO GÖRSELİ — images/intro.jpg -->
+      <div class="intro-img-wrap reveal reveal-d2">
+        <div class="img-frame">
+          <img src="images/intro.jpg" alt="Darüşşifa müzik sahnesi" loading="lazy"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-ph" style="display:none;">
+            <span class="img-ph-icon">🎵</span>
+            <span class="img-ph-txt">GÖRSEL ALANI<br>images/intro.jpg</span>
+          </div>
+          <div class="img-caption">DARÜŞŞİFA · MÜZİK SAHNESİ</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ TAM GENİŞLİK GÖRSEL — images/panorama.jpg ═══════ -->
+<div class="fullwidth-img" aria-hidden="true">
+  <img src="images/panorama.jpg" alt="Darüşşifa avlusu"
+       loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+  <div class="fullwidth-img-ph" style="display:none;">
+    <span>🎶</span>
+    <span>TAM GENİŞLİK GÖRSEL · images/panorama.jpg</span>
+  </div>
+  <div class="fullwidth-img-overlay">
+    <span class="fullwidth-img-label">MÜZİK · SU SESİ · ŞİFA · SULTAN II. BAYEZİD DARÜŞŞİFASI</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     BÖLÜM 2 — HER HASTALIĞA BİR MAKAM + PLAYERLAR
+═══════════════════════════════════════════ -->
+<section id="makamlar" class="page-section page-section--alt" aria-labelledby="makamlar-title">
+
+  <div class="sec-header reveal">
+    <span class="sec-eyebrow">Osmanlı Tıbbında Müzik</span>
+    <h2 class="sec-title" id="makamlar-title">Her Hastalığa <span>Bir Makam</span></h2>
+    <div class="sec-ornament">
+      <div class="sec-orn-line"></div>
+      <span class="sec-orn-gem">✦</span>
+      <div class="sec-orn-line"></div>
+    </div>
+  </div>
+
+  <p class="makam-intro reveal">
+    Osmanlı hekimliğinde belirli rahatsızlıklar için önerilen makamlar ve etkileri. Her makamın karşısındaki oynatıcıdan ilgili makamı dinleyebilirsiniz.
+  </p>
+
+  <div class="makam-table-wrap reveal">
+
+    <!-- Tablo başlığı (masaüstü) -->
+    <div class="makam-table-head" aria-hidden="true">
+      <span>MAKAM</span>
+      <span>TEDAVİ ETTİĞİ DURUM / ETKİSİ</span>
+      <span>DİNLE</span>
+    </div>
+
+    <!-- ══ MAKAM SATIRLARI ══
+         MP3 yolu: audios/{makam-adi}.mp3
+         Dosya yoksa player "Ses dosyası yüklenmedi" gösterir
+    ══════════════════════ -->
+
+    <div class="makam-row" data-makam="rast">
+      <div class="makam-name">Rast Makamı</div>
+      <div class="makam-effect">Felç ve sinirsel rahatsızlıklara iyi gelir.</div>
+      <div class="makam-player">
+        <div class="ap" data-src="audios/rast.mp3" data-label="Rast Makamı" role="region" aria-label="Rast Makamı ses oynatıcı"></div>
+      </div>
+    </div>
+
+    <div class="makam-row" data-makam="irak">
+      <div class="makam-name">Irak Makamı</div>
+      <div class="makam-effect">Hararetli (ateşli) mizaca, sersam (beyin iltihabı) ve çarpıntıya faydalıdır.</div>
+      <div class="makam-player">
+        <div class="ap" data-src="audios/irak.mp3" data-label="Irak Makamı" role="region" aria-label="Irak Makamı ses oynatıcı"></div>
+      </div>
+    </div>
+
+    <div class="makam-row" data-makam="isfahan">
+      <div class="makam-name">İsfahan Makamı</div>
+      <div class="makam-effect">Zihni açar, zekâyı güçlendirir ve hafızayı tazeler.</div>
+      <div class="makam-player">
+        <div class="ap" data-src="audios/isfahan.mp3" data-label="İsfahan Makamı" role="region" aria-label="İsfahan Makamı ses oynatıcı"></div>
+      </div>
+    </div>
+
+    <div class="makam-row" data-makam="zirefkend">
+      <div class="makam-name">Zirefkend Makamı</div>
+      <div class="makam-effect">Sırt ve eklem ağrıları ile kulunç tedavisinde etkilidir.</div>
+      <div class="makam-player">
+        <div class="ap" data-src="audios/zirefkend.mp3" data-label="Zirefkend Makamı" role="region" aria-label="Zirefkend Makamı ses oynatıcı"></div>
+      </div>
+    </div>
+
+    <div class="makam-row" data-makam="rehavi">
+      <div class="makam-name">Rehavi Makamı</div>
+      <div class="makam-effect">Baş ağrısını hafifletir.</div>
+      <div class="makam-player">
+        <div class="ap" data-src="audios/rehavi.mp3" data-label="Rehavi Makamı" role="region" aria-label="Rehavi Makamı ses oynatıcı"></div>
+      </div>
+    </div>
+
+    <div class="makam-row" data-makam="buzurk">
+      <div class="makam-name">Büzürk Makamı</div>
+      <div class="makam-effect">Ateşli hastalıklara iyi gelir; vesvese, korku ve zihinsel bulanıklığı giderir.</div>
+      <div class="makam-player">
+        <div class="ap" data-src="audios/buzurk.mp3" data-label="Büzürk Makamı" role="region" aria-label="Büzürk Makamı ses oynatıcı"></div>
+      </div>
+    </div>
+
+    <div class="makam-row" data-makam="neva">
+      <div class="makam-name">Neva Makamı</div>
+      <div class="makam-effect">Kadın hastalıklarına iyi geldiği kabul edilir.</div>
+      <div class="makam-player">
+        <div class="ap" data-src="audios/neva.mp3" data-label="Neva Makamı" role="region" aria-label="Neva Makamı ses oynatıcı"></div>
+      </div>
+    </div>
+
+    <div class="makam-row" data-makam="zengule">
+      <div class="makam-name">Zengûle Makamı</div>
+      <div class="makam-effect">Kalp rahatsızlıklarında kullanılır.</div>
+      <div class="makam-player">
+        <div class="ap" data-src="audios/zengule.mp3" data-label="Zengûle Makamı" role="region" aria-label="Zengûle Makamı ses oynatıcı"></div>
+      </div>
+    </div>
+
+    <div class="makam-row" data-makam="hicaz">
+      <div class="makam-name">Hicaz Makamı</div>
+      <div class="makam-effect">İdrar zorluklarına iyi gelir, uyarıcı etkisi vardır.</div>
+      <div class="makam-player">
+        <div class="ap" data-src="audios/hicaz.mp3" data-label="Hicaz Makamı" role="region" aria-label="Hicaz Makamı ses oynatıcı"></div>
+      </div>
+    </div>
+
+    <div class="makam-row" data-makam="buselik">
+      <div class="makam-name">Buselik Makamı</div>
+      <div class="makam-effect">Bel ve kulunç ağrılarını hafifletir.</div>
+      <div class="makam-player">
+        <div class="ap" data-src="audios/buselik.mp3" data-label="Buselik Makamı" role="region" aria-label="Buselik Makamı ses oynatıcı"></div>
+      </div>
+    </div>
+
+    <div class="makam-row" data-makam="ussak">
+      <div class="makam-name">Uşşak Makamı</div>
+      <div class="makam-effect">Kalp, karaciğer, mide hastalıkları ve sıtmaya karşı faydalıdır.</div>
+      <div class="makam-player">
+        <div class="ap" data-src="audios/ussak.mp3" data-label="Uşşak Makamı" role="region" aria-label="Uşşak Makamı ses oynatıcı"></div>
+      </div>
+    </div>
+
+  </div><!-- /makam-table-wrap -->
+</section>
+
+<!-- ═══════════════════════════════════════════
+     BÖLÜM 3 — OSMANLIDA MÜZİK + YAN GÖRSEL
+═══════════════════════════════════════════ -->
+<section id="yaklasim" class="page-section" aria-labelledby="yaklasim-title">
+  <div class="container">
+    <div class="sec-header reveal">
+      <span class="sec-eyebrow">Bütüncül Tedavi Anlayışı</span>
+      <h2 class="sec-title" id="yaklasim-title">Sanat ile <span>Tıbbın</span> Buluşması</h2>
+      <div class="sec-ornament">
+        <div class="sec-orn-line"></div>
+        <span class="sec-orn-gem">✦</span>
+        <div class="sec-orn-line"></div>
+      </div>
+    </div>
+
+    <div class="split-grid">
+
+      <div class="split-body reveal">
+        <blockquote class="accent-quote">
+          "Şair-hekim Şuuri Hasan Efendi (ö. 1639), 'Tâdilü'l-Emzice' adlı eserinde müzik makamlarının insan sağlığı üzerindeki etkilerini ayrıntılı biçimde ele almıştır."
+          <cite>— Osmanlı Tıp Literatürü</cite>
+        </blockquote>
+        <p>
+          Her makamın, insan ruhu ve bedeni üzerinde farklı etkiler oluşturduğuna inanılmış; bu nedenle hastalıklara göre özel makamlar kullanılmıştır. Bu yaklaşım, Osmanlı'da tedavinin yalnızca fiziksel değil, aynı zamanda ruhsal bir süreç olarak ele alındığını gösterir.
+        </p>
+        <p>
+          Müzik makamlarıyla yapılan bu tedavi anlayışı, sanat ile tıbbın iç içe geçtiği özgün ve ileri bir sağlık kültürünün önemli bir yansımasıdır. Sultan II. Bayezid Külliyesi, insanı bir bütün olarak gören bu kadim bilgeliği günümüzde de "Sağlık Müzesi" çatısı altında yaşatmaya devam etmektedir.
+        </p>
+      </div>
+
+      <!-- YAN GÖRSEL — images/yaklasim.jpg -->
+      <div class="split-img reveal reveal-d2">
+        <div class="img-frame">
+          <img src="images/yaklasim.jpg" alt="Osmanlı tıbbı müzik ve tedavi" loading="lazy"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-ph" style="display:none;">
+            <span class="img-ph-icon">🎶</span>
+            <span class="img-ph-txt">GÖRSEL ALANI<br>images/yaklasim.jpg</span>
+          </div>
+          <div class="img-caption">OSMANLIDA MÜZİK VE ŞİFA</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ 2'Lİ FOTOĞRAF ŞERİDİ ═══════ -->
+<div style="display:grid;grid-template-columns:1fr 1fr;position:relative;z-index:1;" aria-hidden="true">
+
+  <!-- FOTOĞRAF 1 — images/strip-1.jpg -->
+  <div style="position:relative;overflow:hidden;aspect-ratio:16/9;background:var(--ink-soft);">
+    <img src="images/strip-1.jpg" alt="Müzik aleti" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;filter:sepia(15%);" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div style="display:none;position:absolute;inset:0;background:rgba(26,16,8,.88);flex-direction:column;align-items:center;justify-content:center;gap:8px;">
+      <span style="font-size:24px;opacity:.2;color:var(--gold)">🎵</span>
+      <span style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;color:rgba(201,168,76,.2);text-align:center;padding:0 16px">FOTOĞRAF ALANI<br>images/strip-1.jpg</span>
+    </div>
+    <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(26,16,8,.75) 0%,transparent 55%);display:flex;align-items:flex-end;padding:14px 16px;">
+      <span style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:rgba(201,168,76,.8);">HANENDE VE SAZENDE GRUBU</span>
+    </div>
+  </div>
+
+  <!-- FOTOĞRAF 2 — images/strip-2.jpg -->
+  <div style="position:relative;overflow:hidden;aspect-ratio:16/9;background:var(--ink-soft);">
+    <img src="images/strip-2.jpg" alt="Darüşşifa müzik köşesi" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;filter:sepia(15%);" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div style="display:none;position:absolute;inset:0;background:rgba(26,16,8,.88);flex-direction:column;align-items:center;justify-content:center;gap:8px;">
+      <span style="font-size:24px;opacity:.2;color:var(--gold)">🎵</span>
+      <span style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;color:rgba(201,168,76,.2);text-align:center;padding:0 16px">FOTOĞRAF ALANI<br>images/strip-2.jpg</span>
+    </div>
+    <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(26,16,8,.75) 0%,transparent 55%);display:flex;align-items:flex-end;padding:14px 16px;">
+      <span style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:rgba(201,168,76,.8);">ŞADIRVANLI AVLU VE AKUSTİK</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════
+     KAPANIŞ
+═══════════════════════════════════════════ -->
+<div class="close-banner" aria-label="Kapanış">
+  <div class="close-orn" aria-hidden="true">
+    <div class="close-orn-line"></div>
+    <span class="close-orn-sym">✦ ✦ ✦</span>
+    <div class="close-orn-line"></div>
+  </div>
+  <p class="close-quote reveal">
+    "Ruhun Gıdası: Beş Asırlık Şifa Köprüsü."
+  </p>
+  <span class="close-sub reveal">SULTAN II. BAYEZİD KÜLLİYESİ · MÜZİKLE TEDAVİ · EDİRNE</span>
+  <p class="close-tags reveal">Müzik · Su Sesi · Şifa · Medeniyet</p>
+  <nav class="close-nav reveal" aria-label="İlgili sayfalar">
+    <a href="../hastane/hastane.html" class="btn-primary">DARÜŞŞİFA →</a>
+    <a href="../tarihce/tarihce.html" class="btn-secondary">TARİHÇE</a>
+    <a href="../index.html"           class="btn-secondary">ANA SAYFA</a>
+  </nav>
+</div>
+
+</main>
+
+<!-- FOOTER -->
+<footer role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-brand-title">Sultan II. Bayezid Külliyesi Sağlık Müzesi</div>
+      <div class="footer-brand-sub">T.C. TRAKYA ÜNİVERSİTESİ · EDİRNE</div>
+      <p class="footer-brand-desc">1484 yılında Sultan II. Bayezid tarafından yaptırılan bu eşsiz külliye, Osmanlı sağlık anlayışının en nadide örneğini sunar. Müzikle tedaviden tıp eğitimine uzanan kapsamlı bir kültür mirası.</p>
+    </div>
+    <nav class="footer-nav" aria-label="Sayfalar">
+      <div class="footer-col-title">SAYFALAR</div>
+      <ul class="footer-links">
+        <li><a href="../tarihce/tarihce.html">Tarihçe</a></li>
+        <li><a href="../bayezid/bayezid.html">Sultan II. Bayezid</a></li>
+        <li><a href="../hastane/hastane.html">Darüşşifa</a></li>
+        <li><a href="../medrese/medrese.html">Tıp Medresesi</a></li>
+        <li><a href="../imaret/imaret.html">İmarethane</a></li>
+        <li><a href="../music/music.html">Müzikle Tedavi</a></li>
+        <li><a href="../galeri/galeri.html">Galeri</a></li>
+      </ul>
+    </nav>
+    <nav class="footer-nav" aria-label="Diğer">
+      <div class="footer-col-title">DİĞER</div>
+      <ul class="footer-links">
+        <li><a href="../geziplani/geziplani.html">Gezi Planı</a></li>
+        <li><a href="../siir/siir.html">Sarmaşık</a></li>
+        <li><a href="../oduller/oduller.html">Ödüller</a></li>
+        <li><a href="../personel/personel.html">Personelimiz</a></li>
+        <li><a href="../haberler/haberler.html">Haberler</a></li>
+        <li><a href="../duyurular/duyurular.html">Duyurular</a></li>
+        <li><a href="../index.html#contact">İletişim</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <span aria-hidden="true">✦</span>
+    © 2026 T.C. TRAKYA ÜNİVERSİTESİ · SULTAN II. BAYEZİD KÜLLİYESİ SAĞLIK MÜZESİ · TÜM HAKLARI SAKLIDIR
+    <span aria-hidden="true">✦</span>
+  </div>
+</footer>
+
+<button id="btt" aria-label="Sayfanın başına dön"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
+
+<!-- ═══════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════ -->
+<script>
+'use strict';
+
+/* ─── YARDIMCI ─── */
+const $ = (s,p=document) => p.querySelector(s);
+const $$ = (s,p=document) => [...p.querySelectorAll(s)];
+
+/* ════════════════════════════════════════
+   CUSTOM AUDIO PLAYER
+   Her .ap[data-src] için bir player oluştur
+════════════════════════════════════════ */
+function buildPlayer(container) {
+  const src   = container.dataset.src  || '';
+  const label = container.dataset.label|| 'Makam';
+
+  /* HTML iskeleti */
+  container.innerHTML = `
+    <div class="ap-controls">
+      <button class="ap-btn ap-btn-rew" title="10 sn geri" aria-label="10 saniye geri">
+        <i class="fa fa-backward"></i>
+      </button>
+      <button class="ap-btn ap-btn-play" title="Oynat / Durdur" aria-label="${label} oynat">
+        <i class="fa fa-play"></i>
+      </button>
+      <button class="ap-btn ap-btn-fwd" title="10 sn ileri" aria-label="10 saniye ileri">
+        <i class="fa fa-forward"></i>
+      </button>
+      <div class="ap-progress-wrap">
+        <span class="ap-time ap-time-cur">0:00</span>
+        <div class="ap-progress" role="slider" aria-label="İlerleme" tabindex="0"
+             aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="ap-progress-fill"></div>
+        </div>
+        <span class="ap-time ap-time-total">0:00</span>
+      </div>
+      <div class="ap-volume-wrap">
+        <button class="ap-btn ap-btn-mute" title="Sesi kapat / aç" aria-label="Sesi kapat/aç">
+          <i class="fa fa-volume-up"></i>
+        </button>
+        <input type="range" class="ap-vol-slider" min="0" max="1" step="0.02"
+               value="1" aria-label="Ses seviyesi">
+      </div>
+    </div>
+  `;
+
+  /* Dosya yoksa bilgi yaz */
+  if (!src) {
+    container.innerHTML = `<div class="ap-nofile">— Ses dosyası henüz yüklenmedi —</div>`;
+    return;
+  }
+
+  /* Audio nesnesi */
+  const audio = new Audio();
+  audio.preload = 'none';
+
+  /* Referanslar */
+  const btnPlay  = $('.ap-btn-play',  container);
+  const btnRew   = $('.ap-btn-rew',   container);
+  const btnFwd   = $('.ap-btn-fwd',   container);
+  const btnMute  = $('.ap-btn-mute',  container);
+  const progress = $('.ap-progress',  container);
+  const fill     = $('.ap-progress-fill', container);
+  const timeCur  = $('.ap-time-cur',  container);
+  const timeTotal= $('.ap-time-total',container);
+  const volSlider= $('.ap-vol-slider',container);
+  const row      = container.closest('.makam-row');
+
+  /* Dosya yükle (ilk tıkta lazy) */
+  let loaded = false;
+  function ensureLoad() {
+    if (!loaded) { audio.src = src; audio.load(); loaded = true; }
+  }
+
+  /* Zaman formatlayıcı */
+  function fmt(s) {
+    if (!isFinite(s)) return '0:00';
+    const m = Math.floor(s/60), ss = Math.floor(s%60);
+    return `${m}:${ss.toString().padStart(2,'0')}`;
+  }
+
+  /* Play / Pause */
+  function togglePlay() {
+    ensureLoad();
+    /* Diğer playerları durdur */
+    document.querySelectorAll('.ap-btn-play.playing').forEach(b => {
+      if (b !== btnPlay) b.click();
+    });
+    if (audio.paused) {
+      audio.play().catch(()=>{});
+    } else {
+      audio.pause();
+    }
+  }
+
+  btnPlay.addEventListener('click', togglePlay);
+  container.closest('.makam-player')?.addEventListener('keydown', e => {
+    if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); togglePlay(); }
+  });
+
+  audio.addEventListener('play', () => {
+    btnPlay.innerHTML = '<i class="fa fa-pause"></i>';
+    btnPlay.setAttribute('aria-label', label + ' durdur');
+    btnPlay.classList.add('playing');
+    if (row) row.classList.add('playing-row');
+  });
+
+  audio.addEventListener('pause', () => {
+    btnPlay.innerHTML = '<i class="fa fa-play"></i>';
+    btnPlay.setAttribute('aria-label', label + ' oynat');
+    btnPlay.classList.remove('playing');
+    if (row) row.classList.remove('playing-row');
+  });
+
+  audio.addEventListener('ended', () => {
+    btnPlay.innerHTML = '<i class="fa fa-play"></i>';
+    btnPlay.classList.remove('playing');
+    if (row) row.classList.remove('playing-row');
+    fill.style.width = '0%';
+    timeCur.textContent = '0:00';
+  });
+
+  /* İlerleme güncelle */
+  audio.addEventListener('timeupdate', () => {
+    if (!audio.duration) return;
+    const pct = (audio.currentTime / audio.duration) * 100;
+    fill.style.width = pct + '%';
+    progress.setAttribute('aria-valuenow', Math.round(pct));
+    timeCur.textContent = fmt(audio.currentTime);
+  });
+
+  audio.addEventListener('loadedmetadata', () => {
+    timeTotal.textContent = fmt(audio.duration);
+  });
+
+  /* İlerleme çubuğuna tıklama */
+  function seekTo(e) {
+    ensureLoad();
+    const rect = progress.getBoundingClientRect();
+    const pct  = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    audio.currentTime = pct * (audio.duration || 0);
+  }
+
+  progress.addEventListener('click', seekTo);
+
+  let dragging = false;
+  progress.addEventListener('mousedown', e => { dragging = true; seekTo(e); });
+  document.addEventListener('mousemove', e => { if (dragging) seekTo(e); });
+  document.addEventListener('mouseup',   () => { dragging = false; });
+
+  /* Klavye ile ilerleme */
+  progress.addEventListener('keydown', e => {
+    ensureLoad();
+    if (!audio.duration) return;
+    if (e.key === 'ArrowRight') audio.currentTime = Math.min(audio.duration, audio.currentTime + 5);
+    if (e.key === 'ArrowLeft')  audio.currentTime = Math.max(0, audio.currentTime - 5);
+  });
+
+  /* Touch */
+  progress.addEventListener('touchstart', e => {
+    const t = e.touches[0];
+    const rect = progress.getBoundingClientRect();
+    const pct = Math.max(0, Math.min(1, (t.clientX - rect.left) / rect.width));
+    ensureLoad();
+    audio.currentTime = pct * (audio.duration || 0);
+  }, {passive:true});
+
+  /* 10 sn geri / ileri */
+  btnRew.addEventListener('click', () => {
+    ensureLoad();
+    audio.currentTime = Math.max(0, audio.currentTime - 10);
+  });
+
+  btnFwd.addEventListener('click', () => {
+    ensureLoad();
+    audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 10);
+  });
+
+  /* Mute */
+  btnMute.addEventListener('click', () => {
+    audio.muted = !audio.muted;
+    btnMute.innerHTML = audio.muted
+      ? '<i class="fa fa-volume-off"></i>'
+      : '<i class="fa fa-volume-up"></i>';
+    btnMute.title = audio.muted ? 'Sesi aç' : 'Sesi kapat';
+  });
+
+  /* Ses seviyesi */
+  volSlider.addEventListener('input', () => {
+    audio.volume = +volSlider.value;
+    audio.muted  = audio.volume === 0;
+    btnMute.innerHTML = audio.muted
+      ? '<i class="fa fa-volume-off"></i>'
+      : '<i class="fa fa-volume-up"></i>';
+  });
+
+  /* Hata */
+  audio.addEventListener('error', () => {
+    container.innerHTML = `<div class="ap-nofile">⚠ Ses dosyası yüklenemedi: ${src}</div>`;
+  });
+}
+
+/* Tüm player'ları başlat */
+$$('.ap[data-src]').forEach(buildPlayer);
+
+/* ─── HAMBURGEr ─── */
+(function(){
+  const ham = $('#hamburger'), mob = $('#mobileMenu');
+  if(!ham||!mob) return;
+  const close = () => { ham.classList.remove('open'); mob.classList.remove('open'); ham.setAttribute('aria-expanded','false'); mob.setAttribute('aria-hidden','true'); };
+  ham.addEventListener('click', e => { e.stopPropagation(); ham.classList.contains('open') ? close() : (ham.classList.add('open'),mob.classList.add('open'),ham.setAttribute('aria-expanded','true'),mob.removeAttribute('aria-hidden')); });
+  document.addEventListener('click', e => { if(!mob.contains(e.target)&&e.target!==ham) close(); });
+  document.addEventListener('keydown', e => { if(e.key==='Escape') close(); });
+  $$('a',mob).forEach(l=>l.addEventListener('click',close));
+})();
+
+/* ─── BACK TO TOP ─── */
+(function(){
+  const btt=$('#btt'); if(!btt) return;
+  let tick=false;
+  window.addEventListener('scroll',()=>{ if(!tick){requestAnimationFrame(()=>{btt.classList.toggle('show',scrollY>400);tick=false;});tick=true;}},{passive:true});
+  btt.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
+})();
+
+/* ─── SCROLL REVEAL ─── */
+(function(){
+  const els=$$('.reveal'); if(!els.length) return;
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches){els.forEach(el=>el.classList.add('visible'));return;}
+  const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+  els.forEach(el=>io.observe(el));
+})();
+
+/* ─── SMOOTH SCROLL ─── */
+$$('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const href=a.getAttribute('href'); if(href==='#') return;
+    const target=document.querySelector(href); if(!target) return;
+    e.preventDefault();
+    const navH=$('#navbar')?.offsetHeight||72;
+    scrollTo({top:target.getBoundingClientRect().top+scrollY-navH-12,behavior:'smooth'});
+  });
+});
+</script>
+</body>
+</html>
