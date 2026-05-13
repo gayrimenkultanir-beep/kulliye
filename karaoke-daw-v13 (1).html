@@ -1,0 +1,3087 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0a0a0f">
+<title>TUFAN'S STUDİO</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+
+:root {
+  --bg0:#0a0a0f; --bg1:#111118; --bg2:#1a1a24; --bg3:#22222f; --bg4:#2a2a3a;
+  --accent:#00e5ff; --accent2:#ff2d78; --accent3:#a259ff;
+  --green:#00ff88; --orange:#ff9500; --yellow:#ffd60a; --red:#ff3b30;
+  --text:#e8e8f0; --text2:#9090a8; --text3:#505068;
+  --border:rgba(255,255,255,0.08); --border2:rgba(0,229,255,0.2);
+  --track1:#00e5ff22; --track2:#a259ff22; --track3:#ff2d7822;
+  --wave1:#00e5ff; --wave2:#a259ff; --wave3:#ff2d78;
+  --font:'Rajdhani',sans-serif; --mono:'Space Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:var(--font);background:var(--bg0);color:var(--text);height:100vh;overflow:hidden;display:flex;flex-direction:column;user-select:none;-webkit-user-select:none}
+
+/* ── TOPBAR ── */
+#topbar{height:52px;background:var(--bg1);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 12px;gap:9px;flex-shrink:0;z-index:100}
+.logo{font-size:15px;font-weight:700;letter-spacing:2px;background:linear-gradient(90deg,var(--accent),var(--accent3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;flex-shrink:0;line-height:1.1}
+.logo span{display:block;font-size:8px;letter-spacing:3px;opacity:.7;-webkit-text-fill-color:rgba(255,255,255,.5)}
+.proj-name{font-size:11px;color:var(--text2);font-family:var(--mono);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer}
+.tbtn{background:var(--bg3);border:1px solid var(--border);color:var(--text2);font-family:var(--font);font-size:12px;font-weight:600;letter-spacing:.5px;padding:6px 12px;border-radius:5px;cursor:pointer;white-space:nowrap;transition:all .15s;flex-shrink:0}
+.tbtn:hover{background:var(--bg4);color:var(--text)}
+.tbtn.acc{border-color:var(--accent2);color:var(--accent2)}
+.tbtn.grn{border-color:var(--green);color:var(--green)}
+.bpm-d{font-family:var(--mono);font-size:12px;color:var(--accent);background:var(--bg2);border:1px solid var(--border2);padding:5px 9px;border-radius:4px;flex-shrink:0;cursor:pointer}
+#time-d{font-family:var(--mono);font-size:13px;color:var(--green);background:var(--bg2);border:1px solid rgba(0,255,136,.2);padding:5px 10px;border-radius:4px;min-width:76px;text-align:center;flex-shrink:0}
+
+/* ── MAIN ── */
+#main{display:flex;flex:1;overflow:hidden}
+
+/* ── MIXER ── */
+#mixer{width:80px;background:var(--bg1);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0}
+#mixer-body{flex:1;overflow-y:hidden}
+.mix-hdr{height:32px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;letter-spacing:1px;color:var(--text2);border-bottom:1px solid var(--border)}
+.tctrl{height:58px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border-bottom:1px solid var(--border);padding:4px 4px}
+.tlabel{font-size:9px;font-weight:700;letter-spacing:.5px;text-align:center;line-height:1.2}
+.t1 .tlabel{color:var(--accent)} .t2 .tlabel{color:var(--accent3)} .t3 .tlabel{color:var(--accent2)}
+.mini-btns{display:flex;gap:3px}
+.mbtn{width:22px;height:22px;border-radius:4px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);font-size:8px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .1s}
+.mbtn.mute{color:var(--yellow)} .mbtn.mute.on{background:var(--yellow);color:var(--bg0)}
+.mbtn.solo{color:var(--green)} .mbtn.solo.on{background:var(--green);color:var(--bg0)}
+.mbtn.eq{color:var(--accent3);font-size:7px} .mbtn.eq.on{background:var(--accent3);color:var(--bg0)}
+.vslider{width:66px;height:4px;-webkit-appearance:none;appearance:none;background:var(--bg4);border-radius:2px;outline:none;cursor:pointer}
+.vslider::-webkit-slider-thumb{-webkit-appearance:none;width:11px;height:11px;border-radius:50%;cursor:pointer}
+.t1 .vslider::-webkit-slider-thumb{background:var(--accent)}
+.t2 .vslider::-webkit-slider-thumb{background:var(--accent3)}
+.t3 .vslider::-webkit-slider-thumb{background:var(--accent2)}
+.panslider{width:66px;height:3px;-webkit-appearance:none;appearance:none;background:var(--bg4);border-radius:2px;outline:none;cursor:pointer}
+.panslider::-webkit-slider-thumb{-webkit-appearance:none;width:9px;height:9px;border-radius:50%;background:var(--text3);cursor:pointer}
+
+/* ── TIMELINE ── */
+#tl-area{flex:1;display:flex;flex-direction:column;overflow:hidden;position:relative}
+
+/* Yeni ruler: tc-wrap'in üstünde, scroll ile senkron */
+#ruler-wrap{height:36px;background:#0a0a14;border-bottom:2px solid rgba(0,229,255,0.25);flex-shrink:0;position:relative;overflow:hidden;user-select:none;-webkit-user-select:none}
+#ruler-canvas{position:absolute;top:0;left:0;height:100%;pointer-events:none}
+
+/* Ruler üzerinde gezinen anlık zaman etiketi */
+#ruler-cursor-label{
+  position:absolute;
+  top:50%;transform:translate(-50%,-50%);
+  background:#ffd60a;color:#0a0a14;
+  font:bold 10px 'Space Mono';
+  padding:3px 8px;border-radius:4px;
+  pointer-events:none;display:none;z-index:40;
+  white-space:nowrap;
+  box-shadow:0 2px 10px rgba(255,214,10,0.6);
+  letter-spacing:0.5px;
+}
+/* Ruler playhead iğnesi */
+#ruler-ph{position:absolute;top:0;width:2px;background:var(--yellow);box-shadow:0 0 8px var(--yellow),0 0 2px #fff;z-index:20;pointer-events:none;height:100%}
+#ruler-ph::before{content:'';position:absolute;top:0;left:-5px;width:12px;height:9px;background:var(--yellow);clip-path:polygon(0 0,100% 0,50% 100%)}
+
+/* Sürükleme anında cursor */
+#ruler-wrap.dragging{cursor:grabbing!important}
+#ruler-wrap{cursor:grab}
+
+#tc-wrap{flex:1;overflow-x:auto;overflow-y:auto;position:relative}
+#tl-inner{position:relative;min-height:100%}
+#tc-wrap::-webkit-scrollbar{height:8px}
+#tc-wrap::-webkit-scrollbar-track{background:var(--bg2)}
+#tc-wrap::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:4px;border:1px solid var(--border)}
+#tc-wrap::-webkit-scrollbar-thumb:hover{background:var(--accent3)}
+.track-row{height:58px;border-bottom:1px solid var(--border);position:relative;overflow:hidden;flex-shrink:0;min-width:100%}
+.track-row.t1{background:linear-gradient(180deg,#00e5ff06 0%,var(--bg1) 100%)}
+.track-row.t2{background:linear-gradient(180deg,#a259ff06 0%,var(--bg1) 100%)}
+.track-row.t3{background:linear-gradient(180deg,#ff2d7806 0%,var(--bg1) 100%)}
+.tcanvas{position:absolute;top:0;left:0;height:100%;cursor:crosshair}
+.add-ov{position:absolute;right:6px;top:50%;transform:translateY(-50%);display:flex;gap:3px;z-index:10}
+.add-btn{padding:4px 9px;border-radius:4px;font-size:10px;font-weight:700;letter-spacing:.3px;font-family:var(--font);cursor:pointer;border:1px solid;transition:all .15s}
+.t1 .add-btn{border-color:var(--accent);color:var(--accent);background:var(--track1)}
+.t2 .add-btn{border-color:var(--accent3);color:var(--accent3);background:var(--track2)}
+.t3 .add-btn{border-color:var(--accent2);color:var(--accent2);background:var(--track3)}
+.add-btn:hover{filter:brightness(1.4)}
+input[type=file]{display:none}
+
+/* ── EDIT TOOLBAR ── */
+#edit-bar{height:36px;background:var(--bg2);border-top:1px solid var(--border);display:flex;align-items:center;padding:0 8px;gap:4px;flex-shrink:0;overflow-x:auto}
+#edit-bar::-webkit-scrollbar{height:0}
+.edit-lbl{font-size:8px;font-weight:700;letter-spacing:1px;color:var(--text3);font-family:var(--mono);margin-right:4px;white-space:nowrap;flex-shrink:0}
+.ebtn{height:24px;padding:0 9px;border-radius:4px;background:var(--bg3);border:1px solid var(--border);color:var(--text2);font-family:var(--font);font-size:10px;font-weight:600;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:all .12s;display:flex;align-items:center;gap:3px}
+.ebtn:hover{background:var(--bg4);color:var(--text)}
+.ebtn:active{transform:scale(.93)}
+.ebtn.split{border-color:var(--yellow);color:var(--yellow)}
+.ebtn.split:hover{background:rgba(255,214,10,.1)}
+.ebtn.trim{border-color:var(--accent);color:var(--accent)}
+.ebtn.trim:hover{background:rgba(0,229,255,.1)}
+.ebtn.fade{border-color:var(--accent3);color:var(--accent3)}
+.ebtn.fade:hover{background:rgba(162,89,255,.1)}
+.ebtn.norm{border-color:var(--orange);color:var(--orange)}
+.ebtn.norm:hover{background:rgba(255,149,0,.1)}
+.ebtn.dup{border-color:var(--green);color:var(--green)}
+.ebtn.dup:hover{background:rgba(0,255,136,.1)}
+.ebtn.del{border-color:var(--accent2);color:var(--accent2)}
+.ebtn.del:hover{background:rgba(255,45,120,.1)}
+.edit-sep{width:1px;height:20px;background:var(--border);flex-shrink:0;margin:0 2px}
+
+.ebtn.undo{border-color:var(--text2);color:var(--text2)}
+.ebtn.undo:hover{background:var(--bg4);color:var(--text)}
+.ebtn.undo.disabled{opacity:.3;cursor:not-allowed}
+/* Timeline scrollbar row above edit-bar */
+#tl-scrollbar{height:14px;background:var(--bg2);border-top:1px solid var(--border);display:flex;align-items:center;padding:0 4px;flex-shrink:0}
+#tl-scroll-track{flex:1;height:8px;background:var(--bg3);border-radius:4px;position:relative;cursor:pointer;overflow:hidden}
+#tl-scroll-thumb{position:absolute;top:0;height:8px;background:var(--accent3);border-radius:4px;min-width:30px;cursor:grab;transition:background .1s}
+#tl-scroll-thumb:hover{background:var(--accent)}
+#tl-scroll-thumb:active{cursor:grabbing}
+/* Video/image track */
+.track-row.t2-media{background:linear-gradient(180deg,#a259ff08 0%,var(--bg1) 100%)}
+.media-thumb{position:absolute;top:4px;height:calc(100% - 8px);border-radius:4px;overflow:hidden;background:var(--bg3);border:1px solid var(--accent3);display:flex;align-items:center;justify-content:center;pointer-events:none}
+.media-thumb img,.media-thumb video{height:100%;width:100%;object-fit:cover}
+.media-thumb-lbl{position:absolute;bottom:3px;left:4px;font-size:8px;color:rgba(255,255,255,.7);font-family:var(--mono);pointer-events:none;text-shadow:0 1px 3px #000}
+/* Trim handle tooltip */
+#trim-tooltip{position:fixed;background:#ffd60a;color:#0a0a14;font:bold 10px 'Space Mono';padding:3px 8px;border-radius:4px;pointer-events:none;display:none;z-index:600;white-space:nowrap;box-shadow:0 2px 10px rgba(255,214,10,0.6);transform:translate(-50%,-110%);}
+#playhead{position:absolute;top:0;width:2px;background:var(--yellow);box-shadow:0 0 5px var(--yellow);z-index:50;pointer-events:none}
+#playhead::before{content:'';position:absolute;top:-4px;left:-5px;width:12px;height:8px;background:var(--yellow);clip-path:polygon(0 0,100% 0,50% 100%)}
+
+/* Clip context menu */
+#clip-menu{display:none;position:fixed;background:var(--bg2);border:1px solid var(--border2);border-radius:8px;z-index:500;min-width:140px;box-shadow:0 8px 24px rgba(0,0,0,.6);overflow:hidden}
+.cmenu-item{padding:9px 14px;font-size:11px;font-weight:600;cursor:pointer;color:var(--text);transition:background .1s;display:flex;align-items:center;gap:7px}
+.cmenu-item:hover{background:var(--bg3);color:var(--accent)}
+.cmenu-item.danger{color:var(--accent2)}
+.cmenu-item.danger:hover{background:rgba(255,45,120,.1)}
+.cmenu-sep{height:1px;background:var(--border);margin:3px 0}
+
+/* ── STATUS BAR ── */
+#sbar{height:24px;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 10px;gap:10px;font-size:9px;color:var(--text2);font-family:var(--mono);flex-shrink:0}
+.si{display:flex;align-items:center;gap:3px}
+.sdot{width:5px;height:5px;border-radius:50%;background:var(--text3)}
+.sdot.on{background:var(--green);box-shadow:0 0 4px var(--green)}
+.sdot.rec{background:var(--red);box-shadow:0 0 4px var(--red);animation:blink 1s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+#lat-val{color:var(--accent)}
+.snap-tog{font-size:9px;font-weight:700;color:var(--text2);font-family:var(--mono);background:var(--bg3);border:1px solid var(--border);padding:2px 5px;border-radius:3px;cursor:pointer}
+.snap-tog.on{border-color:var(--accent3);color:var(--accent3)}
+
+/* ── CONTROLS ── */
+#controls{height:58px;background:var(--bg1);border-top:1px solid var(--border);display:flex;align-items:center;padding:0 8px;gap:6px;flex-shrink:0}
+.cbtn{height:42px;border-radius:7px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-family:var(--font);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0}
+.cbtn:active{transform:scale(.92)}
+.cbtn.play{width:52px;border-color:var(--green);color:var(--green)}
+.cbtn.play.on{background:var(--green);color:var(--bg0)}
+.cbtn.pause{width:42px;border-color:var(--yellow);color:var(--yellow)}
+.cbtn.stop{width:42px}
+.cbtn.rec{width:62px;border-color:var(--red);color:var(--red);font-size:12px;font-weight:700;letter-spacing:1px;gap:4px}
+.cbtn.rec.on{background:var(--red);color:#fff}
+.rec-dot{width:9px;height:9px;border-radius:50%;background:currentColor}
+.cbtn.loop{width:42px;color:var(--accent3);border-color:rgba(162,89,255,.3);font-size:15px}
+.cbtn.loop.on{background:var(--accent3);color:var(--bg0)}
+.divider{width:1px;height:36px;background:var(--border);flex-shrink:0}
+.zoom-c{display:flex;flex-direction:column;gap:3px;align-items:center}
+.zoom-lbl{font-size:8px;color:var(--text2);font-family:var(--mono)}
+.zoom-btns{display:flex;gap:2px}
+.zbtn{width:26px;height:22px;background:var(--bg3);border:1px solid var(--border);color:var(--text2);font-size:13px;border-radius:3px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.zbtn:hover{background:var(--bg4);color:var(--text)}
+#vu-meter{display:flex;flex-direction:column;gap:2px;justify-content:center;height:42px;flex-shrink:0}
+.vu-wrap{height:4px;background:var(--bg3);border-radius:2px;width:38px;overflow:hidden}
+.vu-bar{height:100%;width:0%;border-radius:2px;transition:width .04s;background:linear-gradient(90deg,var(--green),var(--yellow),var(--red))}
+.mon-c{display:flex;flex-direction:column;gap:3px;margin-left:auto}
+.mon-row{display:flex;align-items:center;gap:4px;font-size:9px;color:var(--text2);font-weight:600}
+.tog{width:26px;height:14px;border-radius:7px;background:var(--bg4);border:1px solid var(--border);position:relative;cursor:pointer;transition:background .2s;flex-shrink:0}
+.tog.on{background:var(--accent)}
+.tog::after{content:'';width:10px;height:10px;border-radius:50%;background:#fff;position:absolute;top:1px;left:1px;transition:left .2s}
+.tog.on::after{left:13px}
+
+
+/* ── PANELS (shared) ── */
+.panel-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:300;align-items:center;justify-content:center}
+.panel-overlay.vis{display:flex}
+.pbox{background:var(--bg2);border:1px solid var(--border2);border-radius:12px;padding:18px;width:320px;max-width:94vw;max-height:88vh;overflow-y:auto}
+.pbox.wide{width:400px}
+.pbox-title{font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between}
+.pclose{width:22px;height:22px;background:var(--bg3);border:1px solid var(--border);color:var(--text2);border-radius:4px;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.prow{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;gap:10px}
+.plabel{font-size:10px;color:var(--text2);font-weight:600;letter-spacing:.3px}
+.pselect{background:var(--bg3);border:1px solid var(--border);color:var(--text);font-family:var(--font);font-size:11px;padding:5px 7px;border-radius:5px;outline:none;flex:1}
+.pbtns{display:flex;gap:7px;margin-top:14px}
+.pbtn{flex:1;padding:9px;border-radius:6px;font-family:var(--font);font-size:11px;font-weight:700;letter-spacing:.8px;cursor:pointer;border:1px solid var(--border);background:var(--bg3);color:var(--text);transition:all .15s}
+.pbtn:hover{background:var(--bg4)}
+.pbtn.pri{border-color:var(--green);color:var(--green)}
+.pbtn.pri:hover{background:var(--green);color:var(--bg0)}
+.pbtn.red{border-color:var(--accent2);color:var(--accent2)}
+
+/* ── EQ PANEL ── */
+#eq-panel .pbox-title{color:var(--accent3)}
+.eq-bands{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:12px 0}
+.eq-band{display:flex;flex-direction:column;align-items:center;gap:5px}
+.eq-band-lbl{font-size:8px;color:var(--text2);font-family:var(--mono)}
+.eq-band-val{font-size:9px;color:var(--accent3);font-family:var(--mono);min-width:28px;text-align:center}
+.eq-fader{writing-mode:vertical-rl;-webkit-appearance:none;appearance:none;width:4px;height:80px;background:var(--bg4);border-radius:2px;outline:none;cursor:pointer;transform:rotate(180deg)}
+.eq-fader::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:6px;border-radius:3px;background:var(--accent3);cursor:pointer}
+.eq-presets{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin:10px 0}
+.eq-preset-btn{padding:6px 4px;background:var(--bg3);border:1px solid var(--border);border-radius:5px;font-family:var(--font);font-size:9px;font-weight:600;color:var(--text2);cursor:pointer;text-align:center;transition:all .12s}
+.eq-preset-btn:hover{border-color:var(--accent3);color:var(--accent3)}
+.eq-preset-btn.on{border-color:var(--accent3);background:rgba(162,89,255,.15);color:var(--accent3)}
+.eq-save-row{display:flex;gap:6px;align-items:center;margin-top:8px}
+.eq-preset-input{flex:1;background:var(--bg3);border:1px solid var(--border);color:var(--text);font-family:var(--mono);font-size:10px;padding:5px 7px;border-radius:4px;outline:none}
+.eq-preset-input:focus{border-color:var(--accent3)}
+
+/* ── MIC SETTINGS PANEL ── */
+#mic-panel .pbox-title{color:var(--accent2)}
+.mic-section{margin-bottom:14px}
+.mic-sec-title{font-size:9px;font-weight:700;letter-spacing:1px;color:var(--text2);text-transform:uppercase;margin-bottom:8px;border-bottom:1px solid var(--border);padding-bottom:4px}
+.mic-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.mic-label{font-size:10px;color:var(--text2);font-weight:600;width:72px;flex-shrink:0}
+.mic-slider{flex:1;height:4px;-webkit-appearance:none;appearance:none;background:var(--bg4);border-radius:2px;outline:none;cursor:pointer}
+.mic-slider::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:var(--accent2);cursor:pointer}
+.mic-val{font-size:9px;color:var(--accent2);font-family:var(--mono);min-width:32px;text-align:right}
+.preset-list{display:flex;flex-direction:column;gap:5px;margin:8px 0}
+.preset-item{display:flex;align-items:center;gap:6px;padding:7px 10px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;cursor:pointer;transition:all .12s}
+.preset-item:hover{border-color:var(--accent2)}
+.preset-item.on{border-color:var(--accent2);background:rgba(255,45,120,.1)}
+.preset-item-name{flex:1;font-size:11px;font-weight:600}
+.preset-item-del{width:18px;height:18px;display:flex;align-items:center;justify-content:center;background:var(--bg4);border-radius:3px;font-size:10px;color:var(--text3);cursor:pointer}
+.preset-item-del:hover{color:var(--accent2)}
+.preset-save-row{display:flex;gap:6px;margin-top:8px}
+.psinput{flex:1;background:var(--bg3);border:1px solid var(--border);color:var(--text);font-family:var(--mono);font-size:10px;padding:5px 7px;border-radius:4px;outline:none}
+.psinput:focus{border-color:var(--accent2)}
+
+/* ── FX PANEL ── */
+#fx-panel{bottom:0;left:0;right:0;position:fixed;display:none;background:var(--bg1);border-top:2px solid var(--border2);z-index:200;max-height:48vh;overflow-y:auto;padding:12px}
+#fx-panel.vis{display:block}
+.fx-title{font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--accent);text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between}
+.fx-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(95px,1fr));gap:5px}
+.fx-item{background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:7px;cursor:pointer;transition:all .12s}
+.fx-item:hover{background:var(--bg4)}
+.fx-item.on{border-color:var(--accent2);background:rgba(255,45,120,.08)}
+.fx-name{font-size:9px;font-weight:700;margin-bottom:4px;color:var(--text)}
+.fx-item.on .fx-name{color:var(--accent2)}
+.fx-knob{width:100%;height:3px;-webkit-appearance:none;appearance:none;background:var(--bg4);border-radius:2px;outline:none;cursor:pointer}
+.fx-knob::-webkit-slider-thumb{-webkit-appearance:none;width:10px;height:10px;border-radius:50%;background:var(--accent2);cursor:pointer}
+
+/* ── AI PANEL ── */
+.ai-box .pbox-title{color:var(--accent3)}
+.ai-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+.ai-btn{padding:10px 8px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;cursor:pointer;font-family:var(--font);font-size:10px;font-weight:600;color:var(--text);letter-spacing:.2px;text-align:left;transition:all .12s}
+.ai-btn:hover{border-color:var(--accent3);color:var(--accent3)}
+.ai-btn.proc{border-color:var(--green);color:var(--green);animation:blink .8s infinite}
+.ai-sub{opacity:.5;font-size:8px;display:block;margin-top:2px}
+
+/* ── TOAST ── */
+#toast{position:fixed;bottom:82px;left:50%;transform:translateX(-50%) translateY(16px);background:var(--bg3);border:1px solid var(--border2);color:var(--accent);font-family:var(--mono);font-size:10px;padding:7px 14px;border-radius:18px;opacity:0;transition:all .25s;z-index:600;white-space:nowrap;pointer-events:none}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ── LANDSCAPE HINT ── */
+#land-hint{display:none}
+.hint-icon{font-size:44px}
+/* ── FULLSCREEN / CLOSE BUTON ── */
+.tbtn.fs-btn{border-color:var(--accent3);color:var(--accent3);font-size:15px;padding:4px 10px;min-width:34px}
+.tbtn.fs-btn:hover{background:rgba(162,89,255,.15)}
+.tbtn.prj-btn{border-color:var(--accent);color:var(--accent)}
+.tbtn.prj-btn:hover{background:rgba(0,229,255,.1)}
+
+::-webkit-scrollbar{width:3px;height:3px}
+::-webkit-scrollbar-track{background:var(--bg0)}
+::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:2px}
+</style>
+</head>
+<body>
+
+<!-- Landscape hint -->
+<div id="land-hint">
+  <div class="hint-icon">📱</div>
+  <div>Lütfen telefonu <strong>yatay</strong> çevirin</div>
+  <div style="font-size:10px;opacity:.5">KaraStudio yatay modda çalışır</div>
+</div>
+
+<!-- TOPBAR -->
+<div id="topbar">
+  <div class="logo">TUFAN'S<span>STUDİO</span></div>
+  <div class="proj-name" id="proj-name" onclick="renamePrj()">Yeni Proje</div>
+  <div class="bpm-d" id="bpm-d" onclick="editBPM()" title="BPM">120 BPM</div>
+  <div id="time-d">0:00.000</div>
+  <button class="tbtn" onclick="openFX()">FX</button>
+  <button class="tbtn" onclick="openPanel('ai-panel')">AI</button>
+  <button class="tbtn" onclick="openPanel('mic-panel')">🎙 MIC</button>
+  <button class="tbtn prj-btn" onclick="openProjectPanel()">📂 Aç</button>
+  <button class="tbtn grn" onclick="saveProject()">💾</button>
+  <button class="tbtn acc" onclick="openPanel('exp-panel')">EXPORT</button>
+  <button class="tbtn fs-btn" id="btn-fs" onclick="toggleFullscreen()" title="Tam Ekran">⛶</button>
+</div>
+
+<!-- MAIN -->
+<div id="main">
+
+  <!-- MIXER SIDEBAR -->
+  <div id="mixer">
+    <div class="mix-hdr">MIX</div>
+    <div id="mixer-body">
+
+    <div class="tctrl t1" id="mctrl0">
+      <div class="mini-btns">
+        <div class="mbtn mute" id="m0" onclick="toggleMute(0)">M</div>
+        <div class="mbtn solo" id="s0" onclick="toggleSolo(0)">S</div>
+        <div class="mbtn eq" id="eq0" onclick="openEQ(0)" title="EQ">EQ</div>
+      </div>
+      <input type="range" class="vslider" id="vol0" min="0" max="100" value="80" oninput="setVol(0,+this.value)">
+      <input type="range" class="panslider" id="pan0" min="-100" max="100" value="0" oninput="setPan(0,+this.value)">
+    </div>
+
+    <div class="tctrl t2" id="mctrl1">
+      <div class="mini-btns">
+        <div class="mbtn mute" id="m1" onclick="toggleMute(1)">M</div>
+        <div class="mbtn solo" id="s1" onclick="toggleSolo(1)">S</div>
+        <div class="mbtn eq" id="eq1" onclick="openEQ(1)" title="EQ">EQ</div>
+      </div>
+      <input type="range" class="vslider" id="vol1" min="0" max="100" value="80" oninput="setVol(1,+this.value)">
+      <input type="range" class="panslider" id="pan1" min="-100" max="100" value="0" oninput="setPan(1,+this.value)">
+    </div>
+
+    <div class="tctrl t3" id="mctrl2">
+      <div class="mini-btns">
+        <div class="mbtn mute" id="m2" onclick="toggleMute(2)">M</div>
+        <div class="mbtn solo" id="s2" onclick="toggleSolo(2)">S</div>
+        <div class="mbtn eq" id="eq2" onclick="openEQ(2)" title="EQ">EQ</div>
+      </div>
+      <input type="range" class="vslider" id="vol2" min="0" max="100" value="90" oninput="setVol(2,+this.value)">
+      <input type="range" class="panslider" id="pan2" min="-100" max="100" value="0" oninput="setPan(2,+this.value)">
+    </div>
+    </div><!-- /mixer-body -->
+  </div>
+
+  <!-- TIMELINE -->
+  <div id="tl-area">
+    <!-- YENİ RULER -->
+    <div id="ruler-wrap">
+      <canvas id="ruler-canvas"></canvas>
+      <div id="ruler-ph"></div>
+      <div id="ruler-cursor-label"></div>
+    </div>
+
+    <div id="tc-wrap" onscroll="onTCScroll(this)">
+      <div id="tl-inner">
+      <div id="playhead" style="height:270px"></div>
+      <!-- Track 0 -->
+      <div class="track-row t1" id="tr0">
+        <canvas class="tcanvas" id="tc0"></canvas>
+        <div class="add-ov t1">
+          <button class="add-btn" onclick="document.getElementById('fi0').click()">+ MP3</button>
+        </div>
+        <input type="file" id="fi0" accept="audio/*,.mp3,.wav,.m4a,.ogg" onchange="loadAudio(0,this)">
+      </div>
+      <!-- Track 1 — Video/Image -->
+      <div class="track-row t2" id="tr1">
+        <canvas class="tcanvas" id="tc1"></canvas>
+        <div class="add-ov t2">
+          <button class="add-btn" onclick="document.getElementById('fi1v').click()">🎬 Video</button>
+          <button class="add-btn" onclick="document.getElementById('fi1i').click()">🖼 Görsel</button>
+          <button class="add-btn" onclick="document.getElementById('fi1').click()">🎵 MP3</button>
+        </div>
+        <input type="file" id="fi1" accept="audio/*,.mp3,.wav,.m4a,.ogg" onchange="loadAudio(1,this)">
+        <input type="file" id="fi1v" accept="video/*,.mp4,.mov,.webm,.avi" onchange="loadVideo(1,this)">
+        <input type="file" id="fi1i" accept="image/*,.jpg,.jpeg,.png,.gif,.webp" onchange="loadImage(1,this)">
+      </div>
+      <!-- Track 2 — Vocal -->
+      <div class="track-row t3" id="tr2">
+        <canvas class="tcanvas" id="tc2"></canvas>
+        <div class="add-ov t3">
+          <button class="add-btn" onclick="startRecord()">⏺ MIC</button>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- TIMELINE SCROLLBAR -->
+    <div id="tl-scrollbar">
+      <div id="tl-scroll-track" onmousedown="tlScrollMouseDown(event)" ontouchstart="tlScrollTouchStart(event)">
+        <div id="tl-scroll-thumb"></div>
+      </div>
+    </div>
+
+    <!-- EDIT TOOLBAR -->
+    <div id="edit-bar">
+      <span class="edit-lbl">DÜZENLE:</span>
+      <button class="ebtn split" onclick="editBarAction('split')">✂ Böl</button>
+      <button class="ebtn trim" onclick="editBarAction('trimleft')">◀ Sol Trim</button>
+      <button class="ebtn trim" onclick="editBarAction('trimright')">▶ Sağ Trim</button>
+      <div class="edit-sep"></div>
+      <button class="ebtn fade" onclick="editBarAction('fadein')">↗ Fade In</button>
+      <button class="ebtn fade" onclick="editBarAction('fadeout')">↘ Fade Out</button>
+      <div class="edit-sep"></div>
+      <button class="ebtn norm" onclick="editBarAction('normalize')">📊 Normalize</button>
+      <button class="ebtn dup" onclick="editBarAction('duplicate')">⧉ Kopyala</button>
+      <div class="edit-sep"></div>
+      <button class="ebtn del" onclick="editBarAction('delete')">🗑 Sil</button>
+      <div class="edit-sep"></div>
+      <button class="ebtn undo" id="btn-undo" onclick="undo()" title="Geri Al (Ctrl+Z)">↩ Geri</button>
+      <button class="ebtn undo" id="btn-redo" onclick="redo()" title="İleri Al (Ctrl+Y)">↪ İleri</button>
+    </div>
+
+    <!-- STATUS BAR -->
+    <div id="sbar">
+      <div class="si"><div class="sdot" id="dot-audio"></div><span id="stat-audio">WebAudio</span></div>
+      <div class="si"><div class="sdot" id="dot-rec"></div><span id="stat-rec">Hazır</span></div>
+      <div class="si">⏱ <span id="lat-val">~12ms</span></div>
+      <div class="si" id="qual-disp" style="color:var(--accent3)">48kHz·32f</div>
+      <div style="margin-left:auto;display:flex;gap:6px">
+        <div class="snap-tog on" id="snap-btn" onclick="toggleSnap()">SNAP</div>
+      </div>
+    </div>
+
+    <!-- CONTROLS -->
+    <div id="controls">
+      <button class="cbtn stop" onclick="stopAll()">⬛</button>
+      <button class="cbtn play" id="btn-play" onclick="togglePlay()">▶</button>
+      <button class="cbtn pause" onclick="pauseAll()">⏸</button>
+      <div class="divider"></div>
+      <button class="cbtn rec" id="btn-rec" onclick="toggleRecord()"><div class="rec-dot"></div>REC</button>
+      <button class="cbtn loop" id="btn-loop" onclick="toggleLoop()">🔁</button>
+      <div class="divider"></div>
+      <div class="zoom-c">
+        <div class="zoom-lbl">ZOOM</div>
+        <div class="zoom-btns">
+          <div class="zbtn" onclick="zoom(-1)">-</div>
+          <div class="zbtn" onclick="zoom(1)">+</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div id="vu-meter">
+        <div class="vu-wrap"><div class="vu-bar" id="vu-l"></div></div>
+        <div class="vu-wrap"><div class="vu-bar" id="vu-r"></div></div>
+      </div>
+      <div class="mon-c">
+        <div class="mon-row">
+          <div class="tog on" id="tog-back" onclick="this.classList.toggle('on');updateMonitor()"></div>
+          <span>Backing</span>
+        </div>
+        <div class="mon-row">
+          <div class="tog" id="tog-mic" onclick="this.classList.toggle('on');updateMonitor()"></div>
+          <span>Mic Mon</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER BAR -->
+
+
+<!-- CLIP CONTEXT MENU -->
+<div id="clip-menu">
+  <div class="cmenu-item" onclick="clipAction('split')">✂️ Böl (Split)</div>
+  <div class="cmenu-item" onclick="clipAction('trimleft')">◀ Sol Trim</div>
+  <div class="cmenu-item" onclick="clipAction('trimright')">▶ Sağ Trim</div>
+  <div class="cmenu-item" onclick="clipAction('fadein')">↗ Fade In</div>
+  <div class="cmenu-item" onclick="clipAction('fadeout')">↘ Fade Out</div>
+  <div class="cmenu-item" onclick="clipAction('normalize')">📊 Normalize</div>
+  <div class="cmenu-item" onclick="clipAction('duplicate')">⧉ Kopyala</div>
+  <div class="cmenu-sep"></div>
+  <div class="cmenu-item danger" onclick="clipAction('delete')">🗑 Sil</div>
+</div>
+
+<!-- FX PANEL -->
+<div id="fx-panel">
+  <div class="fx-title">VOCAL FX <div class="pclose" onclick="closeFX()">✕</div></div>
+  <div class="fx-grid" id="fx-grid"></div>
+</div>
+
+<!-- EQ PANEL -->
+<div class="panel-overlay" id="eq-panel" onclick="panelBgClick(event,'eq-panel')">
+  <div class="pbox">
+    <div class="pbox-title" style="color:var(--accent3)">
+      <span>🎛 EQUALIZER — <span id="eq-track-name">Track 1</span></span>
+      <div class="pclose" onclick="closePanel('eq-panel')">✕</div>
+    </div>
+
+    <div class="eq-presets" id="eq-preset-btns"></div>
+
+    <div class="eq-bands">
+      <!-- 5 bands: 80Hz 250Hz 1kHz 4kHz 12kHz -->
+      <div class="eq-band">
+        <div class="eq-band-lbl">80Hz</div>
+        <input type="range" class="eq-fader" id="eq-80" min="-12" max="12" value="0" step=".5" oninput="eqChange(0,+this.value)">
+        <div class="eq-band-val" id="eqv-80">0dB</div>
+      </div>
+      <div class="eq-band">
+        <div class="eq-band-lbl">250Hz</div>
+        <input type="range" class="eq-fader" id="eq-250" min="-12" max="12" value="0" step=".5" oninput="eqChange(1,+this.value)">
+        <div class="eq-band-val" id="eqv-250">0dB</div>
+      </div>
+      <div class="eq-band">
+        <div class="eq-band-lbl">1kHz</div>
+        <input type="range" class="eq-fader" id="eq-1k" min="-12" max="12" value="0" step=".5" oninput="eqChange(2,+this.value)">
+        <div class="eq-band-val" id="eqv-1k">0dB</div>
+      </div>
+      <div class="eq-band">
+        <div class="eq-band-lbl">4kHz</div>
+        <input type="range" class="eq-fader" id="eq-4k" min="-12" max="12" value="0" step=".5" oninput="eqChange(3,+this.value)">
+        <div class="eq-band-val" id="eqv-4k">0dB</div>
+      </div>
+      <div class="eq-band">
+        <div class="eq-band-lbl">12kHz</div>
+        <input type="range" class="eq-fader" id="eq-12k" min="-12" max="12" value="0" step=".5" oninput="eqChange(4,+this.value)">
+        <div class="eq-band-val" id="eqv-12k">0dB</div>
+      </div>
+    </div>
+
+    <div class="eq-save-row">
+      <input class="eq-preset-input" id="eq-save-name" type="text" placeholder="Preset adı..." maxlength="24">
+      <button class="pbtn" style="flex:0;padding:5px 12px" onclick="saveEQPreset()">Kaydet</button>
+      <button class="pbtn" style="flex:0;padding:5px 10px;color:var(--text2)" onclick="resetEQ()">Sıfırla</button>
+    </div>
+
+    <div class="pbtns">
+      <button class="pbtn pri" onclick="applyEQ()">✓ Uygula</button>
+      <button class="pbtn" onclick="closePanel('eq-panel')">Kapat</button>
+    </div>
+  </div>
+</div>
+
+<!-- MIC SETTINGS PANEL -->
+<div class="panel-overlay" id="mic-panel" onclick="panelBgClick(event,'mic-panel')">
+  <div class="pbox">
+    <div class="pbox-title" style="color:var(--accent2)">
+      <span>🎙 MİKROFON AYARLARI</span>
+      <div class="pclose" onclick="closePanel('mic-panel')">✕</div>
+    </div>
+
+    <!-- Kayıt kalitesi -->
+    <div class="mic-section">
+      <div class="mic-sec-title">Kayıt Kalitesi</div>
+      <div class="mic-row">
+        <div class="mic-label">Örnekleme</div>
+        <select class="pselect" id="mic-sr" onchange="updateQualDisplay()">
+          <option value="44100">44.1 kHz (CD kalite)</option>
+          <option value="48000" selected>48 kHz (Profesyonel)</option>
+          <option value="96000">96 kHz (Hi-Res)</option>
+        </select>
+      </div>
+      <div class="mic-row">
+        <div class="mic-label">Bit Depth</div>
+        <select class="pselect" id="mic-bit">
+          <option value="16">16-bit</option>
+          <option value="24">24-bit</option>
+          <option value="32" selected>32-bit Float (Maksimum)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Gain / Giriş -->
+    <div class="mic-section">
+      <div class="mic-sec-title">Giriş Ayarları</div>
+      <div class="mic-row">
+        <div class="mic-label">Input Gain</div>
+        <input type="range" class="mic-slider" id="mic-gain" min="0" max="300" value="100" oninput="micParamChange()">
+        <div class="mic-val" id="micv-gain">100%</div>
+      </div>
+      <div class="mic-row">
+        <div class="mic-label">Noise Gate</div>
+        <input type="range" class="mic-slider" id="mic-gate" min="0" max="100" value="10" oninput="micParamChange()">
+        <div class="mic-val" id="micv-gate">10%</div>
+      </div>
+      <div class="mic-row">
+        <div class="mic-label">Compressor</div>
+        <input type="range" class="mic-slider" id="mic-comp" min="0" max="100" value="30" oninput="micParamChange()">
+        <div class="mic-val" id="micv-comp">30%</div>
+      </div>
+      <div class="mic-row">
+        <div class="mic-label">Monitor Gain</div>
+        <input type="range" class="mic-slider" id="mic-mon" min="0" max="100" value="70" oninput="micParamChange()">
+        <div class="mic-val" id="micv-mon">70%</div>
+      </div>
+    </div>
+
+    <!-- Mic EQ -->
+    <div class="mic-section">
+      <div class="mic-sec-title">Mikrofon EQ (Kayıt Öncesi)</div>
+      <div class="mic-row">
+        <div class="mic-label">Bass (80Hz)</div>
+        <input type="range" class="mic-slider" id="mic-eq-bass" min="-12" max="12" value="0" step=".5" oninput="micEQChange()">
+        <div class="mic-val" id="micv-bass">0dB</div>
+      </div>
+      <div class="mic-row">
+        <div class="mic-label">Mid (1kHz)</div>
+        <input type="range" class="mic-slider" id="mic-eq-mid" min="-12" max="12" value="0" step=".5" oninput="micEQChange()">
+        <div class="mic-val" id="micv-mid">0dB</div>
+      </div>
+      <div class="mic-row">
+        <div class="mic-label">Treble (8kHz)</div>
+        <input type="range" class="mic-slider" id="mic-eq-treble" min="-12" max="12" value="0" step=".5" oninput="micEQChange()">
+        <div class="mic-val" id="micv-treble">0dB</div>
+      </div>
+    </div>
+
+    <!-- Preset yönetimi -->
+    <div class="mic-section">
+      <div class="mic-sec-title">Ayar Önayarları</div>
+      <div class="preset-list" id="mic-preset-list"></div>
+      <div class="preset-save-row">
+        <input class="psinput" id="mic-preset-name" type="text" placeholder="Preset adı..." maxlength="24">
+        <button class="pbtn" style="flex:0;padding:5px 12px" onclick="saveMicPreset()">Kaydet</button>
+      </div>
+    </div>
+
+    <div class="pbtns">
+      <button class="pbtn pri" onclick="applyMicSettings()">✓ Uygula</button>
+      <button class="pbtn" onclick="closePanel('mic-panel')">Kapat</button>
+    </div>
+  </div>
+</div>
+
+<!-- EXPORT PANEL -->
+<div class="panel-overlay" id="exp-panel" onclick="panelBgClick(event,'exp-panel')">
+  <div class="pbox">
+    <div class="pbox-title" style="color:var(--green)">
+      <span>📤 EXPORT</span>
+      <div class="pclose" onclick="closePanel('exp-panel')">✕</div>
+    </div>
+    <div class="prow"><div class="plabel">FORMAT</div>
+      <select class="pselect" id="exp-fmt" onchange="expFmtChange()">
+        <option value="wav">WAV (32-bit Float)</option>
+        <option value="mp3">MP3 (WAV olarak kaydedilir)</option>
+        <option value="mp4">MP4/WebM Video (Ses + Video)</option>
+      </select>
+    </div>
+    <div class="prow" id="exp-kbps-row"><div class="plabel">KALİTE (kbps)</div>
+      <select class="pselect" id="exp-kbps"><option value="128">128 kbps</option><option value="192" selected>192 kbps</option><option value="320">320 kbps</option></select>
+    </div>
+    <div class="prow" id="exp-res-row" style="display:none"><div class="plabel">VIDEO ÇÖZÜNÜRLÜK</div>
+      <select class="pselect" id="exp-res">
+        <option value="1280x720">720p (1280×720)</option>
+        <option value="1920x1080" selected>1080p (1920×1080)</option>
+      </select>
+    </div>
+    <div class="prow" id="exp-bg-row" style="display:none"><div class="plabel">VİDEO ARKA PLAN</div>
+      <select class="pselect" id="exp-bg">
+        <option value="#0a0a0f">Koyu Siyah</option>
+        <option value="#000000">Siyah</option>
+        <option value="#1a0a2e">Mor Koyu</option>
+      </select>
+    </div>
+    <div class="prow"><div class="plabel">MASTERING</div>
+      <select class="pselect" id="exp-preset">
+        <option>Karaoke Clean</option><option>Pop Vocal</option><option>Studio Bright</option>
+        <option>Warm Analog</option><option>Live Concert</option><option>Radio Master</option>
+      </select>
+    </div>
+    <div class="pbtns">
+      <button class="pbtn" onclick="closePanel('exp-panel')">İptal</button>
+      <button class="pbtn pri" onclick="doExport()">⬇ EXPORT</button>
+    </div>
+  </div>
+</div>
+
+<!-- EXPORT PROGRESS OVERLAY -->
+<div id="exp-progress-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:800;align-items:center;justify-content:center;flex-direction:column;gap:18px;">
+  <div style="font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:700;color:#00e5ff;letter-spacing:2px;" id="exp-prog-title">🎬 VIDEO EXPORT</div>
+  <div style="width:340px;max-width:90vw;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+      <span id="exp-prog-label" style="font-family:'Space Mono',monospace;font-size:11px;color:#9090a8;">Hazırlanıyor...</span>
+      <span id="exp-prog-pct" style="font-family:'Space Mono',monospace;font-size:11px;color:#ffd60a;font-weight:700;">0%</span>
+    </div>
+    <div style="height:10px;background:#22222f;border-radius:5px;overflow:hidden;border:1px solid rgba(0,229,255,0.2);">
+      <div id="exp-prog-bar" style="height:100%;width:0%;background:linear-gradient(90deg,#00e5ff,#a259ff);border-radius:5px;transition:width 0.2s ease;"></div>
+    </div>
+    <div id="exp-prog-sub" style="font-family:'Space Mono',monospace;font-size:9px;color:#505068;margin-top:6px;text-align:center;">—</div>
+  </div>
+  <button onclick="cancelExport()" style="margin-top:4px;padding:7px 22px;background:#22222f;border:1px solid rgba(255,45,120,0.4);color:#ff2d78;font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;border-radius:5px;cursor:pointer;letter-spacing:1px;">✕ İPTAL</button>
+</div>
+
+<!-- PROJE AÇ PANEL -->
+<div class="panel-overlay" id="proj-panel" onclick="panelBgClick(event,'proj-panel')">
+  <div class="pbox">
+    <div class="pbox-title" style="color:var(--accent)">
+      <span>📂 PROJE AÇ</span>
+      <div class="pclose" onclick="closePanel('proj-panel')">✕</div>
+    </div>
+    <div style="font-size:9px;color:var(--text2);margin-bottom:10px;font-family:var(--mono)">IndexedDB'deki kayıtlı projeler:</div>
+    <div class="preset-list" id="proj-list" style="max-height:50vh;overflow-y:auto"></div>
+    <div class="pbtns">
+      <button class="pbtn" onclick="closePanel('proj-panel')">Kapat</button>
+    </div>
+  </div>
+</div>
+
+<!-- AI PANEL -->
+<div class="panel-overlay" id="ai-panel" onclick="panelBgClick(event,'ai-panel')">
+  <div class="pbox">
+    <div class="pbox-title" style="color:var(--accent3)">
+      <span>🤖 AI ARAÇLARI</span>
+      <div class="pclose" onclick="closePanel('ai-panel')">✕</div>
+    </div>
+    <div class="ai-grid">
+      <button class="ai-btn" onclick="aiTool('clean',this)">🧹 Vocal Clean<span class="ai-sub">Gürültü temizle</span></button>
+      <button class="ai-btn" onclick="aiTool('mix',this)">🎚 Auto Mix<span class="ai-sub">Otomatik denge</span></button>
+      <button class="ai-btn" onclick="aiTool('pitch',this)">🎵 Pitch Fix<span class="ai-sub">Ton düzeltme</span></button>
+      <button class="ai-btn" onclick="aiTool('harmony',this)">🎶 Harmony Gen<span class="ai-sub">Armonik üret</span></button>
+      <button class="ai-btn" onclick="aiTool('double',this)">✌ Vocal Double<span class="ai-sub">Çift vokal</span></button>
+      <button class="ai-btn" onclick="aiTool('denoise',this)">🔇 Denoise<span class="ai-sub">Arka plan sil</span></button>
+    </div>
+    <button class="pbtn" style="width:100%;margin-top:12px" onclick="closePanel('ai-panel')">Kapat</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+<!-- TRIM TOOLTIP -->
+<div id="trim-tooltip"></div>
+
+<script>
+// ═══════════════════════════════════════════════
+//  AUDIO ENGINE
+// ═══════════════════════════════════════════════
+let audioCtx = null, masterGain = null, analyser = null;
+let micStream = null, micSource = null, monitorGain = null;
+let micPreGain = null, micCompressor = null;
+let micEQNodes = []; // [bass, mid, treble] BiquadFilters live on mic path
+let mediaRecorder = null, recChunks = [];
+let isPlaying = false, isRecording = false, isLooping = false, snapEnabled = true;
+let playheadPos = 0, playStartTime = 0, playheadStart = 0;
+let zoomLevel = 1, animFrame = null;
+let driftInterval = null;
+
+const BASE_PPS = 80;
+const SAMPLE_RATE = 48000; // En yüksek kalite: 48kHz
+
+let tracks = [
+  { name:'MP3 Track 1', color:'#00e5ff', clips:[], volume:.8, pan:0, muted:false, solo:false, gain:null, panner:null, eq:null, eqVals:[0,0,0,0,0] },
+  { name:'MP3 Track 2', color:'#a259ff', clips:[], volume:.8, pan:0, muted:false, solo:false, gain:null, panner:null, eq:null, eqVals:[0,0,0,0,0] },
+  { name:'Vocal Track', color:'#ff2d78', clips:[], volume:.9, pan:0, muted:false, solo:false, gain:null, panner:null, eq:null, eqVals:[0,0,0,0,0] }
+];
+
+let effects = {
+  autotune:  {on:false,level:50,label:'AutoTune'},
+  reverb:    {on:false,level:30,label:'Reverb'},
+  delay:     {on:false,level:40,label:'Delay/Echo'},
+  compressor:{on:false,level:60,label:'Compressor'},
+  eq:        {on:false,level:50,label:'EQ'},
+  noiseGate: {on:false,level:40,label:'Noise Gate'},
+  deEsser:   {on:false,level:35,label:'De-Esser'},
+  limiter:   {on:true, level:80,label:'Limiter'},
+  chorus:    {on:false,level:30,label:'Chorus'},
+  pitchShift:{on:false,level:50,label:'Pitch Shift'}
+};
+
+// Mic settings object
+let micSettings = {
+  sampleRate: 48000, bitDepth: 32,
+  gain: 100, noiseGate: 10, compressor: 30, monitorGain: 70,
+  eqBass: 0, eqMid: 0, eqTreble: 0
+};
+
+let micPresets = []; // [{name, settings}]
+let eqPresets  = []; // [{name, vals:[5 floats]}]
+let currentEQTrack = 0;
+
+// Clip drag / selection
+let dragState = null;
+let selectedClip = null; // {ti, clip}
+let contextClip = null;
+
+function pxPerSec() { return BASE_PPS * zoomLevel; }
+
+// ── Init Audio ──
+function initAudio() {
+  if (audioCtx) {
+    // Mobil'de kullanıcı etkileşimi sonrası suspended'dan çık
+    if (audioCtx.state === 'suspended') audioCtx.resume().catch(()=>{});
+    return;
+  }
+  const sr = parseInt(document.getElementById('mic-sr')?.value || '48000');
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: sr });
+  masterGain = audioCtx.createGain();
+  analyser = audioCtx.createAnalyser(); analyser.fftSize = 256;
+  masterGain.connect(analyser); analyser.connect(audioCtx.destination);
+
+  tracks.forEach((t, i) => {
+    t.gain = audioCtx.createGain(); t.gain.gain.value = t.volume;
+    t.panner = audioCtx.createStereoPanner(); t.panner.pan.value = t.pan;
+    t.eq = buildTrackEQ(t.eqVals);
+    t.gain.connect(t.panner); t.panner.connect(masterGain);
+  });
+
+  monitorGain = audioCtx.createGain(); monitorGain.gain.value = 0;
+  monitorGain.connect(audioCtx.destination);
+
+  document.getElementById('dot-audio').classList.add('on');
+  document.getElementById('stat-audio').textContent = audioCtx.sampleRate + 'Hz';
+  startVU();
+}
+
+function buildTrackEQ(vals) {
+  // Returns array of 5 BiquadFilterNodes connected in series (not yet in graph)
+  if (!audioCtx) return null;
+  const freqs = [80, 250, 1000, 4000, 12000];
+  const types = ['lowshelf','peaking','peaking','peaking','highshelf'];
+  return freqs.map((f, i) => {
+    const bq = audioCtx.createBiquadFilter();
+    bq.type = types[i]; bq.frequency.value = f;
+    bq.gain.value = vals[i] || 0; bq.Q.value = 1;
+    return bq;
+  });
+}
+
+function connectTrackEQ(t) {
+  if (!t.eq) return;
+  // chain: gain → pan → eq[0]→...→eq[4] → master
+  t.panner.disconnect();
+  let prev = t.panner;
+  t.eq.forEach(node => { prev.connect(node); prev = node; });
+  prev.connect(masterGain);
+}
+
+// ── FILE LOADING ──
+async function loadAudio(ti, input) {
+  initAudio();
+  const file = input.files[0]; if (!file) return;
+  input.value = '';
+  showToast('⏳ Yükleniyor: ' + file.name);
+  if (audioCtx.state === 'suspended') await audioCtx.resume();
+  const ab = await file.arrayBuffer();
+  let buf;
+  try { buf = await audioCtx.decodeAudioData(ab); }
+  catch(e) { showToast('❌ Okunamadı: ' + (e.message||'format?')); return; }
+
+  const clip = {
+    id: Date.now() + Math.random(),
+    buffer: buf, name: file.name.replace(/\.[^.]+$/,''),
+    startTime: 0, duration: buf.duration,
+    color: tracks[ti].color, source: null,
+    waveform: computeWaveform(buf),
+    fadeIn: 0, fadeOut: 0, gain: 1
+  };
+  const last = tracks[ti].clips[tracks[ti].clips.length-1];
+  if (last) clip.startTime = last.startTime + last.duration + 0.05;
+  tracks[ti].clips.push(clip);
+  drawTrack(ti);
+  showToast('✓ ' + clip.name + ' (' + buf.duration.toFixed(1) + 's)');
+}
+
+// ── WAVEFORM ──
+function computeWaveform(buf, samples=600) {
+  const ch = buf.getChannelData(0);
+  const step = Math.max(1, Math.floor(ch.length / samples));
+  const peaks = [];
+  for (let i=0;i<samples;i++) {
+    let mx=0;
+    for (let j=0;j<step;j++) { const v=Math.abs(ch[i*step+j]||0); if(v>mx)mx=v; }
+    peaks.push(mx);
+  }
+  return peaks;
+}
+
+// ── DRAW ──
+function drawTrack(ti) {
+  const canvas = document.getElementById('tc'+ti);
+  const row    = document.getElementById('tr'+ti);
+  const wrap   = document.getElementById('tc-wrap');
+  const inner  = document.getElementById('tl-inner');
+  const pps    = pxPerSec();
+
+  // Gerçek piksel genişliği: en uzun klibin bitişi veya görünür alan
+  const minW = wrap ? wrap.clientWidth : (row.clientWidth || 800);
+  const clipW = tracks[ti].clips.reduce((a,c) => Math.max(a, (c.startTime + c.duration) * pps), 0);
+  const totalW = Math.max(minW, clipW + 120);
+
+  // canvas.width = piksel çizim alanı (1:1, stretch YOK)
+  canvas.width  = totalW;
+  canvas.height = row.clientHeight || 90;
+  // CSS genişliği = piksel genişliği → oranı bozmaz
+  canvas.style.width  = totalW + 'px';
+  canvas.style.height = canvas.height + 'px';
+
+  // tl-inner genişliğini tüm track'lerin max genişliğine ayarla
+  if (inner) {
+    const allMax = [0,1,2].reduce((m,i2) => {
+      const c2 = document.getElementById('tc'+i2);
+      return c2 ? Math.max(m, parseInt(c2.style.width)||0) : m;
+    }, totalW);
+    inner.style.width = allMax + 'px';
+    // Track row'ları da aynı genişliğe getir
+    [0,1,2].forEach(i2 => {
+      const r2 = document.getElementById('tr'+i2);
+      if (r2) r2.style.width = allMax + 'px';
+    });
+  }
+
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Dikey ızgara çizgileri (saniye başına)
+  ctx.strokeStyle = 'rgba(255,255,255,0.03)'; ctx.lineWidth = 1;
+  for (let x = 0; x < canvas.width; x += pps) {
+    ctx.beginPath(); ctx.moveTo(Math.round(x), 0); ctx.lineTo(Math.round(x), canvas.height); ctx.stroke();
+  }
+
+  // Ruler ve scrollbar güncelle
+  if (typeof drawRuler === 'function') setTimeout(drawRuler, 0);
+
+  tracks[ti].clips.forEach(clip => {
+    const pps = pxPerSec();
+    const x = clip.startTime * pps, w = clip.duration * pps, h = canvas.height - 8;
+    const sel = selectedClip && selectedClip.clip === clip;
+
+    if (clip.isMedia) {
+      // ── Media clip (image / video) ──
+      const accent = '#a259ff';
+      ctx.fillStyle = sel ? '#a259ff44' : '#a259ff1a';
+      ctx.strokeStyle = sel ? accent : accent + '80';
+      ctx.lineWidth = sel ? 2 : 1;
+      ctx.beginPath(); ctx.roundRect(x+2,4,w-4,h,4); ctx.fill(); ctx.stroke();
+
+      // Thumbnail
+      if (clip.thumbImg && clip.thumbImg.complete && w > 16) {
+        ctx.save();
+        ctx.beginPath(); ctx.roundRect(x+2,4,w-4,h,4); ctx.clip();
+        ctx.globalAlpha = 0.55;
+        ctx.drawImage(clip.thumbImg, x+2, 4, w-4, h);
+        ctx.globalAlpha = 1;
+        ctx.restore();
+      }
+
+      // Label
+      const icon = clip.type === 'video' ? '🎬' : '🖼';
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 9px Rajdhani';
+      ctx.shadowColor = '#000'; ctx.shadowBlur = 4;
+      ctx.fillText(icon + ' ' + clip.name, x+6, 15);
+      ctx.shadowBlur = 0;
+
+      // Duration badge
+      const durTxt = clip.duration.toFixed(1) + 's';
+      ctx.font = '8px Space Mono';
+      ctx.fillStyle = 'rgba(255,255,255,0.6)';
+      ctx.fillText(durTxt, x+6, h);
+
+      // Trim handles (visible stripes on edges)
+      if (w > 20) {
+        const hw = Math.min(8, w * 0.12);
+        // Left handle
+        ctx.fillStyle = sel ? 'rgba(162,89,255,0.85)' : 'rgba(162,89,255,0.45)';
+        ctx.beginPath(); ctx.roundRect(x+2, 4, hw, h, [4,0,0,4]); ctx.fill();
+        // Right handle
+        ctx.beginPath(); ctx.roundRect(x+w-2-hw, 4, hw, h, [0,4,4,0]); ctx.fill();
+        // Grip lines
+        ctx.strokeStyle = 'rgba(255,255,255,0.6)'; ctx.lineWidth = 1.5;
+        const lx = x + 2 + hw/2;
+        const rx = x + w - 2 - hw/2;
+        [lx, rx].forEach(gx => {
+          [-3,0,3].forEach(dy => {
+            ctx.beginPath(); ctx.moveTo(gx-2, 4+h/2+dy); ctx.lineTo(gx+2, 4+h/2+dy); ctx.stroke();
+          });
+        });
+      }
+      return;
+    }
+
+    // ── Audio clip ──
+    ctx.fillStyle = tracks[ti].color + (sel?'38':'1e');
+    ctx.strokeStyle = sel ? tracks[ti].color : tracks[ti].color + '70';
+    ctx.lineWidth = sel ? 2 : 1;
+    ctx.beginPath(); ctx.roundRect(x+2,4,w-4,h,4); ctx.fill(); ctx.stroke();
+
+    // fade gradients
+    if (clip.fadeIn > 0) {
+      const fw = Math.min(clip.fadeIn*pps, w*0.4);
+      const g = ctx.createLinearGradient(x+2,0,x+2+fw,0);
+      g.addColorStop(0,'transparent'); g.addColorStop(1,tracks[ti].color+'22');
+      ctx.fillStyle=g; ctx.fillRect(x+2,4,fw,h);
+    }
+    if (clip.fadeOut > 0) {
+      const fw = Math.min(clip.fadeOut*pps, w*0.4);
+      const g = ctx.createLinearGradient(x+w-fw,0,x+w,0);
+      g.addColorStop(0,tracks[ti].color+'22'); g.addColorStop(1,'transparent');
+      ctx.fillStyle=g; ctx.fillRect(x+w-fw,4,fw,h);
+    }
+
+    ctx.fillStyle = tracks[ti].color;
+    ctx.font = '500 9px Rajdhani';
+    ctx.fillText(clip.name, x+6, 15);
+    drawWave(ctx, clip.waveform, x+2, 18, w-4, h-14, tracks[ti].color, clip.gain);
+
+    // Trim handles on audio clips
+    if (w > 20) {
+      const hw = Math.min(8, w * 0.1);
+      const hcolor = tracks[ti].color;
+      ctx.globalAlpha = sel ? 0.85 : 0.45;
+      ctx.fillStyle = hcolor;
+      ctx.beginPath(); ctx.roundRect(x+2, 4, hw, h, [4,0,0,4]); ctx.fill();
+      ctx.beginPath(); ctx.roundRect(x+w-2-hw, 4, hw, h, [0,4,4,0]); ctx.fill();
+      ctx.globalAlpha = 1;
+      ctx.strokeStyle = 'rgba(255,255,255,0.55)'; ctx.lineWidth = 1.5;
+      const lx = x + 2 + hw/2, rx = x + w - 2 - hw/2;
+      [lx, rx].forEach(gx => {
+        [-3,0,3].forEach(dy => {
+          ctx.beginPath(); ctx.moveTo(gx-2, 4+h/2+dy); ctx.lineTo(gx+2, 4+h/2+dy); ctx.stroke();
+        });
+      });
+    }
+  });
+}
+
+function drawWave(ctx, peaks, x, y, w, h, color, gainMult=1) {
+  if (!peaks||!peaks.length) return;
+  const cy=y+h/2, mid=h/2*Math.min(gainMult,1.5);
+  ctx.beginPath(); ctx.strokeStyle=color; ctx.lineWidth=1;
+  peaks.forEach((p,i) => {
+    const px=x+(i/peaks.length)*w;
+    ctx.moveTo(px,cy-p*mid*.9); ctx.lineTo(px,cy+p*mid*.9);
+  });
+  ctx.stroke();
+}
+
+// ── RULER (yeniden tasarlandı) ──
+let rulerScrollLeft = 0;  // ruler'ın şu anki scroll offseti
+
+function drawRuler() {
+  const rulerWrap = document.getElementById('ruler-wrap');
+  const canvas = document.getElementById('ruler-canvas');
+  const wrap = document.getElementById('tc-wrap');
+  if (!rulerWrap || !canvas) return;
+
+  const viewW = rulerWrap.clientWidth;
+  // Canvas sadece görünür alan kadar — sabit kalacak
+  canvas.width = viewW;
+  canvas.height = rulerWrap.clientHeight || 36;
+  const totalW = viewW;  // sadece görünür alana çiz
+
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, totalW, canvas.height);
+
+  const h = canvas.height;
+  const pps = pxPerSec();
+
+  // Arka plan
+  ctx.fillStyle = '#0a0a14';
+  ctx.fillRect(0, 0, totalW, h);
+
+  // Alt çizgi (accent rengi)
+  ctx.fillStyle = 'rgba(0,229,255,0.18)';
+  ctx.fillRect(0, h-2, totalW, 2);
+
+  ctx.font = 'bold 9px Space Mono';
+  ctx.lineWidth = 1;
+
+  // Kaç saniyede bir büyük işaret koyacağız?
+  // pps çok küçükse daha seyrek, büyükse daha sık
+  let step = 1;
+  if (pps < 20)  step = 10;
+  else if (pps < 40)  step = 5;
+  else if (pps < 80)  step = 2;
+  else if (pps < 160) step = 1;
+  else step = 0.5; // sub-second
+
+  const subStep = step / 4;  // ara çizgiler
+
+  // Görünür aralık için sekmeleri çiz
+  const startSec = Math.floor(rulerScrollLeft / pps / subStep) * subStep;
+  const endSec   = (rulerScrollLeft + totalW) / pps + step;
+
+  for (let s = startSec; s <= endSec; s += subStep) {
+    // Canvas sabit, scroll offsetini çıkar → ekrandaki piksel konumu
+    const x = Math.round(s * pps - rulerScrollLeft);
+    if (x < -2 || x > totalW + 2) continue;
+
+    const isMajor = Math.abs(s % step) < 0.001 || Math.abs(s % step - step) < 0.001;
+    const isMid   = !isMajor && (Math.abs(s % (step/2)) < 0.001 || Math.abs(s % (step/2) - step/2) < 0.001);
+
+    if (isMajor) {
+      ctx.strokeStyle = 'rgba(0,229,255,0.6)';
+      ctx.beginPath(); ctx.moveTo(x, h-16); ctx.lineTo(x, h); ctx.stroke();
+      const m = Math.floor(s / 60);
+      const sec = s % 60;
+      const label = step < 1
+        ? m + ':' + (sec < 10 ? '0' : '') + sec.toFixed(1)
+        : m + ':' + (sec < 10 ? '0' : '') + Math.round(sec);
+      ctx.fillStyle = '#c0c0d8';
+      ctx.fillText(label, x + 3, h - 18);
+    } else if (isMid) {
+      ctx.strokeStyle = 'rgba(255,255,255,0.22)';
+      ctx.beginPath(); ctx.moveTo(x, h-9); ctx.lineTo(x, h); ctx.stroke();
+    } else {
+      ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+      ctx.beginPath(); ctx.moveTo(x, h-5); ctx.lineTo(x, h); ctx.stroke();
+    }
+  }
+
+  // Canvas sabit kalır (left:0), sadece içi scroll'a göre çizildi
+  canvas.style.left = '0px';
+
+  // Playhead iğnesini güncelle
+  updateRulerPlayhead();
+}
+
+function updateRulerPlayhead() {
+  const ph = document.getElementById('ruler-ph');
+  if (!ph) return;
+  const pps = pxPerSec();
+  const x = playheadPos * pps - rulerScrollLeft;
+  ph.style.left = x + 'px';
+  ph.style.display = (x >= -2 && x <= (document.getElementById('ruler-wrap')?.clientWidth || 9999) + 2) ? '' : 'none';
+}
+
+function drawAll() { [0,1,2].forEach(i=>drawTrack(i)); drawRuler(); updateTLScrollbar(); }
+
+// ── PLAYBACK with drift correction ──
+function togglePlay() {
+  initAudio(); if(isPlaying){pauseAll();return;}
+  if(audioCtx.state==='suspended') audioCtx.resume();
+  isPlaying=true; playStartTime=audioCtx.currentTime; playheadStart=playheadPos;
+  document.getElementById('btn-play').classList.add('on');
+
+  tracks.forEach((t,ti) => {
+    t.clips.forEach(clip => {
+      if (clip.isMedia) return; // media clips have no audio buffer
+      const off = clip.startTime - playheadStart;
+      if (off + clip.duration < 0) return;
+      const src = audioCtx.createBufferSource();
+      src.buffer = clip.buffer;
+      // Apply per-clip gain
+      const cg = audioCtx.createGain(); cg.gain.value = clip.gain || 1;
+      src.connect(cg); cg.connect(t.gain);
+      clip.source = src; clip._cg = cg;
+      const delay = Math.max(0, off);
+      const bufOff = Math.max(0, -off);
+      src.start(audioCtx.currentTime + delay, bufOff);
+    });
+  });
+
+  animFrame = requestAnimationFrame(tickPlayhead);
+  // Drift correction: every 5s re-sync scheduled sources
+  driftInterval = setInterval(driftCorrect, 5000);
+}
+
+function driftCorrect() {
+  // Drift correction: compare audioCtx clock against expected position
+  if (!isPlaying) return;
+  const elapsed = audioCtx.currentTime - playStartTime;
+  const expected = playheadStart + elapsed;
+  const drift = Math.abs(playheadPos - expected);
+  if (drift > 0.05) { // >50ms drift detected
+    playheadPos = expected;
+    showToast('⚡ Drift düzeltme: ' + (drift*1000).toFixed(0) + 'ms');
+  }
+}
+
+function tickPlayhead() {
+  if (!isPlaying) return;
+  const elapsed = audioCtx.currentTime - playStartTime;
+  playheadPos = playheadStart + elapsed;
+  updatePlayheadUI();
+  updateTimeDisplay(playheadPos);
+  if (isLooping) {
+    const maxDur = maxDuration();
+    if (playheadPos >= maxDur && maxDur > 0) { stopAll(); togglePlay(); return; }
+  }
+  animFrame = requestAnimationFrame(tickPlayhead);
+}
+
+function maxDuration() {
+  let m=0; tracks.forEach(t=>t.clips.forEach(c=>{const e=c.startTime+c.duration;if(e>m)m=e;})); return m;
+}
+
+function pauseAll() {
+  if(!isPlaying) return; isPlaying=false;
+  clearInterval(driftInterval);
+  cancelAnimationFrame(animFrame);
+  const elapsed = audioCtx.currentTime - playStartTime;
+  playheadPos = playheadStart + elapsed;
+  stopAllSources();
+  document.getElementById('btn-play').classList.remove('on');
+}
+
+function stopAll() {
+  isPlaying=false; clearInterval(driftInterval); cancelAnimationFrame(animFrame);
+  stopAllSources();
+  playheadPos=0; updatePlayheadUI(); updateTimeDisplay(0);
+  document.getElementById('btn-play').classList.remove('on');
+}
+
+function stopAllSources() {
+  tracks.forEach(t => t.clips.forEach(clip => {
+    if (clip.isMedia) return;
+    try { if(clip.source){clip.source.stop();clip.source=null;} } catch(e){}
+    try { if(clip._cg){clip._cg.disconnect();clip._cg=null;} } catch(e){}
+  }));
+}
+
+// ── RECORDING ──
+// ── MİKROFON İZNİ YARDIM MODALI ──
+function showMicPermModal(reason) {
+  let existing = document.getElementById('mic-perm-modal');
+  if (existing) existing.remove();
+
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  const isAndroid = /Android/.test(navigator.userAgent);
+
+  let title = '🎙 MİKROFON İZNİ GEREKLİ';
+  let desc  = 'Bu tarayıcı mikrofon erişimine izin vermedi. Aşağıdaki adımları izleyin:';
+  let guide = '';
+  let retryBtn = true;
+
+  if (reason === 'fileprotocol') {
+    title = '⚠️ YEREL SUNUCU GEREKLİ';
+    desc  = 'Chrome ve diğer tarayıcılar, <b>file://</b> protokolüyle açılan sayfalarda mikrofona erişime izin vermez.';
+    guide = `
+      <div class="mperm-step">1️⃣ Terminali açın (Komut İstemi / PowerShell)</div>
+      <div class="mperm-step">2️⃣ Dosyanın bulunduğu klasöre gidin:<br><code style="color:#00e5ff;font-size:10px">cd "C:\\klasor\\yolu"</code></div>
+      <div class="mperm-step">3️⃣ Yerel sunucu başlatın:<br><code style="color:#00e5ff;font-size:10px">python -m http.server 8080</code></div>
+      <div class="mperm-step">4️⃣ Chrome'da açın:<br><code style="color:#00ff88;font-size:10px">http://localhost:8080/karaoke-daw-v13.html</code></div>`;
+    retryBtn = false;
+  } else if (reason === 'noapihttp') {
+    title = '🔒 HTTPS GEREKLİ';
+    desc  = 'Mikrofon API\'si yalnızca güvenli bağlantılarda (HTTPS veya localhost) çalışır.';
+    guide = `<div class="mperm-step">Dosyayı <b>localhost</b> üzerinden açın veya HTTPS destekleyen bir sunucuya yükleyin.</div>`;
+    retryBtn = false;
+  } else if (reason === 'denied') {
+    if (isIOS) {
+      guide = `
+        <div class="mperm-step">📱 <b>iOS Safari:</b> Ayarlar → Safari → Mikrofon → İzin Ver</div>
+        <div class="mperm-step">🔄 Sayfayı yeniledikten sonra tekrar deneyin</div>`;
+    } else if (isAndroid) {
+      guide = `
+        <div class="mperm-step">🔒 Adres çubuğundaki kilit ikonu → Site Ayarları → Mikrofon → İzin Ver</div>
+        <div class="mperm-step">🔄 Sayfayı yeniledikten sonra tekrar deneyin</div>`;
+    } else {
+      guide = `
+        <div class="mperm-step">🔒 Chrome adres çubuğunun solundaki kilit/uyarı ikonuna tıklayın</div>
+        <div class="mperm-step">🎙 <b>Mikrofon</b> satırını <b>İzin Ver</b> olarak değiştirin</div>
+        <div class="mperm-step">🔄 Sayfayı yenileyip tekrar deneyin</div>`;
+    }
+  } else if (reason === 'notfound') {
+    guide = `<div class="mperm-step">🎙 Cihazda mikrofon bulunamadı. Mikrofon bağlı mı kontrol edin.</div>`;
+  } else if (reason === 'busy') {
+    guide = `<div class="mperm-step">⚠️ Mikrofon başka bir uygulama tarafından kullanılıyor. Diğer uygulamaları kapatıp tekrar deneyin.</div>`;
+  } else {
+    guide = `<div class="mperm-step">⚠️ Mikrofon açılamadı. Tarayıcı ve cihaz mikrofon iznini kontrol edin.</div>`;
+  }
+
+  const modal = document.createElement('div');
+  modal.id = 'mic-perm-modal';
+  modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:900;display:flex;align-items:center;justify-content:center;padding:16px';
+  modal.innerHTML = `
+    <div style="background:#1a1a24;border:1px solid rgba(255,45,120,.4);border-radius:14px;padding:22px;max-width:360px;width:100%;font-family:'Rajdhani',sans-serif">
+      <div style="font-size:14px;font-weight:700;color:#ff2d78;letter-spacing:1px;margin-bottom:10px">${title}</div>
+      <div style="font-size:11px;color:#9090a8;margin-bottom:14px;line-height:1.5">${desc}</div>
+      <div style="display:flex;flex-direction:column;gap:7px;margin-bottom:16px">${guide}</div>
+      <div style="display:flex;gap:8px">
+        ${retryBtn ? `<button onclick="document.getElementById('mic-perm-modal').remove();startRecord();"
+          style="flex:1;padding:10px;background:rgba(255,45,120,.15);border:1px solid #ff2d78;color:#ff2d78;border-radius:7px;font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;cursor:pointer">
+          🔄 Tekrar Dene</button>` : ''}
+        <button onclick="document.getElementById('mic-perm-modal').remove()"
+          style="flex:1;padding:10px;background:#22222f;border:1px solid rgba(255,255,255,.1);color:#9090a8;border-radius:7px;font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;cursor:pointer">
+          Kapat</button>
+      </div>
+    </div>`;
+  document.body.appendChild(modal);
+}
+
+// Mikrofon izin modalı için stil
+(function() {
+  const s = document.createElement('style');
+  s.textContent = `.mperm-step{background:#22222f;border:1px solid rgba(255,255,255,.08);border-radius:7px;padding:9px 12px;font-size:11px;color:#e8e8f0;line-height:1.5}`;
+  document.head.appendChild(s);
+})();
+
+async function startRecord() {
+  initAudio();
+  if (isRecording) { stopRecord(); return; }
+
+  // ── file:// protokolü kontrolü (Chrome/Firefox getUserMedia'yı bloke eder) ──
+  if (location.protocol === 'file:') {
+    showMicPermModal('fileprotocol');
+    return;
+  }
+
+  // ── mediaDevices API var mı? ──
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+    showMicPermModal('noapihttp');
+    return;
+  }
+
+  // AudioContext'i kullanıcı etkileşiminden hemen sonra resume et (mobil zorunlu)
+  if (audioCtx && audioCtx.state === 'suspended') {
+    try { await audioCtx.resume(); } catch(e) {}
+  }
+
+  // ── İzin durumunu önceden sorgula (varsa) ──
+  if (navigator.permissions) {
+    try {
+      const ps = await navigator.permissions.query({ name: 'microphone' });
+      if (ps.state === 'denied') { showMicPermModal('denied'); return; }
+    } catch(e) { /* bazı tarayıcılar desteklemez, devam et */ }
+  }
+
+  const sr = parseInt(document.getElementById('mic-sr').value);
+
+  // Kademeli kısıtlama denemesi: katıdan gevşeğe
+  const constraintsList = [
+    {
+      audio: {
+        sampleRate:       { ideal: sr },
+        channelCount:     { ideal: 2 },
+        echoCancellation: false,
+        noiseSuppression: false,
+        autoGainControl:  false,
+        latency:          { ideal: 0.003 },
+      }
+    },
+    {
+      audio: {
+        sampleRate:       { ideal: sr },
+        channelCount:     { ideal: 1 },
+        echoCancellation: { ideal: false },
+        noiseSuppression: { ideal: false },
+        autoGainControl:  { ideal: false },
+      }
+    },
+    { audio: true }
+  ];
+
+  let lastError = null;
+  for (const constraints of constraintsList) {
+    try {
+      micStream = await navigator.mediaDevices.getUserMedia(constraints);
+      lastError = null;
+      break;
+    } catch(e) {
+      lastError = e;
+      if (e.name === 'NotAllowedError' || e.name === 'PermissionDeniedError') break;
+    }
+  }
+
+  if (lastError || !micStream) {
+    const e = lastError;
+    if (e && (e.name === 'NotAllowedError' || e.name === 'PermissionDeniedError')) {
+      showMicPermModal('denied');
+    } else if (e && (e.name === 'NotFoundError' || e.name === 'DevicesNotFoundError')) {
+      showMicPermModal('notfound');
+    } else if (e && (e.name === 'NotReadableError' || e.name === 'TrackStartError')) {
+      showMicPermModal('busy');
+    } else {
+      showMicPermModal('unknown');
+    }
+    return;
+  }
+
+  // Build mic processing chain
+  micSource = audioCtx.createMediaStreamSource(micStream);
+  micPreGain = audioCtx.createGain(); micPreGain.gain.value = micSettings.gain / 100;
+
+  // Mic EQ (3-band: bass, mid, treble)
+  const bassF = audioCtx.createBiquadFilter(); bassF.type='lowshelf'; bassF.frequency.value=80; bassF.gain.value=micSettings.eqBass;
+  const midF  = audioCtx.createBiquadFilter(); midF.type='peaking'; midF.frequency.value=1000; midF.Q.value=1; midF.gain.value=micSettings.eqMid;
+  const trebF = audioCtx.createBiquadFilter(); trebF.type='highshelf'; trebF.frequency.value=8000; trebF.gain.value=micSettings.eqTreble;
+  micEQNodes = [bassF, midF, trebF];
+
+  // Compressor
+  micCompressor = audioCtx.createDynamicsCompressor();
+  micCompressor.threshold.value = -24 - (micSettings.compressor * 0.24);
+  micCompressor.knee.value = 10; micCompressor.ratio.value = 4;
+  micCompressor.attack.value = 0.003; micCompressor.release.value = 0.1;
+
+  // Chain: source → preGain → bass → mid → treble → compressor → monitor
+  micSource.connect(micPreGain);
+  micPreGain.connect(bassF); bassF.connect(midF); midF.connect(trebF); trebF.connect(micCompressor);
+
+  // Monitor
+  monitorGain.gain.value = document.getElementById('tog-mic').classList.contains('on') ? micSettings.monitorGain/100*0.8 : 0;
+  micCompressor.connect(monitorGain);
+
+  // MediaRecorder for capture
+  const destNode = audioCtx.createMediaStreamDestination();
+  micCompressor.connect(destNode);
+
+  // En yüksek kaliteli codec seçimi (öncelik sırası: PCM > FLAC > Opus yüksek bitrate)
+  const preferredTypes = [
+    'audio/wav',
+    'audio/wave',
+    'audio/webm;codecs=pcm',
+    'audio/ogg;codecs=flac',
+    'audio/webm;codecs=opus',
+    'audio/webm',
+    'audio/ogg',
+  ];
+  const mimeType = preferredTypes.find(t => MediaRecorder.isTypeSupported(t)) || 'audio/webm';
+  const isLossy = mimeType.includes('opus') || mimeType.includes('ogg') || mimeType === 'audio/webm';
+  const recOptions = {
+    mimeType,
+    audioBitsPerSecond: isLossy ? 320000 : undefined // Lossy ise max 320kbps
+  };
+  document.getElementById('stat-rec').textContent = '● ' + mimeType.split('/')[1].split(';')[0].toUpperCase();
+
+  recChunks = [];
+  mediaRecorder = new MediaRecorder(destNode.stream, recOptions);
+  mediaRecorder.ondataavailable = e => { if(e.data.size>0) recChunks.push(e.data); };
+  mediaRecorder.onstop = finishRecord;
+  mediaRecorder.start(100);
+
+  isRecording = true; playheadStart = playheadPos;
+  document.getElementById('btn-rec').classList.add('on');
+  document.getElementById('dot-rec').classList.add('rec');
+  document.getElementById('stat-rec').textContent = '● REC';
+  showToast('⏺ Kayıt başladı');
+
+  // Auto-play backing tracks
+  if (!isPlaying) togglePlay();
+}
+
+function stopRecord() {
+  if (!mediaRecorder) return;
+  mediaRecorder.stop();
+  if (micStream) { micStream.getTracks().forEach(t=>t.stop()); micStream=null; }
+  if (micSource) { micSource.disconnect(); micSource=null; }
+  isRecording=false;
+  document.getElementById('btn-rec').classList.remove('on');
+  document.getElementById('dot-rec').classList.remove('rec');
+  document.getElementById('stat-rec').textContent = 'Tamamlandı';
+  showToast('⏹ Kayıt işleniyor...');
+}
+
+function toggleRecord() { if(isRecording) stopRecord(); else startRecord(); }
+
+async function finishRecord() {
+  const blob = new Blob(recChunks, {type:'audio/webm'});
+  const ab = await blob.arrayBuffer();
+  let buf;
+  try { buf = await audioCtx.decodeAudioData(ab); }
+  catch(e) { showToast('❌ Kayıt işlenemedi'); return; }
+  const clip = {
+    id: Date.now(), buffer: buf,
+    name: 'Vokal ' + new Date().toLocaleTimeString('tr'),
+    startTime: playheadStart, duration: buf.duration,
+    color: tracks[2].color, source: null,
+    waveform: computeWaveform(buf), fadeIn:0, fadeOut:0, gain:1
+  };
+  tracks[2].clips.push(clip); drawTrack(2);
+  showToast('✓ Vokal kaydedildi (' + buf.duration.toFixed(1) + 's)');
+}
+
+function updateMonitor() {
+  if (!monitorGain) return;
+  monitorGain.gain.value = document.getElementById('tog-mic').classList.contains('on') ? micSettings.monitorGain/100*0.8 : 0;
+}
+
+// ── VOLUME / PAN / MUTE / SOLO ──
+function setVol(ti, v) {
+  tracks[ti].volume = v/100;
+  if (tracks[ti].gain) tracks[ti].gain.gain.value = tracks[ti].muted ? 0 : v/100;
+}
+function setPan(ti, v) {
+  tracks[ti].pan = v/100;
+  if (tracks[ti].panner) tracks[ti].panner.pan.value = v/100;
+}
+function toggleMute(ti) {
+  tracks[ti].muted = !tracks[ti].muted;
+  document.getElementById('m'+ti).classList.toggle('on', tracks[ti].muted);
+  if (tracks[ti].gain) tracks[ti].gain.gain.value = tracks[ti].muted ? 0 : tracks[ti].volume;
+}
+function toggleSolo(ti) {
+  tracks[ti].solo = !tracks[ti].solo;
+  document.getElementById('s'+ti).classList.toggle('on', tracks[ti].solo);
+  const any = tracks.some(t=>t.solo);
+  tracks.forEach(t => { if(t.gain) t.gain.gain.value = any ? (t.solo?t.volume:0) : (t.muted?0:t.volume); });
+}
+
+// ── EQ ──
+const EQ_FREQS = [80,250,1000,4000,12000];
+const EQ_IDS   = ['eq-80','eq-250','eq-1k','eq-4k','eq-12k'];
+const EQV_IDS  = ['eqv-80','eqv-250','eqv-1k','eqv-4k','eqv-12k'];
+
+function openEQ(ti) {
+  currentEQTrack = ti;
+  document.getElementById('eq-track-name').textContent = tracks[ti].name;
+  // Load current values
+  EQ_IDS.forEach((id,i) => {
+    document.getElementById(id).value = tracks[ti].eqVals[i];
+    document.getElementById(EQV_IDS[i]).textContent = fmtDB(tracks[ti].eqVals[i]);
+  });
+  renderEQPresets();
+  openPanel('eq-panel');
+}
+
+function eqChange(band, val) {
+  document.getElementById(EQV_IDS[band]).textContent = fmtDB(val);
+}
+
+function fmtDB(v) { return (v>0?'+':'')+v+'dB'; }
+
+function resetEQ() {
+  EQ_IDS.forEach((id,i) => { document.getElementById(id).value=0; document.getElementById(EQV_IDS[i]).textContent='0dB'; });
+}
+
+function applyEQ() {
+  const vals = EQ_IDS.map(id => parseFloat(document.getElementById(id).value));
+  tracks[currentEQTrack].eqVals = vals;
+  // Update live EQ nodes
+  if (audioCtx && tracks[currentEQTrack].eq) {
+    tracks[currentEQTrack].eq.forEach((node,i) => node.gain.value = vals[i]);
+  } else if (audioCtx) {
+    tracks[currentEQTrack].eq = buildTrackEQ(vals);
+    connectTrackEQ(tracks[currentEQTrack]);
+  }
+  document.getElementById('eq'+currentEQTrack).classList.toggle('on', vals.some(v=>v!==0));
+  showToast('✓ EQ uygulandı: ' + tracks[currentEQTrack].name);
+  closePanel('eq-panel');
+}
+
+function saveEQPreset() {
+  const name = document.getElementById('eq-save-name').value.trim();
+  if (!name) { showToast('❌ Preset adı girin'); return; }
+  const vals = EQ_IDS.map(id => parseFloat(document.getElementById(id).value));
+  const idx = eqPresets.findIndex(p=>p.name===name);
+  if (idx>=0) eqPresets[idx].vals=vals;
+  else eqPresets.push({name, vals});
+  document.getElementById('eq-save-name').value='';
+  saveToStorage();
+  renderEQPresets();
+  showToast('✓ EQ preset kaydedildi: '+name);
+}
+
+function loadEQPreset(name) {
+  const p = eqPresets.find(p=>p.name===name); if(!p) return;
+  EQ_IDS.forEach((id,i) => { document.getElementById(id).value=p.vals[i]; document.getElementById(EQV_IDS[i]).textContent=fmtDB(p.vals[i]); });
+  renderEQPresets(name);
+}
+
+function renderEQPresets(active) {
+  // Built-in presets
+  const builtIn = [
+    {name:'Flat',     vals:[0,0,0,0,0]},
+    {name:'Vokal',    vals:[-2,0,3,2,1]},
+    {name:'Bass Boost',vals:[6,3,0,0,0]},
+    {name:'Treble+',  vals:[0,0,0,3,5]},
+    {name:'Warmth',   vals:[3,2,1,-1,-2]},
+    {name:'Presence', vals:[0,-1,2,4,2]},
+  ];
+  const all = [...builtIn, ...eqPresets];
+  const cont = document.getElementById('eq-preset-btns'); cont.innerHTML='';
+  all.forEach(p => {
+    const btn = document.createElement('button');
+    btn.className = 'eq-preset-btn' + (p.name===active?' on':'');
+    btn.textContent = p.name;
+    btn.onclick = () => { loadEQPreset2(p.vals); renderEQPresets(p.name); };
+    cont.appendChild(btn);
+  });
+}
+
+function loadEQPreset2(vals) {
+  EQ_IDS.forEach((id,i) => { document.getElementById(id).value=vals[i]||0; document.getElementById(EQV_IDS[i]).textContent=fmtDB(vals[i]||0); });
+}
+
+// ── MIC SETTINGS ──
+function micParamChange() {
+  const fields = [
+    ['mic-gain','micv-gain','%'],['mic-gate','micv-gate','%'],
+    ['mic-comp','micv-comp','%'],['mic-mon','micv-mon','%']
+  ];
+  fields.forEach(([id,vid,unit]) => {
+    const v = parseFloat(document.getElementById(id).value);
+    document.getElementById(vid).textContent = v + unit;
+  });
+}
+
+function micEQChange() {
+  const pairs = [['mic-eq-bass','micv-bass'],['mic-eq-mid','micv-mid'],['mic-eq-treble','micv-treble']];
+  pairs.forEach(([id,vid]) => {
+    const v = parseFloat(document.getElementById(id).value);
+    document.getElementById(vid).textContent = fmtDB(v);
+  });
+}
+
+function applyMicSettings() {
+  micSettings.sampleRate  = parseInt(document.getElementById('mic-sr').value);
+  micSettings.bitDepth    = parseInt(document.getElementById('mic-bit').value);
+  micSettings.gain        = parseFloat(document.getElementById('mic-gain').value);
+  micSettings.noiseGate   = parseFloat(document.getElementById('mic-gate').value);
+  micSettings.compressor  = parseFloat(document.getElementById('mic-comp').value);
+  micSettings.monitorGain = parseFloat(document.getElementById('mic-mon').value);
+  micSettings.eqBass      = parseFloat(document.getElementById('mic-eq-bass').value);
+  micSettings.eqMid       = parseFloat(document.getElementById('mic-eq-mid').value);
+  micSettings.eqTreble    = parseFloat(document.getElementById('mic-eq-treble').value);
+
+  // Apply live if mic active
+  if (micPreGain) micPreGain.gain.value = micSettings.gain/100;
+  if (micEQNodes.length===3) {
+    micEQNodes[0].gain.value = micSettings.eqBass;
+    micEQNodes[1].gain.value = micSettings.eqMid;
+    micEQNodes[2].gain.value = micSettings.eqTreble;
+  }
+  if (micCompressor) {
+    micCompressor.threshold.value = -24 - (micSettings.compressor*0.24);
+  }
+  if (monitorGain) monitorGain.gain.value = document.getElementById('tog-mic').classList.contains('on') ? micSettings.monitorGain/100*0.8 : 0;
+
+  document.getElementById('qual-disp').textContent = (micSettings.sampleRate/1000).toFixed(1)+'kHz·'+micSettings.bitDepth+'f';
+  saveToStorage();
+  showToast('✓ Mikrofon ayarları uygulandı');
+  closePanel('mic-panel');
+}
+
+function saveMicPreset() {
+  const name = document.getElementById('mic-preset-name').value.trim();
+  if (!name) { showToast('❌ Preset adı girin'); return; }
+  // Snapshot current UI values
+  const snap = {
+    gain:      parseFloat(document.getElementById('mic-gain').value),
+    noiseGate: parseFloat(document.getElementById('mic-gate').value),
+    compressor:parseFloat(document.getElementById('mic-comp').value),
+    monitorGain:parseFloat(document.getElementById('mic-mon').value),
+    eqBass:    parseFloat(document.getElementById('mic-eq-bass').value),
+    eqMid:     parseFloat(document.getElementById('mic-eq-mid').value),
+    eqTreble:  parseFloat(document.getElementById('mic-eq-treble').value),
+    sampleRate:parseInt(document.getElementById('mic-sr').value),
+    bitDepth:  parseInt(document.getElementById('mic-bit').value)
+  };
+  const idx = micPresets.findIndex(p=>p.name===name);
+  if (idx>=0) micPresets[idx].settings=snap; else micPresets.push({name, settings:snap});
+  document.getElementById('mic-preset-name').value='';
+  saveToStorage(); renderMicPresets();
+  showToast('✓ Mic preset kaydedildi: '+name);
+}
+
+function loadMicPreset(name) {
+  const p = micPresets.find(p=>p.name===name); if(!p) return;
+  const s = p.settings;
+  document.getElementById('mic-gain').value   = s.gain;     document.getElementById('micv-gain').textContent   = s.gain+'%';
+  document.getElementById('mic-gate').value   = s.noiseGate; document.getElementById('micv-gate').textContent   = s.noiseGate+'%';
+  document.getElementById('mic-comp').value   = s.compressor; document.getElementById('micv-comp').textContent  = s.compressor+'%';
+  document.getElementById('mic-mon').value    = s.monitorGain; document.getElementById('micv-mon').textContent  = s.monitorGain+'%';
+  document.getElementById('mic-eq-bass').value   = s.eqBass;   document.getElementById('micv-bass').textContent   = fmtDB(s.eqBass);
+  document.getElementById('mic-eq-mid').value    = s.eqMid;    document.getElementById('micv-mid').textContent    = fmtDB(s.eqMid);
+  document.getElementById('mic-eq-treble').value = s.eqTreble; document.getElementById('micv-treble').textContent = fmtDB(s.eqTreble);
+  if (s.sampleRate) document.getElementById('mic-sr').value = s.sampleRate;
+  if (s.bitDepth)   document.getElementById('mic-bit').value = s.bitDepth;
+  renderMicPresets(name);
+  showToast('✓ Preset yüklendi: '+name);
+}
+
+function deleteMicPreset(name, e) {
+  e.stopPropagation();
+  micPresets = micPresets.filter(p=>p.name!==name);
+  saveToStorage(); renderMicPresets();
+  showToast('Preset silindi: '+name);
+}
+
+function renderMicPresets(active) {
+  const cont = document.getElementById('mic-preset-list'); cont.innerHTML='';
+  // Built-in presets
+  const builtIn = [
+    {name:'Doğal Ses',    settings:{gain:100,noiseGate:10,compressor:20,monitorGain:70,eqBass:0,eqMid:0,eqTreble:0,sampleRate:48000,bitDepth:32}},
+    {name:'Vokal Studio', settings:{gain:120,noiseGate:20,compressor:40,monitorGain:70,eqBass:-2,eqMid:3,eqTreble:2,sampleRate:48000,bitDepth:32}},
+    {name:'Canlı Sahne',  settings:{gain:110,noiseGate:30,compressor:50,monitorGain:60,eqBass:2,eqMid:2,eqTreble:1,sampleRate:48000,bitDepth:32}},
+    {name:'Podcast',      settings:{gain:130,noiseGate:15,compressor:35,monitorGain:80,eqBass:-3,eqMid:4,eqTreble:1,sampleRate:48000,bitDepth:32}},
+  ];
+  [...builtIn, ...micPresets].forEach(p => {
+    const isUser = micPresets.find(x=>x.name===p.name);
+    const item = document.createElement('div');
+    item.className = 'preset-item' + (p.name===active?' on':'');
+    item.innerHTML = `<span class="preset-item-name">${p.name}</span>` +
+      (isUser ? `<span class="preset-item-del" onclick="deleteMicPreset('${p.name}',event)">✕</span>` : '');
+    item.onclick = () => loadMicPreset(p.name);
+    cont.appendChild(item);
+  });
+}
+
+function updateQualDisplay() {
+  const sr = parseInt(document.getElementById('mic-sr').value);
+  const bd = document.getElementById('mic-bit').value;
+  document.getElementById('qual-disp').textContent = (sr/1000).toFixed(1)+'kHz·'+bd+'f';
+}
+
+// ── EDIT BAR (toolbar butonları için) ──
+function editBarAction(action) {
+  if (!selectedClip) {
+    showToast('❌ Önce bir klipe tıklayın (sec)'); return;
+  }
+  contextClip = selectedClip;
+  clipAction(action);
+}
+
+// ── CLIP CONTEXT MENU ──
+function showClipMenu(e, ti, clip) {
+  e.preventDefault(); e.stopPropagation();
+  contextClip = {ti, clip};
+  const menu = document.getElementById('clip-menu');
+  menu.style.display='block';
+  let x = e.clientX, y = e.clientY;
+  if (x + 160 > window.innerWidth) x = window.innerWidth - 164;
+  if (y + 300 > window.innerHeight) y = window.innerHeight - 280;
+  menu.style.left = x+'px'; menu.style.top = y+'px';
+}
+
+function hideClipMenu() { document.getElementById('clip-menu').style.display='none'; }
+
+function clipAction(action) {
+  hideClipMenu();
+  if (!contextClip) return;
+  const {ti, clip} = contextClip;
+  pushUndo(); // Her işlem öncesi geri alma noktası kaydet
+
+  if (action === 'delete') {
+    tracks[ti].clips = tracks[ti].clips.filter(c=>c!==clip);
+    if (selectedClip && selectedClip.clip===clip) selectedClip=null;
+    drawTrack(ti); showToast('🗑 Klip silindi'); return;
+  }
+  if (action === 'duplicate') {
+    const nc = {...clip, id:Date.now()+Math.random(), startTime: clip.startTime + clip.duration + 0.05, source:null, _cg:null};
+    tracks[ti].clips.push(nc); tracks[ti].clips.sort((a,b)=>a.startTime-b.startTime);
+    drawTrack(ti); showToast('⧉ Kopyalandı'); return;
+  }
+  if (action === 'split') {
+    const splitAt = playheadPos;
+    if (splitAt <= clip.startTime || splitAt >= clip.startTime + clip.duration) {
+      showToast('❌ Oynatma çizgisini klibin üzerine getirin'); return;
+    }
+    const offset = splitAt - clip.startTime;
+
+    // ── Media clip split (no buffer) ──
+    if (clip.isMedia) {
+      const right = {
+        ...clip, id: Date.now()+Math.random(),
+        name: clip.name+'-B',
+        startTime: splitAt,
+        duration: clip.duration - offset,
+        source: null
+      };
+      clip.duration = offset;
+      tracks[ti].clips.push(right); tracks[ti].clips.sort((a,b)=>a.startTime-b.startTime);
+      drawTrack(ti); showToast('✂️ Bölündü: ' + clip.name + ' + ' + right.name); return;
+    }
+
+    const bufDur = clip.buffer.duration; // sample-accurate gerçek süre
+    const rBuf = sliceBuffer(clip.buffer, offset, bufDur);
+    const lBuf = sliceBuffer(clip.buffer, 0, offset);
+    const rDur = rBuf.duration;
+    const right = {
+      id: Date.now()+Math.random(), buffer: rBuf, name: clip.name+'-B',
+      startTime: splitAt, duration: rDur, color: clip.color,
+      source: null, waveform: computeWaveform(rBuf), fadeIn:0, fadeOut:0, gain: clip.gain
+    };
+    clip.buffer = lBuf; clip.duration = lBuf.duration; clip.waveform = computeWaveform(lBuf);
+    tracks[ti].clips.push(right); tracks[ti].clips.sort((a,b)=>a.startTime-b.startTime);
+    drawTrack(ti); showToast('✂️ Bölündü: ' + clip.name + ' + ' + right.name); return;
+  }
+  if (action === 'trimleft') {
+    const trimTo = playheadPos;
+    if (trimTo <= clip.startTime || trimTo >= clip.startTime + clip.duration) {
+      showToast('❌ Oynatma çizgisini klibin içine getirin'); return;
+    }
+    const offset = trimTo - clip.startTime;
+    if (clip.isMedia) {
+      clip.duration -= offset; clip.startTime = trimTo;
+      drawTrack(ti); showToast('◀ Sol trim (' + offset.toFixed(2) + 's kesildi)'); return;
+    }
+    const nb = sliceBuffer(clip.buffer, offset, clip.buffer.duration);
+    clip.buffer = nb; clip.duration = nb.duration; clip.startTime = trimTo;
+    clip.waveform = computeWaveform(nb);
+    drawTrack(ti); showToast('◀ Sol trim (' + offset.toFixed(2) + 's kesildi)'); return;
+  }
+  if (action === 'trimright') {
+    const trimTo = playheadPos;
+    if (trimTo <= clip.startTime || trimTo >= clip.startTime + clip.duration) {
+      showToast('❌ Oynatma çizgisini klibin içine getirin'); return;
+    }
+    const offset = trimTo - clip.startTime;
+    if (clip.isMedia) {
+      clip.duration = offset;
+      drawTrack(ti); showToast('▶ Sağ trim'); return;
+    }
+    const nb = sliceBuffer(clip.buffer, 0, offset);
+    clip.buffer = nb; clip.duration = nb.duration; clip.waveform = computeWaveform(nb);
+    drawTrack(ti); showToast('▶ Sağ trim (' + (clip.buffer.duration - offset).toFixed(2) + 's kesildi)'); return;
+  }
+  if (action === 'fadein') {
+    if (clip.isMedia) { showToast('ℹ Medya klipleri için fade desteklenmiyor'); return; }
+    clip.fadeIn = Math.min(clip.duration * 0.3, 2);
+    drawTrack(ti); showToast('↗ Fade In eklendi'); return;
+  }
+  if (action === 'fadeout') {
+    if (clip.isMedia) { showToast('ℹ Medya klipleri için fade desteklenmiyor'); return; }
+    clip.fadeOut = Math.min(clip.duration * 0.3, 2);
+    drawTrack(ti); showToast('↘ Fade Out eklendi'); return;
+  }
+  if (action === 'normalize') {
+    if (clip.isMedia) { showToast('ℹ Medya klipleri için normalize desteklenmiyor'); return; }
+    clip.gain = 1 / (Math.max(...clip.waveform) || 1);
+    drawTrack(ti); showToast('📊 Normalize edildi'); return;
+  }
+}
+
+function sliceBuffer(buf, startSec, endSec) {
+  const sr = buf.sampleRate;
+  const startSample = Math.floor(startSec * sr);
+  const endSample   = Math.min(Math.floor(endSec * sr), buf.length);
+  const len = endSample - startSample;
+  if (len <= 0) return buf;
+  const nb = audioCtx ? audioCtx.createBuffer(buf.numberOfChannels, len, sr) : buf;
+  if (!audioCtx) return buf;
+  for (let c=0;c<buf.numberOfChannels;c++) {
+    const src = buf.getChannelData(c).subarray(startSample, endSample);
+    nb.getChannelData(c).set(src);
+  }
+  return nb;
+}
+
+// ── CLIP DRAG + TRIM HANDLES ──
+
+// Trim handle state
+let trimState = null; // {ti, clip, side:'left'|'right', startX, origStart, origDuration}
+
+const TRIM_HANDLE_PX = 10; // pixels from edge that activate trim cursor
+
+function getClipEdgeAt(ti, clientX) {
+  // Returns {clip, side} if near a clip edge, else null
+  const wrap = document.getElementById('tc-wrap');
+  const rect = wrap.getBoundingClientRect();
+  const x = clientX - rect.left + wrap.scrollLeft;
+  const pps = pxPerSec();
+  for (const clip of tracks[ti].clips) {
+    const clipX = clip.startTime * pps;
+    const clipW = clip.duration * pps;
+    const distLeft  = Math.abs(x - clipX);
+    const distRight = Math.abs(x - (clipX + clipW));
+    if (distLeft <= TRIM_HANDLE_PX) return {clip, side:'left'};
+    if (distRight <= TRIM_HANDLE_PX) return {clip, side:'right'};
+  }
+  return null;
+}
+
+function showTrimTooltip(clientX, clientY, timeSec) {
+  const tt = document.getElementById('trim-tooltip');
+  if (!tt) return;
+  const m = Math.floor(timeSec/60), s = (timeSec%60).toFixed(2);
+  tt.textContent = (timeSec<0?'-':'') + m+':'+(Math.abs(+s)<10?'0':'')+Math.abs(+s)+'s';
+  tt.style.left = clientX+'px';
+  tt.style.top  = clientY+'px';
+  tt.style.display = 'block';
+}
+function hideTrimTooltip() {
+  const tt = document.getElementById('trim-tooltip'); if(tt) tt.style.display='none';
+}
+
+function setupDrag() {
+  [0,1,2].forEach(ti => {
+    const canvas = document.getElementById('tc'+ti);
+
+    // ── CURSOR hover: show resize cursor near edges ──
+    canvas.addEventListener('mousemove', e => {
+      if (dragState || trimState) return;
+      const edge = getClipEdgeAt(ti, e.clientX);
+      canvas.style.cursor = edge ? 'ew-resize' : 'crosshair';
+    });
+    canvas.addEventListener('mouseleave', () => { if(!dragState&&!trimState) canvas.style.cursor='crosshair'; });
+
+    // ── MOUSEDOWN ──
+    canvas.addEventListener('mousedown', e => {
+      if (e.button === 2) return;
+      // Check trim handle first
+      const edge = getClipEdgeAt(ti, e.clientX);
+      if (edge) {
+        pushUndo();
+        trimState = {ti, clip: edge.clip, side: edge.side,
+          startX: e.clientX,
+          origStart: edge.clip.startTime,
+          origDuration: edge.clip.duration,
+          origTrimOffset: edge.clip.trimOffset || 0};
+        selectedClip = {ti, clip: edge.clip};
+        [0,1,2].forEach(i=>drawTrack(i));
+        e.stopPropagation();
+        return;
+      }
+      startDrag(e, ti, e.clientX, e.clientY);
+    });
+
+    // ── TOUCHSTART ──
+    canvas.addEventListener('touchstart', e => {
+      if (e.touches.length !== 1) return;
+      const cx = e.touches[0].clientX;
+      const cy = e.touches[0].clientY;
+      const edge = getClipEdgeAt(ti, cx);
+      if (edge) {
+        pushUndo();
+        trimState = {ti, clip: edge.clip, side: edge.side,
+          startX: cx,
+          origStart: edge.clip.startTime,
+          origDuration: edge.clip.duration,
+          origTrimOffset: edge.clip.trimOffset || 0};
+        selectedClip = {ti, clip: edge.clip};
+        [0,1,2].forEach(i=>drawTrack(i));
+        return;
+      }
+      startDrag(e, ti, cx, cy);
+    }, {passive:true});
+
+    canvas.addEventListener('contextmenu', e => {
+      const clip = findClipAt(ti, e.clientX);
+      if (clip) {
+        const wrap = document.getElementById('tc-wrap');
+        const rect = wrap.getBoundingClientRect();
+        const x = e.clientX - rect.left + wrap.scrollLeft;
+        playheadPos = Math.max(0, x / pxPerSec());
+        updatePlayheadUI(); updateTimeDisplay(playheadPos);
+        showClipMenu(e, ti, clip);
+      }
+    });
+  });
+
+  // ── GLOBAL MOUSEMOVE ──
+  document.addEventListener('mousemove', e => {
+    if (trimState) {
+      doTrim(e.clientX, e.clientY);
+    } else {
+      moveDrag(e.clientX);
+    }
+  });
+
+  // ── GLOBAL TOUCHMOVE ──
+  document.addEventListener('touchmove', e => {
+    if (trimState) {
+      e.preventDefault();
+      doTrim(e.touches[0].clientX, e.touches[0].clientY);
+    } else if (dragState) {
+      e.preventDefault();
+      moveDrag(e.touches[0].clientX);
+    }
+  }, {passive:false});
+
+  // ── GLOBAL MOUSEUP / TOUCHEND ──
+  document.addEventListener('mouseup', () => { endTrim(); endDrag(); });
+  document.addEventListener('touchend', () => { endTrim(); endDrag(); });
+  document.addEventListener('click', hideClipMenu);
+}
+
+function doTrim(clientX, clientY) {
+  if (!trimState) return;
+  const {ti, clip, side, startX, origStart, origDuration} = trimState;
+  const dx = clientX - startX;
+  const dt = dx / pxPerSec();
+  const pps = pxPerSec();
+
+  if (side === 'left') {
+    // Sola sürükle → başlangıcı ileri al (küçültür), sağa → başlangıcı geri al (büyütür — sadece trimOffset varsa)
+    let newStart = origStart + dt;
+    let newDuration = origDuration - dt;
+
+    // Minimum 0.1s kalsın
+    if (newDuration < 0.1) { newDuration = 0.1; newStart = origStart + origDuration - 0.1; }
+    if (newStart < 0) { newDuration -= -newStart; newStart = 0; }
+
+    if (clip.isMedia) {
+      clip.startTime = newStart;
+      clip.duration  = newDuration;
+    } else {
+      // Audio: buffer'ı trimOffset ile takip et
+      const origBufDur = trimState.origBufDuration || (trimState.origBufDuration = clip.buffer.duration + (clip.trimOffset||0));
+      const newTrimOffset = (trimState.origTrimOffset || 0) + dt;
+      const clampedOffset = Math.max(0, Math.min(origBufDur - 0.1, newTrimOffset));
+      const actualDt = clampedOffset - (trimState.origTrimOffset||0);
+      clip.startTime = origStart + actualDt;
+      clip.duration  = origDuration - actualDt;
+      // Rebuild buffer slice
+      const fullBuf = trimState.fullBuffer || (trimState.fullBuffer = clip._fullBuffer || clip.buffer);
+      clip._fullBuffer = fullBuf;
+      clip.trimOffset = clampedOffset;
+      clip.buffer = sliceBuffer(fullBuf, clampedOffset, fullBuf.duration);
+      clip.waveform = computeWaveform(clip.buffer);
+    }
+    showTrimTooltip(clientX, clientY, clip.startTime);
+  } else {
+    // Right side: shorten/extend from right
+    let newDuration = origDuration + dt;
+    if (newDuration < 0.1) newDuration = 0.1;
+
+    if (clip.isMedia) {
+      clip.duration = newDuration;
+    } else {
+      const fullBuf = trimState.fullBuffer || (trimState.fullBuffer = clip._fullBuffer || clip.buffer);
+      clip._fullBuffer = fullBuf;
+      const maxDur = fullBuf.duration - (clip.trimOffset||0);
+      const clampedDur = Math.min(maxDur, Math.max(0.1, newDuration));
+      clip.duration = clampedDur;
+      const trimStart = clip.trimOffset || 0;
+      clip.buffer = sliceBuffer(fullBuf, trimStart, trimStart + clampedDur);
+      clip.waveform = computeWaveform(clip.buffer);
+    }
+    showTrimTooltip(clientX, clientY, clip.startTime + clip.duration);
+  }
+
+  drawTrack(trimState.ti);
+}
+
+function endTrim() {
+  if (!trimState) return;
+  hideTrimTooltip();
+  // restore crosshair cursor on all canvases
+  [0,1,2].forEach(i => {
+    const c = document.getElementById('tc'+i);
+    if (c) c.style.cursor = 'crosshair';
+  });
+  trimState = null;
+}
+
+// ── RULER ETKİLEŞİMLERİ ──
+function setupRuler() {
+  const rulerWrap = document.getElementById('ruler-wrap');
+  if (!rulerWrap) return;
+
+  let isDragging = false;
+  let dragStartX = 0;
+  let dragStartScroll = 0;
+
+  // Gerçek zaman çizelgesindeki saniyeyi hesapla (scrolla göre)
+  function getTimeAt(clientX) {
+    const rect = rulerWrap.getBoundingClientRect();
+    return Math.max(0, (clientX - rect.left + rulerScrollLeft) / pxPerSec());
+  }
+
+  // Sürükleme esnasında fare konumundaki saniyeyi göster
+  function showLabel(clientX, t) {
+    const lbl = document.getElementById('ruler-cursor-label');
+    if (!lbl) return;
+    const rect = rulerWrap.getBoundingClientRect();
+    const m  = Math.floor(t / 60);
+    const s  = Math.floor(t % 60);
+    const ms = Math.floor((t % 1) * 1000);
+    lbl.textContent = m + ':' + (s < 10 ? '0' : '') + s + '.' + String(ms).padStart(3, '0') + 's';
+    let lx = clientX - rect.left;
+    lx = Math.max(32, Math.min(lx, rect.width - 32));
+    lbl.style.left = lx + 'px';
+    lbl.style.display = 'block';
+  }
+
+  function hideLabel() {
+    const lbl = document.getElementById('ruler-cursor-label');
+    if (lbl) lbl.style.display = 'none';
+  }
+
+  // ── MOUSE ──
+  rulerWrap.addEventListener('mousedown', function(e) {
+    if (e.button !== 0) return;
+    isDragging = false;
+    dragStartX      = e.clientX;
+    dragStartScroll = rulerScrollLeft;
+    rulerWrap.classList.add('dragging');
+
+    function onMouseMove(ev) {
+      const dx = dragStartX - ev.clientX;   // sola sürükle = ileri git
+      if (Math.abs(dx) > 3) isDragging = true;
+      if (isDragging) {
+        const wrap = document.getElementById('tc-wrap');
+        const ns = Math.max(0, dragStartScroll + dx);
+        wrap.scrollLeft = ns;
+        rulerScrollLeft = ns;
+        drawRuler();
+        updateTLScrollbar();
+        // Fare konumundaki sabit saniyeyi göster
+        const t = getTimeAt(ev.clientX);
+        showLabel(ev.clientX, t);
+      }
+    }
+
+    function onMouseUp(ev) {
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup',   onMouseUp);
+      rulerWrap.classList.remove('dragging');
+      if (!isDragging) {
+        // Sadece tıklama → playhead buraya konumlan
+        const t = getTimeAt(ev.clientX);
+        playheadPos = t;
+        updatePlayheadUI();
+        updateTimeDisplay(t);
+        if (isPlaying) { pauseAll(); togglePlay(); }
+      }
+      isDragging = false;
+      hideLabel();
+    }
+
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup',   onMouseUp);
+    e.preventDefault();
+  });
+
+  // Hover: sürüklemeden bağımsız, fareyi gezdirince saniyeyi göster
+  rulerWrap.addEventListener('mousemove', function(e) {
+    if (!isDragging) showLabel(e.clientX, getTimeAt(e.clientX));
+  });
+  rulerWrap.addEventListener('mouseleave', function() {
+    if (!isDragging) hideLabel();
+  });
+
+  // ── TOUCH ──
+  rulerWrap.addEventListener('touchstart', function(e) {
+    if (e.touches.length !== 1) return;
+    isDragging      = false;
+    dragStartX      = e.touches[0].clientX;
+    dragStartScroll = rulerScrollLeft;
+
+    function onTouchMove(ev) {
+      if (ev.touches.length !== 1) return;
+      const dx = dragStartX - ev.touches[0].clientX;
+      if (Math.abs(dx) > 6) isDragging = true;
+      if (isDragging) {
+        const wrap = document.getElementById('tc-wrap');
+        const ns = Math.max(0, dragStartScroll + dx);
+        wrap.scrollLeft = ns;
+        rulerScrollLeft = ns;
+        drawRuler();
+        updateTLScrollbar();
+        showLabel(ev.touches[0].clientX, getTimeAt(ev.touches[0].clientX));
+      }
+      ev.preventDefault();
+    }
+
+    function onTouchEnd() {
+      rulerWrap.removeEventListener('touchmove', onTouchMove);
+      rulerWrap.removeEventListener('touchend',  onTouchEnd);
+      rulerWrap.classList.remove('dragging');
+      if (!isDragging) {
+        const t = getTimeAt(dragStartX);
+        playheadPos = t;
+        updatePlayheadUI();
+        updateTimeDisplay(t);
+      }
+      isDragging = false;
+      hideLabel();
+    }
+
+    rulerWrap.addEventListener('touchmove',  onTouchMove, {passive: false});
+    rulerWrap.addEventListener('touchend',   onTouchEnd);
+    e.preventDefault();
+  }, {passive: false});
+}
+
+
+
+function findClipAt(ti, clientX) {
+  const wrap = document.getElementById('tc-wrap');
+  const rect = wrap.getBoundingClientRect();
+  const x = clientX - rect.left + wrap.scrollLeft;
+  const t = x / pxPerSec();
+  return tracks[ti].clips.find(c => t >= c.startTime && t <= c.startTime + c.duration);
+}
+
+function startDrag(e, ti, clientX, clientY) {
+  const clip = findClipAt(ti, clientX); if(!clip) return;
+  dragState = {ti, clip, startX: clientX, origStart: clip.startTime, moved: false};
+  selectedClip = {ti, clip};
+  [0,1,2].forEach(i => drawTrack(i));
+}
+
+function moveDrag(clientX) {
+  if (!dragState) return;
+  const dx = clientX - dragState.startX;
+  if (Math.abs(dx) > 3) dragState.moved = true; // gerçek sürükleme eşiği
+  const dt = dx / pxPerSec();
+  let ns = Math.max(0, dragState.origStart + dt);
+  if (snapEnabled) ns = Math.round(ns * 4) / 4;
+  dragState.clip.startTime = ns;
+  drawTrack(dragState.ti);
+}
+
+function endDrag() {
+  // Eğer klip gerçekten sürüklendiyse (hareket ettiyse) playhead'i güncelleme
+  if (dragState && dragState.moved) {
+    // sürükleme bitti — bir sonraki click eventini yut
+    const once = () => { document.removeEventListener('click', once, true); };
+    document.addEventListener('click', once, true);
+  }
+  dragState = null;
+}
+
+// ── PINCH ZOOM ──
+let lastPinch = null;
+document.getElementById('tc-wrap').addEventListener('touchmove', e => {
+  if (e.touches.length === 2) {
+    e.preventDefault();
+    const dx = e.touches[0].clientX - e.touches[1].clientX;
+    const dy = e.touches[0].clientY - e.touches[1].clientY;
+    const d = Math.sqrt(dx*dx+dy*dy);
+    if (lastPinch) {
+      zoomLevel = Math.max(.2, Math.min(8, zoomLevel * d/lastPinch));
+      [0,1,2].forEach(i => { const c=document.getElementById('tc'+i); if(c)c.style.width=''; const r=document.getElementById('tr'+i); if(r)r.style.width=''; });
+      const inner=document.getElementById('tl-inner'); if(inner)inner.style.width='';
+      drawAll(); updatePlayheadUI(); drawRuler();
+    }
+    lastPinch = d;
+  }
+}, {passive:false});
+document.getElementById('tc-wrap').addEventListener('touchend', ()=>lastPinch=null);
+
+// ── PLAYHEAD CLICK ──
+document.getElementById('tc-wrap').addEventListener('click', function(e) {
+  if (dragState) return;
+  const rect = this.getBoundingClientRect();
+  const x = e.clientX - rect.left + this.scrollLeft;
+  playheadPos = Math.max(0, x / pxPerSec());
+  updatePlayheadUI(); updateTimeDisplay(playheadPos);
+  if (isPlaying) { pauseAll(); togglePlay(); }
+});
+
+// ── SCROLL SYNC ──
+function onTCScroll(el) {
+  rulerScrollLeft = el.scrollLeft;
+  const mb = document.getElementById('mixer-body');
+  if (mb) mb.scrollTop = el.scrollTop;
+  drawRuler();
+  updateTLScrollbar();
+}
+
+// ── PLAYHEAD UI ──
+function updatePlayheadUI() {
+  const ph = document.getElementById('playhead');
+  const wrap = document.getElementById('tc-wrap');
+  ph.style.left = (playheadPos * pxPerSec()) + 'px';
+  if (isPlaying && wrap) {
+    const ax = playheadPos * pxPerSec();
+    const w = wrap.clientWidth;
+    if (ax - wrap.scrollLeft > w * 0.8) {
+      wrap.scrollLeft = ax - w * 0.2;
+      rulerScrollLeft = wrap.scrollLeft;
+    }
+  }
+  updateRulerPlayhead();
+}
+
+function updateTimeDisplay(s) {
+  const m=Math.floor(s/60), sec=(s%60).toFixed(3);
+  document.getElementById('time-d').textContent = m+':'+(+sec<10?'0':'')+sec;
+}
+
+// ── CONTROLS ──
+function toggleLoop() { isLooping=!isLooping; document.getElementById('btn-loop').classList.toggle('on',isLooping); showToast(isLooping?'🔁 Loop AÇIK':'Loop KAPALI'); }
+function toggleSnap() { snapEnabled=!snapEnabled; document.getElementById('snap-btn').classList.toggle('on',snapEnabled); showToast('Snap: '+(snapEnabled?'AÇIK':'KAPALI')); }
+function zoom(d) {
+  zoomLevel = Math.max(.2, Math.min(8, zoomLevel*(d>0?1.4:.72)));
+  // track genişliklerini sıfırla ki drawTrack yeniden hesaplasın
+  [0,1,2].forEach(i => {
+    const c = document.getElementById('tc'+i);
+    if (c) { c.style.width=''; }
+    const r = document.getElementById('tr'+i);
+    if (r) r.style.width='';
+  });
+  const inner = document.getElementById('tl-inner');
+  if (inner) inner.style.width = '';
+  drawAll();
+  updatePlayheadUI();
+  drawRuler();
+}
+function editBPM() { const el=document.getElementById('bpm-d'); const n=prompt('BPM:',parseInt(el.textContent)||120); const v=parseInt(n); if(v&&v>=40&&v<=240){el.textContent=v+' BPM';showToast('BPM: '+v);} }
+function renamePrj() { const el=document.getElementById('proj-name'); const n=prompt('Proje adı:',el.textContent); if(n)el.textContent=n; }
+
+// ── VU ──
+function startVU() {
+  function tick() {
+    if (!analyser) { requestAnimationFrame(tick); return; }
+    const d=new Uint8Array(analyser.frequencyBinCount); analyser.getByteFrequencyData(d);
+    const avg=d.reduce((a,b)=>a+b,0)/d.length;
+    const p=Math.min(100,(avg/128)*100*(isRecording?1.6:1));
+    document.getElementById('vu-l').style.width=p+'%';
+    document.getElementById('vu-r').style.width=Math.max(0,p-4*Math.random())+'%';
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+// ── FX PANEL ──
+function openFX() {
+  const g=document.getElementById('fx-grid'); g.innerHTML='';
+  Object.entries(effects).forEach(([k,fx])=>{
+    const el=document.createElement('div'); el.className='fx-item'+(fx.on?' on':'');
+    el.innerHTML=`<div class="fx-name">${fx.label}</div><input type="range" class="fx-knob" min="0" max="100" value="${fx.level}" oninput="effects['${k}'].level=+this.value">`;
+    el.onclick=ev=>{if(ev.target.tagName==='INPUT')return;fx.on=!fx.on;el.classList.toggle('on',fx.on);showToast(fx.label+': '+(fx.on?'AÇIK':'KAPALI'));};
+    g.appendChild(el);
+  });
+  document.getElementById('fx-panel').classList.add('vis');
+}
+function closeFX() { document.getElementById('fx-panel').classList.remove('vis'); }
+
+// ── AI ──
+function aiTool(tool, btn) {
+  const labels={clean:'Vocal Clean',mix:'Auto Mix',pitch:'Pitch Fix',harmony:'Harmony Gen',double:'Vocal Double',denoise:'Denoise'};
+  document.querySelectorAll('.ai-btn').forEach(b=>b.classList.remove('proc'));
+  btn.classList.add('proc');
+  showToast('🤖 '+labels[tool]+' işleniyor...');
+  setTimeout(()=>{ btn.classList.remove('proc'); showToast('✓ '+labels[tool]+' tamamlandı'); }, 2000+Math.random()*1500);
+}
+
+// ── EXPORT ──
+async function doExport() {
+  const fmt = document.getElementById('exp-fmt').value;
+  if (fmt === 'mp4') { await doExportMP4(); return; }
+
+  initAudio(); closePanel('exp-panel');
+  showToast('🎛 Mixdown başlatıldı...');
+  let maxDur=0; tracks.forEach(t=>t.clips.forEach(c=>{const e=c.startTime+c.duration;if(e>maxDur)maxDur=e;}));
+  if (maxDur===0) { showToast('❌ Kanal boş'); return; }
+  if (audioCtx.state==='suspended') await audioCtx.resume();
+
+  // En yüksek kalite: her track'in sample rate'ini al, en yükseğini kullan
+  let maxSR = SAMPLE_RATE;
+  tracks.forEach(t => t.clips.forEach(c => { if (c.buffer && c.buffer.sampleRate > maxSR) maxSR = c.buffer.sampleRate; }));
+  const offCtx = new OfflineAudioContext(2, Math.ceil(maxDur * maxSR), maxSR);
+  const offMaster = offCtx.createGain(); offMaster.connect(offCtx.destination);
+
+  tracks.forEach(t => {
+    if (t.muted) return;
+    const tg = offCtx.createGain(); tg.gain.value = t.volume;
+    const tp = offCtx.createStereoPanner(); tp.pan.value = t.pan;
+    const eqChain = t.eqVals.map((v,i) => {
+      const bq = offCtx.createBiquadFilter();
+      bq.type = ['lowshelf','peaking','peaking','peaking','highshelf'][i];
+      bq.frequency.value = EQ_FREQS[i]; bq.gain.value = v; bq.Q.value = 1;
+      return bq;
+    });
+    let prev = tg; tg.connect(tp); prev = tp;
+    eqChain.forEach(n=>{prev.connect(n);prev=n;}); prev.connect(offMaster);
+
+    t.clips.forEach(clip => {
+      if (clip.isMedia) return;
+      const src=offCtx.createBufferSource(); src.buffer=clip.buffer;
+      const cg=offCtx.createGain(); cg.gain.value=clip.gain||1;
+      src.connect(cg); cg.connect(tg);
+      src.start(clip.startTime);
+    });
+  });
+
+  const rendered = await offCtx.startRendering();
+  const wavBlob = audioBufferToWav(rendered);
+  const url = URL.createObjectURL(wavBlob);
+  const a=document.createElement('a'); a.href=url;
+  a.download=(document.getElementById('proj-name').textContent||'mix')+'.wav';
+  a.click(); URL.revokeObjectURL(url);
+  showToast('✓ Mix indirildi!');
+}
+
+// ─────────────────────────────────────────────
+// ── GERÇEK MP4 EXPORT — ffmpeg.wasm ile H.264 + AAC ──
+// ─────────────────────────────────────────────
+
+// ─────────────────────────────────────────────
+// ── VIDEO EXPORT — Progress bar + Güvenilir WebM/MP4 ──
+// ─────────────────────────────────────────────
+
+let _exportCancelled = false;
+
+function cancelExport() {
+  _exportCancelled = true;
+  hideExportProgress();
+  showToast('⚠️ Export iptal edildi');
+}
+
+function showExportProgress() {
+  const ov = document.getElementById('exp-progress-overlay');
+  if (ov) { ov.style.display = 'flex'; }
+  _exportCancelled = false;
+}
+
+function hideExportProgress() {
+  const ov = document.getElementById('exp-progress-overlay');
+  if (ov) ov.style.display = 'none';
+}
+
+function setExportProgress(pct, label, sub) {
+  const bar  = document.getElementById('exp-prog-bar');
+  const pctEl= document.getElementById('exp-prog-pct');
+  const lbl  = document.getElementById('exp-prog-label');
+  const subEl= document.getElementById('exp-prog-sub');
+  if (bar)   bar.style.width  = Math.round(pct) + '%';
+  if (pctEl) pctEl.textContent = Math.round(pct) + '%';
+  if (lbl && label) lbl.textContent = label;
+  if (subEl && sub !== undefined) subEl.textContent = sub;
+}
+
+async function doExportMP4() {
+  closePanel('exp-panel');
+  showExportProgress();
+  setExportProgress(0, 'Ses mix ediliyor...', '');
+
+  // ── Süre ──
+  let totalDur = 0;
+  tracks.forEach(t => t.clips.forEach(c => { const e=c.startTime+c.duration; if(e>totalDur) totalDur=e; }));
+  if (totalDur === 0) { hideExportProgress(); showToast('❌ Kanal boş'); return; }
+
+  const resVal   = document.getElementById('exp-res')?.value || '1280x720';
+  const [VW, VH] = resVal.split('x').map(Number);
+  const bgColor  = document.getElementById('exp-bg')?.value || '#0a0a0f';
+  const FPS = 30;
+
+  // ── AŞAMA 1: Offline Audio Mix ──
+  initAudio();
+  if (audioCtx.state === 'suspended') await audioCtx.resume();
+  let maxSR = SAMPLE_RATE;
+  tracks.forEach(t => t.clips.forEach(c => { if(c.buffer && c.buffer.sampleRate > maxSR) maxSR = c.buffer.sampleRate; }));
+
+  const offCtx    = new OfflineAudioContext(2, Math.ceil(totalDur * maxSR), maxSR);
+  const offMaster = offCtx.createGain(); offMaster.connect(offCtx.destination);
+  tracks.forEach(t => {
+    if (t.muted) return;
+    const tg = offCtx.createGain(); tg.gain.value = t.volume;
+    const tp = offCtx.createStereoPanner(); tp.pan.value = t.pan;
+    const eq = t.eqVals.map((v,i)=>{
+      const b=offCtx.createBiquadFilter();
+      b.type=['lowshelf','peaking','peaking','peaking','highshelf'][i];
+      b.frequency.value=EQ_FREQS[i]; b.gain.value=v; b.Q.value=1; return b;
+    });
+    tg.connect(tp); let prev=tp; eq.forEach(n=>{prev.connect(n);prev=n;}); prev.connect(offMaster);
+    t.clips.forEach(clip=>{
+      if(clip.isMedia) return;
+      const s=offCtx.createBufferSource(); s.buffer=clip.buffer;
+      const g=offCtx.createGain(); g.gain.value=clip.gain||1;
+      s.connect(g); g.connect(tg); s.start(clip.startTime);
+    });
+  });
+  const rendered = await offCtx.startRendering();
+  if (_exportCancelled) return;
+  setExportProgress(8, 'Ses hazır. Medya yükleniyor...', '');
+
+  // ── AŞAMA 2: Medya elemanları yükle ──
+  const mediaClips = [];
+  tracks.forEach(t => t.clips.forEach(clip => { if(clip.isMedia) mediaClips.push(clip); }));
+
+  const mediaEls = {};
+  for (const clip of mediaClips) {
+    if (clip.type === 'image' && clip.thumbImg) {
+      // Orijinal URL'den tam boyut yükle
+      if (clip.url) {
+        const img = new Image(); img.src = clip.url; img.crossOrigin = 'anonymous';
+        await new Promise(r => { img.onload=r; img.onerror=()=>{mediaEls[clip.id]=clip.thumbImg;r();}; setTimeout(r,3000); });
+        mediaEls[clip.id] = img.complete ? img : clip.thumbImg;
+      } else {
+        mediaEls[clip.id] = clip.thumbImg;
+      }
+    } else if (clip.type === 'video' && clip.url) {
+      const v = document.createElement('video');
+      v.src = clip.url; v.muted = true; v.preload = 'auto';
+      await new Promise(r => { v.oncanplaythrough=r; v.onerror=r; setTimeout(r,5000); });
+      mediaEls[clip.id] = v;
+    }
+  }
+  if (_exportCancelled) return;
+  setExportProgress(12, 'Frame\'ler render ediliyor...', '');
+  await new Promise(r => setTimeout(r, 30)); // UI güncellemesi için nefes
+
+  // ── AŞAMA 3: Frame'leri canvas'a çiz + ImageData dizisi ──
+  const cvs = document.createElement('canvas');
+  cvs.width = VW; cvs.height = VH;
+  const ctx2 = cvs.getContext('2d', { alpha: false });
+
+  const totalFrames = Math.ceil(totalDur * FPS);
+  const ch0 = rendered.getChannelData(0);
+
+  // MediaRecorder stream'ini şimdi başlat (canvas.captureStream)
+  // Ses ayrı LiveAudioContext'ten gelecek — sync için her ikisini aynı anda başlatacağız
+  const liveACtx = new AudioContext({ sampleRate: maxSR });
+  const destNode = liveACtx.createMediaStreamDestination();
+  const audioSrc = liveACtx.createBufferSource();
+  audioSrc.buffer = rendered;
+  audioSrc.connect(destNode);
+
+  const videoStream = cvs.captureStream(FPS);
+  const aTrack = destNode.stream.getAudioTracks()[0];
+  if (aTrack) videoStream.addTrack(aTrack);
+
+  // Desteklenen codec seç
+  const mimeList = [
+    'video/webm;codecs=vp9,opus',
+    'video/webm;codecs=vp8,opus',
+    'video/webm',
+  ];
+  const mime = mimeList.find(m => MediaRecorder.isTypeSupported(m)) || 'video/webm';
+  const chunks = [];
+  const mr = new MediaRecorder(videoStream, { mimeType: mime, videoBitsPerSecond: 6_000_000 });
+  mr.ondataavailable = e => { if(e.data && e.data.size > 0) chunks.push(e.data); };
+  const mrDone = new Promise(r => { mr.onstop = r; });
+
+  // ── Canvas render loop: frame'i çiz, SONRA ses+kayıt başlat ──
+  // İlk frame'i önceden çiz ki MediaRecorder boş başlamasın
+  function drawFrame(timeSec) {
+    ctx2.fillStyle = bgColor;
+    ctx2.fillRect(0, 0, VW, VH);
+
+    // Medya klipleri
+    mediaClips.forEach(clip => {
+      if (timeSec < clip.startTime || timeSec > clip.startTime+clip.duration) return;
+      const el = mediaEls[clip.id]; if (!el) return;
+      if (clip.type === 'video') {
+        const vt = timeSec - clip.startTime;
+        if (Math.abs(el.currentTime - vt) > 0.12) el.currentTime = Math.max(0, vt);
+      }
+      const ew=el.videoWidth||el.naturalWidth||VW, eh=el.videoHeight||el.naturalHeight||VH;
+      const scale=Math.min(VW/ew,VH/eh), dw=ew*scale, dh=eh*scale, dx=(VW-dw)/2, dy=(VH-dh)/2;
+      try { ctx2.drawImage(el, dx, dy, dw, dh); } catch(e){}
+    });
+
+    // Waveform çubuğu
+    const si  = Math.floor(timeSec * rendered.sampleRate);
+    const wSz = Math.floor(rendered.sampleRate / FPS);
+    ctx2.strokeStyle = 'rgba(0,229,255,0.7)'; ctx2.lineWidth = 2;
+    ctx2.beginPath();
+    const bW = VW / 80;
+    for (let i=0;i<80;i++) {
+      const v = Math.abs(ch0[si + Math.floor(i*wSz/80)] || 0);
+      const bH = v * VH * 0.25, bx = i * bW;
+      ctx2.moveTo(bx+bW/2, VH-28-bH); ctx2.lineTo(bx+bW/2, VH-28);
+    }
+    ctx2.stroke();
+
+    // Alt bilgi şeridi
+    ctx2.fillStyle = 'rgba(0,0,0,0.6)'; ctx2.fillRect(0, VH-40, VW, 40);
+    ctx2.font = 'bold 15px sans-serif'; ctx2.fillStyle = '#00e5ff'; ctx2.textAlign = 'left';
+    ctx2.fillText(document.getElementById('proj-name').textContent||'Mix', 14, VH-14);
+    const mm=Math.floor(timeSec/60), ss=(timeSec%60).toFixed(1);
+    ctx2.font = 'bold 13px monospace'; ctx2.fillStyle = '#ffd60a'; ctx2.textAlign = 'right';
+    ctx2.fillText(mm+':'+(+ss<10?'0':'')+ss, VW-14, VH-14);
+    ctx2.textAlign = 'left';
+  }
+
+  // İlk frame'i çiz
+  drawFrame(0);
+
+  // Kayıt + ses aynı anda başlasın
+  mr.start(100);
+  audioSrc.start(0);
+  const startWall = performance.now();
+
+  // ── Render loop: AudioContext zamanına kilitli ──
+  await new Promise(resolve => {
+    let lastPct = 0;
+
+    function loop() {
+      if (_exportCancelled) { mr.stop(); liveACtx.close(); resolve(); return; }
+
+      // AudioContext'ten gerçek zamanı al (en güvenilir sync)
+      const elapsed = liveACtx.currentTime;
+      const timeSec = Math.min(elapsed, totalDur);
+      const pct = timeSec / totalDur;
+
+      drawFrame(timeSec);
+
+      // Progress güncelle (çok sık DOM yazma → throttle)
+      const pctInt = Math.round(pct * 85) + 12; // 12%..97% arası bu aşama
+      if (pctInt !== lastPct) {
+        lastPct = pctInt;
+        const elapsed_s = timeSec.toFixed(1);
+        const total_s   = totalDur.toFixed(1);
+        setExportProgress(pctInt, 'Video render ediliyor...', elapsed_s + 's / ' + total_s + 's  —  ' + mime.split(';')[0]);
+      }
+
+      if (timeSec >= totalDur - 0.05) {
+        // Son frame
+        drawFrame(totalDur);
+        setTimeout(() => { mr.stop(); liveACtx.close(); resolve(); }, 300);
+        return;
+      }
+      requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+  });
+
+  if (_exportCancelled) { hideExportProgress(); return; }
+  setExportProgress(97, 'Dosya oluşturuluyor...', '');
+  await mrDone;
+  await new Promise(r => setTimeout(r, 100));
+
+  // ── İndir ──
+  const ext  = mime.includes('mp4') ? 'mp4' : 'webm';
+  const blob = new Blob(chunks, { type: mime });
+
+  if (blob.size < 1000) {
+    hideExportProgress();
+    showToast('❌ Export başarısız — kanal içeriğini kontrol edin');
+    return;
+  }
+
+  setExportProgress(100, 'Tamamlandı!', (blob.size/1024/1024).toFixed(1) + ' MB');
+  await new Promise(r => setTimeout(r, 600));
+
+  const url = URL.createObjectURL(blob);
+  const a   = document.createElement('a');
+  a.href = url; a.download = (document.getElementById('proj-name').textContent||'mix') + '.' + ext;
+  a.click(); URL.revokeObjectURL(url);
+
+  hideExportProgress();
+  showToast('✅ ' + ext.toUpperCase() + ' indirildi! (' + (blob.size/1024/1024).toFixed(1) + ' MB)');
+}
+
+// 32-bit Float WAV export — en yüksek kalite
+function audioBufferToWav(buf) {
+  const nc = buf.numberOfChannels, len = buf.length, sr = buf.sampleRate;
+  const bytesPerSample = 4; // 32-bit float
+  const dataLen = len * nc * bytesPerSample;
+  const ab = new ArrayBuffer(44 + dataLen);
+  const v = new DataView(ab);
+  const ws = (o, s) => { for (let i = 0; i < s.length; i++) v.setUint8(o + i, s.charCodeAt(i)); };
+
+  ws(0, 'RIFF'); v.setUint32(4, 36 + dataLen, true); ws(8, 'WAVE');
+  ws(12, 'fmt '); v.setUint32(16, 16, true);
+  v.setUint16(20, 3, true);           // PCM type 3 = IEEE float
+  v.setUint16(22, nc, true);
+  v.setUint32(24, sr, true);
+  v.setUint32(28, sr * nc * bytesPerSample, true);
+  v.setUint16(32, nc * bytesPerSample, true);
+  v.setUint16(34, 32, true);          // 32-bit
+  ws(36, 'data'); v.setUint32(40, dataLen, true);
+
+  let off = 44;
+  for (let i = 0; i < len; i++) {
+    for (let c = 0; c < nc; c++) {
+      // 32-bit float: no clipping, full dynamic range
+      v.setFloat32(off, buf.getChannelData(c)[i], true);
+      off += 4;
+    }
+  }
+  return new Blob([ab], { type: 'audio/wav' });
+}
+
+// ─────────────────────────────────────────────
+// ── VIDEO / GÖRSEL YÜKLEME — Gerçek timeline klipleri ──
+// ─────────────────────────────────────────────
+function loadVideo(ti, input) {
+  const file = input.files[0]; if (!file) return;
+  input.value = '';
+  const url = URL.createObjectURL(file);
+  const name = file.name.replace(/\.[^.]+$/, '');
+  showToast('⏳ Video yükleniyor: ' + name);
+
+  const vid = document.createElement('video');
+  vid.src = url; vid.muted = true; vid.preload = 'metadata';
+  vid.onloadedmetadata = () => {
+    const duration = vid.duration || 5;
+    // Thumbnail için bir kare al
+    vid.currentTime = Math.min(0.5, duration * 0.1);
+    vid.onseeked = () => {
+      const cvs = document.createElement('canvas');
+      cvs.width = 160; cvs.height = 90;
+      cvs.getContext('2d').drawImage(vid, 0, 0, 160, 90);
+      const thumbUrl = cvs.toDataURL('image/jpeg', 0.7);
+      const thumbImg = new Image(); thumbImg.src = thumbUrl;
+
+      // Bir önceki klibin bitiminden yerleştir
+      const clips = tracks[ti].clips;
+      const last = clips[clips.length - 1];
+      const startTime = last ? last.startTime + last.duration + 0.05 : playheadPos;
+
+      const clip = {
+        id: Date.now() + Math.random(),
+        isMedia: true, type: 'video',
+        url, name, thumbImg,
+        startTime, duration,
+        color: '#a259ff',
+        source: null, buffer: null, waveform: null,
+        fadeIn: 0, fadeOut: 0, gain: 1
+      };
+      tracks[ti].clips.push(clip);
+      tracks[ti].clips.sort((a,b)=>a.startTime-b.startTime);
+      drawTrack(ti);
+      showToast('✓ 🎬 Video eklendi: ' + name + ' (' + duration.toFixed(1) + 's)');
+    };
+  };
+  vid.onerror = () => showToast('❌ Video okunamadı');
+}
+
+function loadImage(ti, input) {
+  const file = input.files[0]; if (!file) return;
+  input.value = '';
+  const url = URL.createObjectURL(file);
+  const name = file.name.replace(/\.[^.]+$/, '');
+  const DEFAULT_DURATION = 5; // Görseller varsayılan 5 saniye
+
+  const img = new Image();
+  img.onload = () => {
+    const clips = tracks[ti].clips;
+    const last = clips[clips.length - 1];
+    const startTime = last ? last.startTime + last.duration + 0.05 : playheadPos;
+
+    const clip = {
+      id: Date.now() + Math.random(),
+      isMedia: true, type: 'image',
+      url, name, thumbImg: img,
+      startTime, duration: DEFAULT_DURATION,
+      color: '#a259ff',
+      source: null, buffer: null, waveform: null,
+      fadeIn: 0, fadeOut: 0, gain: 1
+    };
+    tracks[ti].clips.push(clip);
+    tracks[ti].clips.sort((a,b)=>a.startTime-b.startTime);
+    drawTrack(ti);
+    showToast('✓ 🖼 Görsel eklendi: ' + name + ' (5s)');
+  };
+  img.onerror = () => showToast('❌ Görsel okunamadı');
+  img.src = url;
+}
+
+// ─────────────────────────────────────────────
+// ── EXPORT FORMAT DEĞİŞİM ──
+// ─────────────────────────────────────────────
+function expFmtChange() {
+  const fmt = document.getElementById('exp-fmt').value;
+  const kbpsRow = document.getElementById('exp-kbps-row');
+  const resRow  = document.getElementById('exp-res-row');
+  const bgRow   = document.getElementById('exp-bg-row');
+  if (fmt === 'mp4') {
+    kbpsRow.style.display = 'none';
+    resRow.style.display  = '';
+    bgRow.style.display   = '';
+  } else {
+    kbpsRow.style.display = '';
+    resRow.style.display  = 'none';
+    bgRow.style.display   = 'none';
+  }
+}
+
+// ─────────────────────────────────────────────
+// ── TİMELİNE SCROLLBAR ──
+// ─────────────────────────────────────────────
+let tlScrollDragging = false, tlScrollStartX = 0, tlScrollStartLeft = 0;
+
+function updateTLScrollbar() {
+  const wrap  = document.getElementById('tc-wrap');
+  const track = document.getElementById('tl-scroll-track');
+  const thumb = document.getElementById('tl-scroll-thumb');
+  if (!wrap||!track||!thumb) return;
+  const scrollable = wrap.scrollWidth - wrap.clientWidth;
+  if (scrollable <= 0) { thumb.style.width='100%'; thumb.style.left='0'; return; }
+  const ratio   = wrap.clientWidth / wrap.scrollWidth;
+  const thumbW  = Math.max(40, ratio * track.clientWidth);
+  const thumbLeft = (wrap.scrollLeft / scrollable) * (track.clientWidth - thumbW);
+  thumb.style.width = thumbW + 'px';
+  thumb.style.left  = thumbLeft + 'px';
+}
+
+function tlScrollMouseDown(e) {
+  const track = document.getElementById('tl-scroll-track');
+  const wrap  = document.getElementById('tc-wrap');
+  const rect  = track.getBoundingClientRect();
+  const ratio = (e.clientX - rect.left) / rect.width;
+  wrap.scrollLeft = ratio * (wrap.scrollWidth - wrap.clientWidth);
+  tlScrollDragging=true; tlScrollStartX=e.clientX; tlScrollStartLeft=wrap.scrollLeft;
+  document.addEventListener('mousemove', tlScrollMove);
+  document.addEventListener('mouseup',   tlScrollEnd);
+  e.preventDefault();
+}
+
+function tlScrollTouchStart(e) {
+  const touch = e.touches[0];
+  const track = document.getElementById('tl-scroll-track');
+  const wrap  = document.getElementById('tc-wrap');
+  const rect  = track.getBoundingClientRect();
+  const ratio = (touch.clientX - rect.left) / rect.width;
+  wrap.scrollLeft = ratio * (wrap.scrollWidth - wrap.clientWidth);
+  tlScrollDragging=true; tlScrollStartX=touch.clientX; tlScrollStartLeft=wrap.scrollLeft;
+  document.addEventListener('touchmove', tlScrollTouchMove, {passive:false});
+  document.addEventListener('touchend',  tlScrollEnd);
+  e.preventDefault();
+}
+
+function tlScrollMove(e) {
+  if (!tlScrollDragging) return;
+  const track = document.getElementById('tl-scroll-track');
+  const wrap  = document.getElementById('tc-wrap');
+  const dx    = e.clientX - tlScrollStartX;
+  wrap.scrollLeft = tlScrollStartLeft + (dx / track.clientWidth) * (wrap.scrollWidth - wrap.clientWidth);
+  updateTLScrollbar();
+}
+
+function tlScrollTouchMove(e) {
+  if (!tlScrollDragging) return;
+  e.preventDefault();
+  const track = document.getElementById('tl-scroll-track');
+  const wrap  = document.getElementById('tc-wrap');
+  const dx    = e.touches[0].clientX - tlScrollStartX;
+  wrap.scrollLeft = tlScrollStartLeft + (dx / track.clientWidth) * (wrap.scrollWidth - wrap.clientWidth);
+  updateTLScrollbar();
+}
+
+function tlScrollEnd() {
+  tlScrollDragging = false;
+  document.removeEventListener('mousemove', tlScrollMove);
+  document.removeEventListener('mouseup',   tlScrollEnd);
+  document.removeEventListener('touchmove', tlScrollTouchMove);
+  document.removeEventListener('touchend',  tlScrollEnd);
+}
+
+// ─────────────────────────────────────────────
+// ── GERİ AL / İLERİ AL (UNDO / REDO) ──
+// ─────────────────────────────────────────────
+let undoStack = [];
+let redoStack = [];
+
+function pushUndo() {
+  const snap = tracks.map(t => ({
+    clips: t.clips.map(c => ({
+      id:c.id, name:c.name, startTime:c.startTime, duration:c.duration,
+      color:c.color, buffer:c.buffer, waveform:c.waveform,
+      fadeIn:c.fadeIn, fadeOut:c.fadeOut, gain:c.gain, source:null, _cg:null
+    }))
+  }));
+  undoStack.push(snap);
+  if (undoStack.length > 30) undoStack.shift();
+  redoStack = [];
+  updateUndoButtons();
+}
+
+function undo() {
+  if (!undoStack.length) { showToast('❌ Geri alınacak işlem yok'); return; }
+  // Mevcut durumu redo stack'e kaydet
+  const cur = tracks.map(t => ({
+    clips: t.clips.map(c => ({...c, source:null, _cg:null}))
+  }));
+  redoStack.push(cur);
+  const snap = undoStack.pop();
+  tracks.forEach((t, i) => { t.clips = snap[i].clips; });
+  drawAll(); updateUndoButtons();
+  showToast('↩ Geri alındı');
+}
+
+function redo() {
+  if (!redoStack.length) { showToast('❌ İleri alınacak işlem yok'); return; }
+  const cur = tracks.map(t => ({
+    clips: t.clips.map(c => ({...c, source:null, _cg:null}))
+  }));
+  undoStack.push(cur);
+  const snap = redoStack.pop();
+  tracks.forEach((t, i) => { t.clips = snap[i].clips; });
+  drawAll(); updateUndoButtons();
+  showToast('↪ Yinelendi');
+}
+
+function updateUndoButtons() {
+  const bu = document.getElementById('btn-undo');
+  const br = document.getElementById('btn-redo');
+  if (bu) bu.classList.toggle('disabled', !undoStack.length);
+  if (br) br.classList.toggle('disabled', !redoStack.length);
+}
+
+// ─────────────────────────────────────────────
+// ── TAM EKRAN (FULLSCREEN) ──
+// ─────────────────────────────────────────────
+function enterFullscreen() {
+  const el = document.documentElement;
+  if (el.requestFullscreen)       el.requestFullscreen();
+  else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+  else if (el.mozRequestFullScreen)    el.mozRequestFullScreen();
+}
+
+function exitFullscreen() {
+  if (document.exitFullscreen)           document.exitFullscreen();
+  else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+  else if (document.mozCancelFullScreen)  document.mozCancelFullScreen();
+}
+
+function toggleFullscreen() {
+  const isFS = document.fullscreenElement || document.webkitFullscreenElement;
+  if (isFS) exitFullscreen(); else enterFullscreen();
+}
+
+function updateFSButton() {
+  const isFS = document.fullscreenElement || document.webkitFullscreenElement;
+  const btn  = document.getElementById('btn-fs');
+  if (!btn) return;
+  btn.textContent = isFS ? '✕' : '⛶';
+  btn.title = isFS ? 'Tam Ekrandan Çık' : 'Tam Ekran';
+  btn.classList.toggle('acc', isFS);
+}
+
+// ─────────────────────────────────────────────
+// ── PROJE AÇ / YÜKLE ──
+// ─────────────────────────────────────────────
+async function openProjectPanel() {
+  if (!db) { try { await openDB(); } catch(e){ showToast('❌ Veritabanı açılamadı'); return; } }
+  const list = document.getElementById('proj-list');
+  list.innerHTML = '<div style="color:var(--text2);font-size:10px;padding:10px 0;text-align:center">Projeler yükleniyor...</div>';
+  openPanel('proj-panel');
+
+  const tx = db.transaction('projects','readonly');
+  const req = tx.objectStore('projects').getAll();
+  req.onsuccess = e => {
+    const projects = e.target.result || [];
+    if (!projects.length) {
+      list.innerHTML = '<div style="color:var(--text2);font-size:10px;padding:16px 0;text-align:center">💾 Henüz kayıtlı proje yok.<br>Projeyi kaydetmek için topbardaki 💾 butonunu kullanın.</div>';
+      return;
+    }
+    list.innerHTML = '';
+    projects.sort((a,b)=>(b.savedAt||0)-(a.savedAt||0)).forEach(p => {
+      const item = document.createElement('div');
+      item.className = 'preset-item';
+      const date = p.savedAt ? new Date(p.savedAt).toLocaleString('tr') : '?';
+      item.innerHTML = `
+        <div style="flex:1">
+          <div class="preset-item-name" style="font-size:12px">${p.name}</div>
+          <div style="font-size:8px;color:var(--text3);margin-top:2px;font-family:var(--mono)">${date}</div>
+        </div>
+        <div class="preset-item-del" title="Projeyi sil" onclick="deleteProject('${p.name.replace(/'/g,"\\'")}',event)">🗑</div>
+      `;
+      item.addEventListener('click', ev => { if(ev.target.closest('.preset-item-del')) return; doLoadProject(p); });
+      list.appendChild(item);
+    });
+  };
+  req.onerror = () => { list.innerHTML = '<div style="color:var(--accent2);text-align:center">❌ Veritabanı hatası</div>'; };
+}
+
+async function doLoadProject(proj) {
+  closePanel('proj-panel');
+  showToast('⏳ Proje yükleniyor: ' + proj.name);
+  initAudio();
+  if (audioCtx.state === 'suspended') await audioCtx.resume();
+  stopAll();
+  tracks.forEach(t => { t.clips = []; });
+
+  for (let i = 0; i < Math.min((proj.tracks||[]).length, tracks.length); i++) {
+    const td = proj.tracks[i];
+    if (td.clips) {
+      for (const cd of td.clips) {
+        try {
+          const b64 = cd.bufBase64;
+          const bytes = atob(b64);
+          const ab = new ArrayBuffer(bytes.length);
+          const arr = new Uint8Array(ab);
+          for (let j=0;j<bytes.length;j++) arr[j]=bytes.charCodeAt(j);
+          const buf = await audioCtx.decodeAudioData(ab);
+          tracks[i].clips.push({
+            id: cd.id || Date.now()+Math.random(),
+            buffer: buf, name: cd.name || 'Klip',
+            startTime: cd.startTime || 0, duration: cd.duration || buf.duration,
+            color: tracks[i].color, source: null, _cg: null,
+            waveform: computeWaveform(buf),
+            fadeIn: cd.fadeIn||0, fadeOut: cd.fadeOut||0, gain: cd.gain||1
+          });
+        } catch(err) { console.warn('Klip yüklenemedi:', err); }
+      }
+    }
+    if (td.volume !== undefined) {
+      tracks[i].volume = td.volume;
+      const vEl = document.getElementById('vol'+i);
+      if (vEl) vEl.value = Math.round(td.volume*100);
+    }
+    if (td.pan !== undefined) {
+      tracks[i].pan = td.pan;
+      const pEl = document.getElementById('pan'+i);
+      if (pEl) pEl.value = Math.round(td.pan*100);
+    }
+    if (td.eqVals) tracks[i].eqVals = td.eqVals;
+  }
+
+  document.getElementById('proj-name').textContent = proj.name;
+  if (proj.bpm) document.getElementById('bpm-d').textContent = proj.bpm;
+  drawAll(); updateTLScrollbar();
+  showToast('✓ Proje yüklendi: ' + proj.name);
+}
+
+async function deleteProject(name, e) {
+  e.stopPropagation();
+  if (!confirm('«' + name + '» projesini silmek istiyor musunuz?')) return;
+  if (!db) await openDB();
+  const tx = db.transaction('projects','readwrite');
+  tx.objectStore('projects').delete(name);
+  tx.oncomplete = () => { showToast('🗑 Proje silindi: '+name); openProjectPanel(); };
+}
+
+
+let db = null;
+function openDB() {
+  return new Promise((res,rej)=>{
+    const req = indexedDB.open('KaraStudioDB',1);
+    req.onupgradeneeded = e => { const d=e.target.result; if(!d.objectStoreNames.contains('projects')) d.createObjectStore('projects',{keyPath:'name'}); if(!d.objectStoreNames.contains('settings')) d.createObjectStore('settings',{keyPath:'key'}); };
+    req.onsuccess = e => { db=e.target.result; res(db); };
+    req.onerror = ()=>rej('DB açılamadı');
+  });
+}
+
+async function saveProject() {
+  if (!db) await openDB();
+  const name = document.getElementById('proj-name').textContent;
+  // Serialize clips (buffer as base64)
+  const tData = await Promise.all(tracks.map(async t => ({
+    name:t.name, volume:t.volume, pan:t.pan, muted:t.muted, solo:t.solo, eqVals:t.eqVals,
+    clips: await Promise.all(t.clips.filter(c => !c.isMedia).map(async c => {
+      const raw = audioBufferToWav(c.buffer);
+      const ab = await raw.arrayBuffer();
+      return { id:c.id, name:c.name, startTime:c.startTime, duration:c.duration, fadeIn:c.fadeIn, fadeOut:c.fadeOut, gain:c.gain, bufBase64: arrayBufferToB64(ab) };
+    }))
+  })));
+  const tx=db.transaction('projects','readwrite');
+  tx.objectStore('projects').put({name, tracks:tData, bpm:document.getElementById('bpm-d').textContent, savedAt:Date.now()});
+  tx.oncomplete=()=>showToast('💾 Proje kaydedildi: '+name);
+  tx.onerror=()=>showToast('❌ Kayıt hatası');
+}
+
+async function saveToStorage() {
+  if (!db) { try { await openDB(); } catch(e){ return; } }
+  const tx = db.transaction('settings','readwrite'); const s = tx.objectStore('settings');
+  s.put({key:'micPresets', value: JSON.stringify(micPresets)});
+  s.put({key:'eqPresets',  value: JSON.stringify(eqPresets)});
+  s.put({key:'micSettings',value: JSON.stringify(micSettings)});
+}
+
+async function loadStorage() {
+  try { await openDB(); } catch(e){ return; }
+  const tx=db.transaction('settings','readonly'); const s=tx.objectStore('settings');
+  ['micPresets','eqPresets','micSettings'].forEach(key => {
+    const req=s.get(key); req.onsuccess=e=>{
+      if(!e.target.result) return;
+      const val=JSON.parse(e.target.result.value);
+      if(key==='micPresets'){micPresets=val; renderMicPresets();}
+      if(key==='eqPresets') {eqPresets=val;}
+      if(key==='micSettings'){Object.assign(micSettings,val);}
+    };
+  });
+}
+
+function arrayBufferToB64(ab) {
+  const bytes=new Uint8Array(ab); let s='';
+  for(let i=0;i<bytes.byteLength;i+=8192) { s+=String.fromCharCode(...bytes.subarray(i,i+8192)); }
+  return btoa(s);
+}
+
+// ── PANELS ──
+function openPanel(id) { document.getElementById(id).classList.add('vis'); }
+function closePanel(id) { document.getElementById(id).classList.remove('vis'); }
+function panelBgClick(e, id) { if(e.target===document.getElementById(id)) closePanel(id); }
+
+// ── TOAST ──
+function showToast(msg) {
+  const t=document.getElementById('toast'); t.textContent=msg;
+  t.classList.add('show'); clearTimeout(t._to); t._to=setTimeout(()=>t.classList.remove('show'),2600);
+}
+
+// ── KEYBOARD ──
+window.addEventListener('keydown', e=>{
+  if(e.code==='Space'){e.preventDefault();togglePlay();}
+  if(e.code==='KeyR' && !e.ctrlKey) toggleRecord();
+  if(e.code==='KeyS' && e.ctrlKey){e.preventDefault();saveProject();}
+  if(e.code==='KeyZ' && e.ctrlKey){e.preventDefault();undo();}
+  if(e.code==='KeyY' && e.ctrlKey){e.preventDefault();redo();}
+  if(e.code==='Escape'){closeFX();['eq-panel','mic-panel','exp-panel','ai-panel','proj-panel'].forEach(id=>closePanel(id));}
+});
+
+// ── INIT ──
+window.addEventListener('load', ()=>{
+  [0,1,2].forEach(i=>{
+    const c=document.getElementById('tc'+i), r=document.getElementById('tr'+i);
+    c.height=r.clientHeight||58;
+  });
+  drawAll();
+  setupDrag();
+  renderMicPresets();
+  renderEQPresets();
+  loadStorage();
+  updateTLScrollbar();
+  updateUndoButtons();
+  drawRuler();
+  setupRuler();
+  document.addEventListener('fullscreenchange', updateFSButton);
+  document.addEventListener('webkitfullscreenchange', updateFSButton);
+});
+
+window.addEventListener('resize', ()=>{
+  [0,1,2].forEach(i=>{
+    const c=document.getElementById('tc'+i), r=document.getElementById('tr'+i);
+    c.height=r.clientHeight||58;
+  });
+  drawAll();
+  updateTLScrollbar();
+  drawRuler();
+});
+</script>
+</body>
+</html>
