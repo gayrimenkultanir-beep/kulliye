@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Oda — 3D Yürüyüş Turu</title>
+<style>
+  :root{
+    --ink:#1b1815;
+    --paper:#f2ece2;
+    --paper-dim:#c9c0b1;
+    --accent:#b9713f;
+    --accent-soft:rgba(185,113,63,0.16);
+    --glass:rgba(20,17,14,0.62);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{width:100%;height:100%;overflow:hidden;background:#0c0a08;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:var(--paper);}
+  #canvasWrap{position:fixed;inset:0;}
+  canvas{display:block;width:100%;height:100%;touch-action:none;outline:none;}
+
+  /* ---------- Yükleniyor ---------- */
+  #loadingScreen{
+    position:fixed;inset:0;z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;
+    background:radial-gradient(circle at 50% 40%, #241f19 0%, #0c0a08 75%);
+    transition:opacity .5s ease, visibility .5s ease;
+  }
+  #loadingScreen.hidden{opacity:0;visibility:hidden;pointer-events:none;}
+  #loadingScreen h1{font-family:Georgia,'Times New Roman',serif;font-weight:600;font-size:22px;letter-spacing:.02em;color:var(--paper);}
+  #loadingScreen p{font-size:12.5px;color:var(--paper-dim);}
+  .ring{width:44px;height:44px;border-radius:50%;border:2.5px solid rgba(242,236,226,0.15);border-top-color:var(--accent);animation:spin 0.9s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  #loadPct{font-size:11px;color:var(--paper-dim);letter-spacing:.08em;}
+
+  /* ---------- Giris ekrani ---------- */
+  #introScreen{
+    position:fixed;inset:0;z-index:40;display:none;flex-direction:column;align-items:center;justify-content:flex-end;
+    background:linear-gradient(to top, rgba(8,7,6,0.88) 0%, rgba(8,7,6,0.15) 55%, transparent 75%);
+    padding:0 24px 44px;text-align:center;gap:16px;
+  }
+  #introScreen.show{display:flex;}
+  #introScreen .eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600;}
+  #introScreen h1{font-family:Georgia,'Times New Roman',serif;font-size:26px;font-weight:600;max-width:520px;}
+  #introScreen p{font-size:13.5px;color:var(--paper-dim);max-width:420px;line-height:1.6;}
+  .startBtns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:6px;}
+  .primaryBtn{
+    background:linear-gradient(135deg,var(--accent),#8f5228);color:#1b1200;border:none;font-weight:700;
+    padding:13px 26px;border-radius:30px;font-size:14px;cursor:pointer;box-shadow:0 8px 24px rgba(185,113,63,0.35);
+  }
+  .secondaryBtn{
+    background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);color:var(--paper);
+    padding:13px 22px;border-radius:30px;font-size:14px;cursor:pointer;backdrop-filter:blur(6px);
+  }
+  .primaryBtn:hover{filter:brightness(1.08);}
+  .secondaryBtn:hover{background:rgba(255,255,255,0.14);}
+
+  /* ---------- HUD ---------- */
+  #hud{position:fixed;inset:0;z-index:20;pointer-events:none;}
+  #topBar{
+    position:absolute;top:0;left:0;right:0;padding:16px 18px;display:flex;align-items:center;justify-content:space-between;
+    background:linear-gradient(to bottom, rgba(8,7,6,0.6), transparent);
+  }
+  #roomLabel{font-size:13px;font-weight:600;letter-spacing:.02em;}
+  #roomLabel span{display:block;font-size:10.5px;color:var(--paper-dim);font-weight:400;margin-top:1px;}
+  #exitBtn{
+    pointer-events:auto;background:rgba(20,17,14,0.55);border:1px solid rgba(255,255,255,0.18);color:var(--paper);
+    padding:8px 14px;border-radius:20px;font-size:12px;cursor:pointer;backdrop-filter:blur(6px);display:none;
+  }
+  #exitBtn.show{display:inline-flex;}
+
+  #crosshair{
+    position:absolute;top:50%;left:50%;width:6px;height:6px;margin:-3px;border-radius:50%;
+    background:rgba(255,255,255,0.75);box-shadow:0 0 0 1.5px rgba(0,0,0,0.4);display:none;
+  }
+  #crosshair.show{display:block;}
+
+  #centerHint{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;
+    background:rgba(12,10,8,0.55);padding:14px 22px;border-radius:14px;backdrop-filter:blur(6px);
+    font-size:13px;color:var(--paper);display:none;line-height:1.5;
+  }
+  #centerHint.show{display:block;}
+
+  #bottomBar{
+    position:absolute;bottom:0;left:0;right:0;padding:18px;display:flex;align-items:flex-end;justify-content:space-between;
+    background:linear-gradient(to top, rgba(8,7,6,0.55), transparent);
+  }
+  #vrBtnHolder{pointer-events:auto;}
+  #vrEnterBtn{
+    background:linear-gradient(135deg,var(--accent),#8f5228);color:#1b1200;border:none;font-weight:700;
+    padding:12px 22px;border-radius:30px;font-size:13.5px;cursor:pointer;display:none;align-items:center;gap:8px;
+    box-shadow:0 8px 22px rgba(185,113,63,0.4);
+  }
+  #vrEnterBtn.show{display:inline-flex;}
+  #notSupportedNote{font-size:11px;color:var(--paper-dim);max-width:180px;display:none;}
+  #notSupportedNote.show{display:block;}
+
+  #compass{
+    pointer-events:none;width:46px;height:46px;border-radius:50%;background:rgba(12,10,8,0.55);
+    border:1px solid rgba(255,255,255,0.15);position:relative;backdrop-filter:blur(6px);
+  }
+  #compassNeedle{
+    position:absolute;top:50%;left:50%;width:2px;height:16px;background:var(--accent);transform-origin:50% 100%;
+    margin-left:-1px;margin-top:-16px;border-radius:2px;
+  }
+
+  /* ---------- Mobil joystick ---------- */
+  #joystickZone{
+    position:absolute;left:22px;bottom:22px;width:118px;height:118px;border-radius:50%;
+    background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);display:none;pointer-events:auto;
+  }
+  #joystickZone.show{display:block;}
+  #joystickKnob{
+    position:absolute;top:50%;left:50%;width:52px;height:52px;margin:-26px;border-radius:50%;
+    background:rgba(242,236,226,0.85);box-shadow:0 3px 10px rgba(0,0,0,0.3);
+  }
+  #lookZoneHint{
+    position:absolute;right:20px;bottom:26px;font-size:11px;color:var(--paper-dim);text-align:right;
+    max-width:120px;line-height:1.5;display:none;pointer-events:none;
+  }
+  #lookZoneHint.show{display:block;}
+
+  @media (min-width: 821px){
+    #joystickZone, #lookZoneHint{display:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<div id="canvasWrap"></div>
+
+<div id="loadingScreen">
+  <div class="ring"></div>
+  <h1>Oda Yükleniyor</h1>
+  <p id="loadPct">Model hazırlanıyor…</p>
+</div>
+
+<div id="introScreen">
+  <div class="eyebrow">3D Yürüyüş Turu</div>
+  <h1 id="introTitle">Restorasyon Modelini Gez</h1>
+  <p>Fare/parmakla bakış yönünü değiştir, WASD veya sanal joystick ile yürü. VR gözlüğün varsa gerçek adımlarınla mekânda dolaşabilirsin.</p>
+  <div class="startBtns">
+    <button class="primaryBtn" id="startScreenBtn">🖥️ Ekranda Gez</button>
+    <button class="secondaryBtn" id="startVrBtn" style="display:none;">🥽 VR'da Gez</button>
+  </div>
+</div>
+
+<div id="hud">
+  <div id="topBar">
+    <div id="roomLabel">Oda<span id="roomSub">3D restorasyon modeli</span></div>
+    <button id="exitBtn">✎ Menüye Dön</button>
+  </div>
+  <div id="crosshair"></div>
+  <div id="centerHint"></div>
+  <div id="bottomBar">
+    <div id="vrBtnHolder">
+      <button id="vrEnterBtn">🥽 VR'da Görüntüle</button>
+      <div id="notSupportedNote">Bu cihaz/tarayıcı VR desteklemiyor. Ekranda gezinebilirsin.</div>
+    </div>
+    <div id="compass"><div id="compassNeedle"></div></div>
+  </div>
+  <div id="joystickZone"><div id="joystickKnob"></div></div>
+  <div id="lookZoneHint">Sağ alanı sürükleyerek bak</div>
+</div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { VRButton } from 'three/addons/webxr/VRButton.js';
+
+/* ================= Ayarlar ================= */
+const EYE_HEIGHT = 1.68;
+const WALK_SPEED = 1.9;         // m/s
+const COLLIDE_RADIUS = 0.32;    // duvara yaklaşma sınırı
+const ROOM_LABEL = "Oda";
+
+/* ================= Temel sahne ================= */
+const canvasWrap = document.getElementById('canvasWrap');
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.xr.enabled = true;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.05;
+canvasWrap.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0c0a08);
+
+const camera = new THREE.PerspectiveCamera(70, window.innerWidth/window.innerHeight, 0.05, 200);
+
+// Oyuncu kaynağı: rig hareket eder, kamera rig içinde döner (VR başlığın kendi rotasyonunu da barındırır)
+const rig = new THREE.Group();
+rig.add(camera);
+scene.add(rig);
+
+const hemi = new THREE.HemisphereLight(0xfff3e0, 0x1a1410, 0.9);
+scene.add(hemi);
+const sun = new THREE.DirectionalLight(0xffe9c7, 0.9);
+sun.position.set(4, 8, 3);
+scene.add(sun);
+const fillLight = new THREE.PointLight(0xffd9a8, 0.4, 20);
+fillLight.position.set(-3, 2.2, -2);
+scene.add(fillLight);
+
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth/window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+/* ================= Model yükleme (base64 gömülü) ================= */
+const loadingScreen = document.getElementById('loadingScreen');
+const loadPct = document.getElementById('loadPct');
+
+// Tanılama: hata olursa ekranda göster (mobilde konsol erişimi zor olduğu için)
+window.addEventListener('error', (e) => {
+  loadPct.textContent = 'Hata: ' + (e.message || 'bilinmeyen script hatası');
+  loadPct.style.color = '#e07a5f';
+});
+window.addEventListener('unhandledrejection', (e) => {
+  const msg = (e.reason && e.reason.message) ? e.reason.message : String(e.reason);
+  loadPct.textContent = 'Hata: ' + msg;
+  loadPct.style.color = '#e07a5f';
+});
+setTimeout(() => {
+  if (!modelReady){
+    loadPct.textContent += ' — 10sn geçti, hâlâ yüklenmedi. İnternet/ağ CDN\'i engelliyor olabilir.';
+  }
+}, 10000);
+const introScreen = document.getElementById('introScreen');
+const startScreenBtn = document.getElementById('startScreenBtn');
+const startVrBtn = document.getElementById('startVrBtn');
+const vrEnterBtn = document.getElementById('vrEnterBtn');
+const notSupportedNote = document.getElementById('notSupportedNote');
+const exitBtn = document.getElementById('exitBtn');
+const crosshair = document.getElementById('crosshair');
+const centerHint = document.getElementById('centerHint');
+const joystickZone = document.getElementById('joystickZone');
+const joystickKnob = document.getElementById('joystickKnob');
+const lookZoneHint = document.getElementById('lookZoneHint');
+const compassNeedle = document.getElementById('compassNeedle');
+const roomSub = document.getElementById('roomSub');
+
+let modelBox = new THREE.Box3();
+let collidables = [];
+let floorY = 0;
+let modelReady = false;
+
+// Model dosyası URL'den geliyor: viewer.html?model=models/oda.glb
+const params = new URLSearchParams(window.location.search);
+const modelParam = params.get('model');
+const roomNameParam = params.get('ad'); // opsiyonel: özel oda adı ?ad=Salon
+
+if (!modelParam){
+  loadPct.textContent = "Model belirtilmedi. Adrese ?model=models/dosya.glb ekleyerek aç.";
+  loadPct.style.color = '#e07a5f';
+} else {
+  const niceName = roomNameParam || modelParam.split('/').pop().replace(/\.glb$/i,'').replace(/[-_]+/g,' ').replace(/\b\w/g, c => c.toUpperCase());
+  document.title = niceName + " — 3D Yürüyüş Turu";
+  document.getElementById('roomLabel').firstChild.textContent = niceName;
+  document.getElementById('introTitle').textContent = niceName + "'i Gez";
+
+  const loader = new GLTFLoader();
+  loader.load(modelParam, (gltf) => {
+  const model = gltf.scene;
+  scene.add(model);
+
+  model.traverse((o) => {
+    if (o.isMesh){
+      o.castShadow = false;
+      o.receiveShadow = false;
+      collidables.push(o);
+      if (o.material){
+        const mats = Array.isArray(o.material) ? o.material : [o.material];
+        mats.forEach(m => { if (m.map) m.map.colorSpace = THREE.SRGBColorSpace; m.side = THREE.DoubleSide; });
+      }
+    }
+  });
+
+  modelBox.setFromObject(model);
+
+  // En büyük yatay ("zemin" olması muhtemel) mesh'i bul — başlangıç noktasını
+  // tüm modelin (dış cephe/bahçe dahil olabilecek) bounding box merkezi yerine
+  // gerçek oda zemininin üstüne yerleştirmek için.
+  let bestFloor = null, bestArea = 0;
+  const tmpBox = new THREE.Box3();
+  const midY = (modelBox.min.y + modelBox.max.y) / 2;
+  collidables.forEach((mesh) => {
+    tmpBox.setFromObject(mesh);
+    const size = new THREE.Vector3();
+    tmpBox.getSize(size);
+    const boxCenter = new THREE.Vector3();
+    tmpBox.getCenter(boxCenter);
+    const isFlat = size.y < Math.max(0.35, Math.min(size.x, size.z) * 0.08);
+    const isLowerHalf = boxCenter.y <= midY;
+    const area = size.x * size.z;
+    if (isFlat && isLowerHalf && area > bestArea){
+      bestArea = area;
+      bestFloor = tmpBox.clone();
+    }
+  });
+
+  const center = new THREE.Vector3();
+  let startX, startZ;
+  if (bestFloor){
+    bestFloor.getCenter(center);
+    startX = center.x; startZ = center.z;
+    floorY = bestFloor.max.y; // zemin panelinin üst yüzeyi
+  } else {
+    modelBox.getCenter(center);
+    startX = center.x; startZ = center.z;
+    floorY = modelBox.min.y;
+  }
+
+  rig.position.set(startX, floorY + EYE_HEIGHT, startZ);
+
+  // Emniyet: başlangıç noktasından aşağı ışın at, gerçekten bir yüzeye
+  // oturduğumuzu doğrula/düzelt (zemin farklı bir kotta ise).
+  const startRay = new THREE.Raycaster(
+    new THREE.Vector3(startX, modelBox.max.y + 2, startZ),
+    new THREE.Vector3(0, -1, 0)
+  );
+  const startHits = startRay.intersectObjects(collidables, false);
+  if (startHits.length){
+    floorY = startHits[0].point.y;
+    rig.position.y = floorY + EYE_HEIGHT;
+  }
+
+  modelReady = true;
+  loadingScreen.classList.add('hidden');
+  introScreen.classList.add('show');
+
+  roomSub.textContent = "3D restorasyon modeli · " + estimateAreaLabel();
+}, (xhr) => {
+  if (xhr.total){
+    const pct = Math.round((xhr.loaded/xhr.total)*100);
+    loadPct.textContent = "Model hazırlanıyor… " + pct + "%";
+  }
+}, (err) => {
+  loadPct.textContent = "Model yüklenemedi: " + (err && err.message ? err.message : String(err));
+  loadPct.style.color = '#e07a5f';
+  console.error(err);
+  });
+}
+
+function estimateAreaLabel(){
+  const size = new THREE.Vector3();
+  modelBox.getSize(size);
+  const area = (size.x * size.z);
+  if (area > 1 && area < 400) return Math.round(area) + " m² tahmini alan";
+  return "";
+}
+
+/* ================= VR desteği kontrolü ================= */
+if ('xr' in navigator){
+  navigator.xr.isSessionSupported('immersive-vr').then((supported) => {
+    if (supported){
+      vrEnterBtn.classList.add('show');
+      startVrBtn.style.display = 'inline-flex';
+    } else {
+      notSupportedNote.classList.add('show');
+    }
+  }).catch(() => notSupportedNote.classList.add('show'));
+} else {
+  notSupportedNote.classList.add('show');
+}
+
+const vrButtonEl = VRButton.createButton(renderer);
+vrButtonEl.style.display = 'none'; // görünmez; kendi butonumuzu kullanıyoruz, click'i tetikleyeceğiz
+document.body.appendChild(vrButtonEl);
+
+function enterVR(){
+  vrButtonEl.click();
+}
+vrEnterBtn.addEventListener('click', enterVR);
+startVrBtn.addEventListener('click', () => { introScreen.classList.remove('show'); enterVR(); });
+
+renderer.xr.addEventListener('sessionstart', () => {
+  exitBtn.classList.remove('show');
+  crosshair.classList.remove('show');
+  joystickZone.classList.remove('show');
+  lookZoneHint.classList.remove('show');
+});
+renderer.xr.addEventListener('sessionend', () => {
+  introScreen.classList.add('show');
+});
+
+/* ================= Masaüstü: mouse-look + WASD ================= */
+let yaw = 0, pitch = 0;
+let pointerLocked = false;
+const keys = {};
+const isTouch = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+
+startScreenBtn.addEventListener('click', () => {
+  introScreen.classList.remove('show');
+  exitBtn.classList.add('show');
+  if (!isTouch){
+    crosshair.classList.add('show');
+    renderer.domElement.requestPointerLock && renderer.domElement.requestPointerLock();
+  } else {
+    joystickZone.classList.add('show');
+    lookZoneHint.classList.add('show');
+  }
+});
+
+exitBtn.addEventListener('click', () => {
+  introScreen.classList.add('show');
+  exitBtn.classList.remove('show');
+  crosshair.classList.remove('show');
+  joystickZone.classList.remove('show');
+  lookZoneHint.classList.remove('show');
+  if (document.pointerLockElement) document.exitPointerLock();
+});
+
+document.addEventListener('pointerlockchange', () => {
+  pointerLocked = document.pointerLockElement === renderer.domElement;
+});
+renderer.domElement.addEventListener('click', () => {
+  if (!isTouch && !renderer.xr.isPresenting && exitBtn.classList.contains('show') && !pointerLocked){
+    renderer.domElement.requestPointerLock && renderer.domElement.requestPointerLock();
+  }
+});
+
+window.addEventListener('mousemove', (e) => {
+  if (!pointerLocked) return;
+  yaw -= e.movementX * 0.0022;
+  pitch -= e.movementY * 0.0022;
+  pitch = Math.max(-1.2, Math.min(1.2, pitch));
+});
+
+window.addEventListener('keydown', (e) => { keys[e.code] = true; });
+window.addEventListener('keyup', (e) => { keys[e.code] = false; });
+
+/* ================= Mobil: joystick (hareket) + sağ ekran sürükle (bak) ================= */
+let joyActive = false, joyStartX=0, joyStartY=0, joyVecX=0, joyVecY=0;
+let lookActive = false, lookLastX=0, lookLastY=0;
+
+joystickZone.addEventListener('touchstart', (e) => {
+  joyActive = true;
+  const t = e.changedTouches[0];
+  joyStartX = t.clientX; joyStartY = t.clientY;
+  e.preventDefault();
+}, {passive:false});
+joystickZone.addEventListener('touchmove', (e) => {
+  if (!joyActive) return;
+  const t = e.changedTouches[0];
+  let dx = t.clientX - joyStartX, dy = t.clientY - joyStartY;
+  const max = 46;
+  const len = Math.hypot(dx,dy);
+  if (len > max){ dx = dx/len*max; dy = dy/len*max; }
+  joystickKnob.style.transform = `translate(${dx}px, ${dy}px)`;
+  joyVecX = dx/max; joyVecY = dy/max;
+  e.preventDefault();
+}, {passive:false});
+function joyEnd(e){
+  joyActive = false; joyVecX = 0; joyVecY = 0;
+  joystickKnob.style.transform = 'translate(0,0)';
+}
+joystickZone.addEventListener('touchend', joyEnd);
+joystickZone.addEventListener('touchcancel', joyEnd);
+
+renderer.domElement.addEventListener('touchstart', (e) => {
+  if (!isTouch || renderer.xr.isPresenting) return;
+  for (const t of e.changedTouches){
+    if (t.clientX > window.innerWidth * 0.4){
+      lookActive = true; lookLastX = t.clientX; lookLastY = t.clientY;
+    }
+  }
+}, {passive:true});
+renderer.domElement.addEventListener('touchmove', (e) => {
+  if (!lookActive) return;
+  for (const t of e.changedTouches){
+    if (t.clientX > window.innerWidth * 0.4){
+      const dx = t.clientX - lookLastX, dy = t.clientY - lookLastY;
+      yaw -= dx * 0.0035;
+      pitch -= dy * 0.0035;
+      pitch = Math.max(-1.2, Math.min(1.2, pitch));
+      lookLastX = t.clientX; lookLastY = t.clientY;
+    }
+  }
+}, {passive:true});
+renderer.domElement.addEventListener('touchend', (e) => { lookActive = false; });
+
+/* ================= Çarpışma ve zemin ================= */
+const downRay = new THREE.Raycaster();
+const fwdRay = new THREE.Raycaster();
+const tmpDir = new THREE.Vector3();
+const tmpPos = new THREE.Vector3();
+
+function moveRig(moveX, moveZ, dt, facingYaw){
+  if (moveX === 0 && moveZ === 0) return;
+  const speed = WALK_SPEED * dt;
+  const sin = Math.sin(facingYaw), cos = Math.cos(facingYaw);
+  // moveZ: ileri(-1)/geri(1), moveX: sağ(1)/sol(-1) — kameranın baktığı yöne göre
+  let dx = (-moveZ * sin + moveX * cos) * speed;
+  let dz = (-moveZ * cos - moveX * sin) * speed;
+
+  // duvar çarpışma kontrolü (basit): hareket yönünde kısa mesafe ray at
+  tmpDir.set(dx, 0, dz).normalize();
+  fwdRay.set(new THREE.Vector3(rig.position.x, floorY + 1.0, rig.position.z), tmpDir);
+  fwdRay.far = COLLIDE_RADIUS + Math.hypot(dx,dz);
+  const hits = collidables.length ? fwdRay.intersectObjects(collidables, false) : [];
+  if (hits.length && hits[0].distance < COLLIDE_RADIUS + 0.05){
+    return; // duvara çok yakın, hareketi iptal et
+  }
+
+  rig.position.x += dx;
+  rig.position.z += dz;
+
+  // taban yüksekliği güncelle (kat farkları için)
+  if (collidables.length){
+    downRay.set(new THREE.Vector3(rig.position.x, rig.position.y + 3, rig.position.z), new THREE.Vector3(0,-1,0));
+    const fHits = downRay.intersectObjects(collidables, false);
+    if (fHits.length){
+      rig.position.y = fHits[0].point.y + EYE_HEIGHT;
+    }
+  }
+}
+
+/* ================= XR kontrolcü hareketi (thumbstick) ================= */
+function handleXRInput(dt){
+  const session = renderer.xr.getSession();
+  if (!session) return;
+  for (const source of session.inputSources){
+    if (!source.gamepad) continue;
+    const axes = source.gamepad.axes;
+    if (!axes || axes.length < 2) continue;
+    // çoğu Quest denetleyicisinde axes[2],axes[3] thumbstick; bazılarında [0],[1]
+    const ax = Math.abs(axes[2]) > 0.05 || Math.abs(axes[3]) > 0.05 ? axes[2] : axes[0];
+    const ay = Math.abs(axes[2]) > 0.05 || Math.abs(axes[3]) > 0.05 ? axes[3] : axes[1];
+    if (Math.abs(ax) < 0.12 && Math.abs(ay) < 0.12) continue;
+
+    const xrCam = renderer.xr.getCamera();
+    const facing = new THREE.Euler().setFromQuaternion(xrCam.quaternion, 'YXZ').y;
+    moveRig(Math.abs(ax) > 0.12 ? ax : 0, Math.abs(ay) > 0.12 ? ay : 0, dt, facing);
+  }
+}
+
+/* ================= Ana döngü ================= */
+const clock = new THREE.Clock();
+
+renderer.setAnimationLoop(() => {
+  const dt = Math.min(clock.getDelta(), 0.05);
+
+  if (renderer.xr.isPresenting){
+    handleXRInput(dt);
+  } else if (modelReady) {
+    camera.rotation.set(pitch, yaw, 0, 'YXZ');
+
+    let mx = 0, mz = 0;
+    if (isTouch){
+      mx = joyVecX; mz = joyVecY;
+    } else {
+      if (keys['KeyW'] || keys['ArrowUp']) mz -= 1;
+      if (keys['KeyS'] || keys['ArrowDown']) mz += 1;
+      if (keys['KeyA'] || keys['ArrowLeft']) mx -= 1;
+      if (keys['KeyD'] || keys['ArrowRight']) mx += 1;
+    }
+    const len = Math.hypot(mx,mz);
+    if (len > 1){ mx/=len; mz/=len; }
+    moveRig(mx, mz, dt, yaw);
+  }
+
+  // pusula
+  const facingYaw = renderer.xr.isPresenting ? new THREE.Euler().setFromQuaternion(renderer.xr.getCamera().quaternion,'YXZ').y : yaw;
+  compassNeedle.style.transform = `rotate(${facingYaw}rad)`;
+
+  renderer.render(scene, camera);
+});
+</script>
+</body>
+</html>

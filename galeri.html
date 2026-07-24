@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D Oda Turları — Galeri</title>
+<style>
+  :root{
+    --ink:#1b1815; --paper:#f2ece2; --paper-dim:#a99d8c;
+    --accent:#b9713f; --card-bg:#171310; --card-border:rgba(255,255,255,0.08);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    min-height:100vh;background:radial-gradient(circle at 20% 0%, #241f19 0%, #0c0a08 55%);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:var(--paper);
+    padding:40px 20px 80px;
+  }
+  header{max-width:900px;margin:0 auto 34px;}
+  .eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700;}
+  h1{font-family:Georgia,'Times New Roman',serif;font-size:30px;margin-top:8px;font-weight:600;}
+  header p{color:var(--paper-dim);font-size:13.5px;margin-top:8px;max-width:520px;line-height:1.6;}
+
+  #grid{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;}
+  .card{
+    background:var(--card-bg);border:1px solid var(--card-border);border-radius:16px;overflow:hidden;
+    text-decoration:none;color:var(--paper);display:flex;flex-direction:column;transition:transform .18s ease, border-color .18s ease;
+  }
+  .card:hover{transform:translateY(-3px);border-color:rgba(185,113,63,0.5);}
+  .thumb{
+    height:130px;background:
+      linear-gradient(135deg, rgba(185,113,63,0.22), transparent 60%),
+      repeating-linear-gradient(45deg, #201a15 0 2px, #191410 2px 34px);
+    display:flex;align-items:center;justify-content:center;font-size:30px;
+  }
+  .card .info{padding:14px 16px 16px;}
+  .card .name{font-weight:700;font-size:14.5px;}
+  .card .meta{font-size:11.5px;color:var(--paper-dim);margin-top:4px;}
+
+  #state{max-width:900px;margin:0 auto;color:var(--paper-dim);font-size:13.5px;line-height:1.7;}
+  #state code{background:rgba(255,255,255,0.08);padding:2px 6px;border-radius:5px;font-size:12px;}
+  #state.error{color:#e3a08a;}
+  .ring{width:30px;height:30px;border-radius:50%;border:2.5px solid rgba(242,236,226,0.15);border-top-color:var(--accent);animation:spin .9s linear infinite;margin-bottom:14px;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Restorasyon Arşivi</div>
+  <h1>3D Oda Turları</h1>
+  <p>Bu liste, reponun <code style="background:rgba(255,255,255,0.08);padding:2px 6px;border-radius:5px;">models/</code> klasöründeki tüm <code style="background:rgba(255,255,255,0.08);padding:2px 6px;border-radius:5px;">.glb</code> dosyalarını otomatik gösterir. Yeni bir model eklemek için o klasöre dosyayı yükleyip push etmen yeterli — sayfayı yeniden oluşturmana gerek yok.</p>
+</header>
+
+<div id="state">
+  <div class="ring"></div>
+  Modeller listeleniyor…
+</div>
+<div id="grid"></div>
+
+<script>
+/* ====== Tek seferlik ayar: repo bilgin ====== */
+const OWNER = "gayrimenkultanir-beep";
+const REPO  = "kulliye";
+const BRANCH = "main";     // reponun ana dalı farklıysa (örn. "master") burayı değiştir
+const FOLDER = "models";   // .glb dosyalarını bu klasöre yükle
+/* ============================================ */
+
+const state = document.getElementById('state');
+const grid = document.getElementById('grid');
+
+function niceName(filename){
+  return filename.replace(/\.glb$/i,'').replace(/[-_]+/g,' ').replace(/\b\w/g, c => c.toUpperCase());
+}
+
+async function loadModels(){
+  const apiUrl = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${FOLDER}?ref=${BRANCH}`;
+  let res, data;
+  try {
+    res = await fetch(apiUrl);
+  } catch(e){
+    state.className = 'error';
+    state.innerHTML = 'Bağlantı hatası: GitHub API\'ye ulaşılamadı. İnternetini kontrol et.';
+    return;
+  }
+
+  if (res.status === 404){
+    state.className = 'error';
+    state.innerHTML = `<strong>"${FOLDER}/" klasörü bulunamadı.</strong><br>Repo köküne <code>${FOLDER}</code> adında bir klasör oluşturup içine .glb dosyalarını yükle, sonra bu sayfayı yenile.`;
+    return;
+  }
+  if (res.status === 403){
+    state.className = 'error';
+    state.innerHTML = 'GitHub API istek sınırına takıldı (kısa süre sonra tekrar dene) — veya repo private ise bu yöntem çalışmaz, repo public olmalı.';
+    return;
+  }
+  if (!res.ok){
+    state.className = 'error';
+    state.innerHTML = 'Liste alınamadı (HTTP ' + res.status + ').';
+    return;
+  }
+
+  try {
+    data = await res.json();
+  } catch(e){
+    state.className = 'error';
+    state.innerHTML = 'Sunucu yanıtı okunamadı.';
+    return;
+  }
+
+  const glbFiles = (Array.isArray(data) ? data : []).filter(f => f.type === 'file' && /\.glb$/i.test(f.name));
+
+  if (glbFiles.length === 0){
+    state.className = '';
+    state.innerHTML = `Henüz "${FOLDER}/" klasöründe bir .glb dosyası yok. Yükler yüklemez burada otomatik görünecek.`;
+    return;
+  }
+
+  state.style.display = 'none';
+  glbFiles
+    .sort((a,b) => a.name.localeCompare(b.name, 'tr'))
+    .forEach(f => {
+      const label = niceName(f.name);
+      const a = document.createElement('a');
+      a.className = 'card';
+      a.href = `viewer.html?model=${encodeURIComponent(FOLDER + '/' + f.name)}&ad=${encodeURIComponent(label)}`;
+      a.innerHTML = `
+        <div class="thumb">🏠</div>
+        <div class="info">
+          <div class="name">${label}</div>
+          <div class="meta">${(f.size/1024).toFixed(0)} KB · .glb</div>
+        </div>`;
+      grid.appendChild(a);
+    });
+}
+
+loadModels();
+</script>
+</body>
+</html>
